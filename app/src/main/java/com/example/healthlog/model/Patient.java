@@ -22,7 +22,7 @@ public class Patient {
 
     List<String> location;//[floor, room_no, bed_no], manual
 
-    
+
     public Patient() {
     }
 
