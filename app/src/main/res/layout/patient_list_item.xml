@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+
+    <LinearLayout
+        android:id="@+id/patient_list_item_nameStatusContainer_linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp">
+
+        <TextView
+            android:id="@+id/patient_list_item_name_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Full name"
+            android:textSize="24sp"/>
+
+        <LinearLayout
+            android:id="@+id/patient_list_item_statusContainer_linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp">
+
+            <View
+                android:id="@+id/patient_list_item_statusCircle_view"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:background="@drawable/status_circle"/>
+
+            <TextView
+                android:id="@+id/patient_list_item_statusText_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Active"
+                android:textSize="18sp"
+                android:layout_marginLeft="8dp"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/patient_list_item_logDescription_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/patient_list_item_nameStatusContainer_linearLayout"
+        android:layout_centerVertical="true"
+        android:maxLines="3"
+        android:minLines="3"
+        android:ellipsize="end"
+        android:text="Last log description,this is demo text displaying "
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
+
+    <TextView
+        android:id="@+id/patient_list_item_dateAdded_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:text="Added: 24th Mar, 13:00 hrs"
+        android:padding="6dp"/>
+
+
+</RelativeLayout>
