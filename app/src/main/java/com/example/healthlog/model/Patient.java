@@ -1,11 +1,6 @@
 package com.example.healthlog.model;
 
-import com.example.healthlog.handler.NewPatientHandler;
 import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.FieldValue;
-import com.google.firestore.v1.DocumentTransform;
-
-import java.util.Date;
 import java.util.List;
 
 public class Patient {
@@ -17,7 +12,6 @@ public class Patient {
     String age;
     String status;
     String recentLog;
-
 
     Timestamp dob;// manual
     Timestamp dateAdded;//date of data entry, automatically
