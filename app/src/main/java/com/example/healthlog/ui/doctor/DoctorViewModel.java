@@ -1,16 +1,16 @@
-package com.example.healthlog.ui.notifications;
+package com.example.healthlog.ui.doctor;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class NotificationsViewModel extends ViewModel {
+public class DoctorViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public NotificationsViewModel() {
+    public DoctorViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
+        mText.setValue("This is Doctor fragment");
     }
 
     public LiveData<String> getText() {
