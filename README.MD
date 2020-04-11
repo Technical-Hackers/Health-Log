@@ -1,4 +1,4 @@
-# Hackon
+# Health Log
 <p align="center">
 <img src="https://media.giphy.com/media/fvNDkAARQ3e9mVAjfv/giphy.gif">
 </p>
