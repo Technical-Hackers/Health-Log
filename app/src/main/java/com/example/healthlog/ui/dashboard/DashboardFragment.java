@@ -1,35 +1,67 @@
 package com.example.healthlog.ui.dashboard;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.healthlog.R;
+import com.example.healthlog.adapter.DashboardAdapter;
+import com.example.healthlog.model.Patient;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DashboardFragment extends Fragment {
 
+    private ArrayList<Patient> patientList = new ArrayList<>();
     private DashboardViewModel dashboardViewModel;
+    private DashboardAdapter dashboardAdapter;
+    private RecyclerView dashboardRecyclerView;
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         dashboardViewModel =
                 ViewModelProviders.of(this).get(DashboardViewModel.class);
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        dashboardAdapter = new DashboardAdapter(patientList);
+        dashboardRecyclerView = (RecyclerView) root.findViewById(R.id.dashboard_showList_recycler);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        dashboardRecyclerView.setLayoutManager(mLayoutManager);
+        dashboardRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        dashboardRecyclerView.setAdapter(dashboardAdapter);
+        preparePatientData();
         return root;
+    }
+
+    private void preparePatientData() {
+        Patient patient = new Patient("Ram", "Active", "Three checkup completed");
+        patientList.add(patient);
+
+        patient = new Patient("Shyam", "Cured", "One checkup");
+        patientList.add(patient);
+        dashboardAdapter.notifyDataSetChanged();
     }
 }

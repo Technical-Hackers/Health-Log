@@ -10,15 +10,21 @@ public class Patient {
     String name;
     String address;
     String age;
+    String status;
+    String recentLog;
 
     Timestamp dob;
     Timestamp dateAdded;
 
     List<String> location;
 
-    int status;
-
     public Patient() {
+    }
+
+    public Patient(String name, String status, String recentLog) {
+        this.name = name;
+        this.status = status;
+        this.recentLog = recentLog;
     }
 
     public String getId() {
@@ -77,11 +83,19 @@ public class Patient {
         this.location = location;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void setRecentLog(String recentLog) {
+        this.recentLog = recentLog;
+    }
+
+    public String getRecentLog() {
+        return this.recentLog;
     }
 }
