@@ -8,4 +8,14 @@
     <string name="enter_your_hospital_id">Enter your Hospital ID</string>
     <string name="doctor">Doctor</string>
     <string name="hospital">Hospital</string>
+    <string name="search">Search</string>
+    <string name="enter_patient_id">Enter patient ID or patient name</string>
+    <string name="patient_id">Patient ID</string>
+
+    <string-array name="statusArray">
+        <item>All</item>
+        <item>Active</item>
+        <item>Cured</item>
+        <item>Deceased</item>
+    </string-array>
 </resources>

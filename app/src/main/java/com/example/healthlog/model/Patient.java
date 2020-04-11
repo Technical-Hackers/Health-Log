@@ -9,20 +9,27 @@ import java.util.List;
 
 public class Patient {
 
-    String id;//auto
-    String name;// manual
-    String address;// manual
-    String age;// automatically calculated from dob
+
+    String id;
+    String name;
+    String address;
+    String age;
+    String status;
+    String recentLog;
 
     Timestamp dob;// manual
     Timestamp dateAdded;//date of data entry, automatically
 
     List<String> location;//[floor, room_no, bed_no], manual
 
-    String status;//Active, Deceased, Cured
-
-
+    
     public Patient() {
+    }
+
+    public Patient(String name, String status, String recentLog) {
+        this.name = name;
+        this.status = status;
+        this.recentLog = recentLog;
     }
 
     public String getId() {
@@ -87,5 +94,13 @@ public class Patient {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void setRecentLog(String recentLog) {
+        this.recentLog = recentLog;
+    }
+
+    public String getRecentLog() {
+        return this.recentLog;
     }
 }
