@@ -1,22 +1,26 @@
 package com.example.healthlog.model;
 
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firestore.v1.DocumentTransform;
 
+import java.util.Date;
 import java.util.List;
 
 public class Patient {
 
-    String id;
-    String name;
-    String address;
-    String age;
+    String id;//auto
+    String name;// manual
+    String address;// manual
+    String age;// automatically calculated from dob
 
-    Timestamp dob;
-    Timestamp dateAdded;
+    Timestamp dob;// manual
+    Timestamp dateAdded;//date of data entry, automatically
 
-    List<String> location;
+    List<String> location;//[floor, room_no, bed_no], manual
 
-    int status;
+    String status;//Active, Deceased, Cured
+
 
     public Patient() {
     }
@@ -77,11 +81,11 @@ public class Patient {
         this.location = location;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }

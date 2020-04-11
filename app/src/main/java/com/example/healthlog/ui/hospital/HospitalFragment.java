@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.healthlog.R;
+import com.example.healthlog.handler.NewPatientHandler;
 
 public class HospitalFragment extends Fragment {
 
@@ -30,6 +31,8 @@ public class HospitalFragment extends Fragment {
                 textView.setText(s);
             }
         });
+        NewPatientHandler  handler = new NewPatientHandler(getContext(), getActivity());
+        handler.init();
         return root;
     }
 }
