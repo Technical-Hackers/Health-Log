@@ -1,10 +1,15 @@
 package com.example.healthlog.model;
 
+import com.example.healthlog.handler.NewPatientHandler;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firestore.v1.DocumentTransform;
 
+import java.util.Date;
 import java.util.List;
 
 public class Patient {
+
 
     String id;
     String name;
@@ -13,10 +18,11 @@ public class Patient {
     String status;
     String recentLog;
 
-    Timestamp dob;
-    Timestamp dateAdded;
 
-    List<String> location;
+    Timestamp dob;// manual
+    Timestamp dateAdded;//date of data entry, automatically
+
+    List<String> location;//[floor, room_no, bed_no], manual
 
     public Patient() {
     }
