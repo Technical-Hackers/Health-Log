@@ -27,6 +27,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     public DashboardAdapter(List<Patient> patientList ) {
         this.allPatientList = patientList;
         currentPatientList = new ArrayList<>();
+
     }
 
     @NonNull
@@ -40,8 +41,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull DashboardViewHolder holder, int position) {
-        // TODO(Shashank) add colors to res directory rather than hardcoding
-        Patient patient = currentPatientList.get(position);
+        // COMPLETED(Shashank) add colors to res directory rather than hardcoding
+        Patient patient = allPatientList.get(position);
         holder.patientName.setText(patient.getName());
         holder.patientStatus.setText(patient.getStatus());
         holder.patientLogDescription.setText(patient.getRecentLog());
@@ -59,7 +60,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         return currentPatientList.size();
     }
 
-    // TODO(Shashank) create Add and AddAll method to add new patients in array
     public void add(Patient p){
         allPatientList.add(p);
         if(currentFilter.equals("All")){
@@ -96,6 +96,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         notifyDataSetChanged();
     }
 
+    // COMPLETED(Shashank) create Add and AddAll method to add new patients in array
 
     public class DashboardViewHolder extends RecyclerView.ViewHolder {
 

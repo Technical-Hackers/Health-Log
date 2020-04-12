@@ -31,9 +31,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.grpc.Context;
+
 public class DashboardFragment extends Fragment {
 
-    private ArrayList<Patient> patientList = new ArrayList<>();
     private DashboardViewModel dashboardViewModel;
     private DashboardAdapter dashboardAdapter;
     private RecyclerView dashboardRecyclerView;
@@ -51,13 +52,27 @@ public class DashboardFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel.class);
-        root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        // TODO(Shashank) attach observer and update the array
 
         setUpRecyclerView();
         setUpSpinner();
+        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        // COMPLETED(Shashank) attach observer and update the array
+
+        dashboardRecyclerView = (RecyclerView) root.findViewById(R.id.dashboard_showList_recycler);
+        dashboardRecyclerView.setHasFixedSize(true);
+        dashboardRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        //dashboardRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+
+        dashboardViewModel = ViewModelProviders.of(requireActivity()).get(DashboardViewModel.class);
+        dashboardViewModel.init(getActivity());
+        //Spinner
+        spinner = root.findViewById(R.id.dashboard_list_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.statusArray, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_expandable_list_item_1);
+        spinner.setAdapter(adapter);
+        updateRecycleView();
+
+        // FAB
         FloatingActionButton addPatient = (FloatingActionButton) root.findViewById(R.id.dashboard_add_fab);
         addPatient.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,9 +80,6 @@ public class DashboardFragment extends Fragment {
                 addNewPatient();
             }
         });
-
-
-
         return root;
     }
 
@@ -76,7 +88,7 @@ public class DashboardFragment extends Fragment {
         handler.init();
     }
 
-    void setUpRecyclerView(){
+    void setUpRecyclerView() {
         dashboardAdapter = new DashboardAdapter(new ArrayList<Patient>());
         dashboardRecyclerView = (RecyclerView) root.findViewById(R.id.dashboard_showList_recycler);
 
@@ -97,7 +109,24 @@ public class DashboardFragment extends Fragment {
         dashboardAdapter.add(new Patient("Mohini", "Active", "Three checkup completed"));
         dashboardAdapter.add(new Patient("Tinku", "Cured", "One checkup"));
         dashboardAdapter.add(new Patient("Rinkiya", "Deceased", "Four checkup late arrival"));
+    }
 
+
+    private void updateRecycleView() {
+        dashboardViewModel
+                .getPatientsList()
+                .observe(
+                        getViewLifecycleOwner(),
+                        new Observer<ArrayList<Patient>>() {
+                            @Override
+                            public void onChanged(ArrayList<Patient> patientModels) {
+                                dashboardAdapter.notifyDataSetChanged();
+                            }
+                        });
+
+        dashboardAdapter =
+                new DashboardAdapter(dashboardViewModel.getPatientsList().getValue());
+        dashboardRecyclerView.setAdapter(dashboardAdapter);
     }
 
     // COMPLETED(Danish) apply filter based on spinner selection
