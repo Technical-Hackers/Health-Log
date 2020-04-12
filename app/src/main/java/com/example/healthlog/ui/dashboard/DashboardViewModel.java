@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.healthlog.HealthLog;
 import com.example.healthlog.model.Patient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -59,8 +60,9 @@ public class DashboardViewModel extends ViewModel {
     }
 
     public void fetchPatients(){
+
         mRef.collection("Hospital")
-                .document("H1_Sir_Sunderlal_Hospital")
+                .document(HealthLog.ID)
                 .collection("Patient")
                 .whereEqualTo("type", 0)
                 .get()

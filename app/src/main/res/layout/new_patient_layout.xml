@@ -71,6 +71,7 @@
         style="@style/NewPatientEditTextTheme"/>
 
     <Button
+        android:id="@+id/new_patient_layout_cancel_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cancel"
@@ -78,6 +79,7 @@
         android:layout_marginTop="64dp"/>
 
     <Button
+        android:id="@+id/new_patient_layout_submit_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"

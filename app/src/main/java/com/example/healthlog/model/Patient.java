@@ -12,12 +12,13 @@ public class Patient {
     String age;
     String status;
     String recentLog;
+    String dob;
 
-    Timestamp dob;// manual
-    Timestamp dateAdded;//date of data entry, automatically
+    Timestamp dateAdded;
 
+    List<String> location;
 
-    List<String> location;//[floor, room_no, bed_no], manual
+    Integer type = 0;
 
 
     public Patient() {
@@ -61,11 +62,11 @@ public class Patient {
         this.age = age;
     }
 
-    public Timestamp getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(Timestamp dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 
@@ -99,5 +100,13 @@ public class Patient {
 
     public String getRecentLog() {
         return this.recentLog;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }

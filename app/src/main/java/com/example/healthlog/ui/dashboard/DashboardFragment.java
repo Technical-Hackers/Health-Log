@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +23,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.healthlog.HealthLog;
 import com.example.healthlog.R;
 import com.example.healthlog.adapter.DashboardAdapter;
 import com.example.healthlog.handler.NewPatientHandler;
@@ -53,7 +55,7 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-
+        Toast.makeText(getActivity(), HealthLog.ID, Toast.LENGTH_SHORT).show();
         root = inflater.inflate(R.layout.fragment_dashboard, container, false);
         // COMPLETED(Shashank) attach observer and update the array
 
@@ -127,7 +129,7 @@ public class DashboardFragment extends Fragment {
                             }
                         });
     }
-    
+
 
     // COMPLETED(Danish) apply filter based on spinner selection
     void setUpSpinner(){
