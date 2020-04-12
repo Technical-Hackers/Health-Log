@@ -52,7 +52,7 @@ public class DashboardFragment extends Fragment {
         dashboardViewModel =
                 ViewModelProviders.of(this).get(DashboardViewModel.class);
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-
+        // TODO(Shashank) attach observer and update the array
         dashboardAdapter = new DashboardAdapter(patientList);
         dashboardRecyclerView = (RecyclerView) root.findViewById(R.id.dashboard_showList_recycler);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
@@ -75,7 +75,7 @@ public class DashboardFragment extends Fragment {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.statusArray, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_expandable_list_item_1);
         spinner.setAdapter(adapter);
-
+        // TODO(Danish) apply filter based on spinner selection
         preparePatientData();
         return root;
     }

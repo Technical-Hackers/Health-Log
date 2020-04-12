@@ -16,4 +16,6 @@ public class DoctorViewModel extends ViewModel {
     public LiveData<String> getText() {
         return mText;
     }
+
+    // TODO(Shashank) fetch data from server and return the arrayList
 }

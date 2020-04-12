@@ -19,6 +19,8 @@ import java.util.List;
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.DashboardViewHolder> {
 
+    // TODO(Danish) handle filter login here
+
     private List<Patient> patientList;
     private Context mcontext;
 
@@ -37,6 +39,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull DashboardViewHolder holder, int position) {
+        // TODO(Shashank) add colors to res directory rather than hardcoding
         Patient patient = patientList.get(position);
         holder.patientName.setText(patient.getName());
         holder.patientStatus.setText(patient.getStatus());
@@ -54,6 +57,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     public int getItemCount() {
         return patientList.size();
     }
+
+    // TODO(Shashank) create Add and AddAll method to add new patients in array
 
     public class DashboardViewHolder extends RecyclerView.ViewHolder {
 

@@ -1,13 +1,6 @@
 package com.example.healthlog.model;
 
 import com.google.firebase.Timestamp;
-<<<<<<< HEAD
-import com.google.firebase.firestore.FieldValue;
-import com.google.firestore.v1.DocumentTransform;
-
-import java.util.Date;
-=======
->>>>>>> spinner
 import java.util.List;
 
 public class Patient {
@@ -22,14 +15,10 @@ public class Patient {
 
     Timestamp dob;// manual
     Timestamp dateAdded;//date of data entry, automatically
-<<<<<<< HEAD
+
 
     List<String> location;//[floor, room_no, bed_no], manual
 
-=======
-
-    List<String> location;//[floor, room_no, bed_no], manual
->>>>>>> spinner
 
     public Patient() {
     }

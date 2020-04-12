@@ -114,7 +114,7 @@ public class NewPatientHandler {
         datePickerDialog.show();
     }
 
-    // TODO(1) implement method
+    // TODO(Danish) implement method
     void createNewPatient(){
         /*
         * 1. Create new patient object
