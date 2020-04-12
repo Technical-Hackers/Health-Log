@@ -1,96 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.DashboardFragment">
 
-
-    <TextView
-        android:id="@+id/dashboard_search_textView"
+    <RelativeLayout
+        android:id="@+id/dashboard_searchConatiner_relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/search"
-        android:textColor="#000"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/dashboard_patientID_textView"
-        app:layout_constraintEnd_toStartOf="@+id/dashboard_list_spinner"
-        app:layout_constraintHorizontal_bias="0.191"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.225" />
+        android:padding="8dp">
 
-    <TextView
-        android:id="@+id/dashboard_patientID_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/enter_patient_id"
-        android:textColor="@color/colorPrimary"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/dashboard_searchBox_editText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.257"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dashboard_list_spinner"
-        app:layout_constraintVertical_bias="0.605" />
+        <EditText
+            android:id="@+id/dashboard_searchBox_editText"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:ems="10"
+            android:hint="@string/patient_id"
+            android:inputType="textPersonName"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"/>
 
-    <Spinner
-        android:id="@+id/dashboard_list_spinner"
-        android:layout_width="100dp"
-        android:layout_height="18dp"
-        android:layout_marginEnd="68dp"
-        android:contextClickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/dashboard_searchBox_editText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.256" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dashboard_searchBox_editText"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:text="@string/search"
+                android:textColor="#fff"
+                android:layout_margin="8dp"/>
+            <Spinner
+                android:id="@+id/dashboard_list_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:layout_marginEnd="68dp"
+                android:contextClickable="true"
+                android:layout_gravity="center_vertical"/>
 
-    <EditText
-        android:id="@+id/dashboard_searchBox_editText"
-        android:layout_width="331dp"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:hint="@string/patient_id"
-        android:inputType="textPersonName"
-        android:backgroundTint="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.201" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+
+    </RelativeLayout>
+
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="407dp"
+        android:layout_height="3dp"
+        android:layout_marginTop="8dp"
         android:background="@color/colorPrimary"
-        android:text="@string/search"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textColor="#fff"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dashboard_searchBox_editText"
-        app:layout_constraintVertical_bias="0.053" />
+        android:layout_below="@id/dashboard_searchConatiner_relativeLayout"/>
 
-    <androidx.core.widget.NestedScrollView
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/dashboard_showList_recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/dashboard_showList_recycler"
-            android:layout_width="395dp"
-            android:layout_height="426dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
-    </androidx.core.widget.NestedScrollView>
-
-
-
-
+        android:layout_height="match_parent"
+        android:layout_below="@id/frameLayout"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/dashboard_add_fab"
@@ -100,21 +76,10 @@
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_add_black_24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.921"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0.817" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"/>
 
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="407dp"
-        android:layout_height="3dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button">
 
-    </FrameLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

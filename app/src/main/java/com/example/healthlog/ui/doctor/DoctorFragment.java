@@ -16,7 +16,7 @@ import com.example.healthlog.R;
 
 public class DoctorFragment extends Fragment {
 
-    // TODO(DJ) implement layout file
+    // COMPLETED(DJ) implement layout file
 
     // TODO(SHANK) implement recycler view and adapter
 
@@ -28,13 +28,7 @@ public class DoctorFragment extends Fragment {
         homeViewModel =
                 ViewModelProviders.of(this).get(DoctorViewModel.class);
         View root = inflater.inflate(R.layout.fragment_doctor, container, false);
-        final TextView textView = root.findViewById(R.id.text_doctor);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
         return root;
     }
 

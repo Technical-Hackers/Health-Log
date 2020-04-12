@@ -16,4 +16,10 @@
         <item name="android:layout_marginRight">32dp</item>
     </style>
 
+    <!-- patient layout textView theme. -->
+    <style name="PatientLayoutTextViewTheme" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+    </style>
+
 </resources>

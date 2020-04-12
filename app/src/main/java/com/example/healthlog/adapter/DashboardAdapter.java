@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.healthlog.R;
+import com.example.healthlog.interfaces.OnItemClickListener;
 import com.example.healthlog.model.Patient;
 
 import java.util.ArrayList;
@@ -18,16 +19,25 @@ import java.util.List;
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.DashboardViewHolder> {
 
+    OnItemClickListener onItemClickListener;
+
     private List<Patient> allPatientList;
     private List<Patient> currentPatientList;
 
     private Context mcontext;
     private String currentFilter = "Deceased";
 
-    public DashboardAdapter(List<Patient> patientList ) {
+    public DashboardAdapter(List<Patient> patientList) {
         this.allPatientList = patientList;
         currentPatientList = new ArrayList<>();
 
+    }
+
+    public DashboardAdapter(List<Patient> patientList , OnItemClickListener listener) {
+        this.allPatientList = patientList;
+        currentPatientList = new ArrayList<>();
+
+        onItemClickListener = listener;
     }
 
     @NonNull
@@ -43,6 +53,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     public void onBindViewHolder(@NonNull DashboardViewHolder holder, int position) {
         // COMPLETED(Shashank) add colors to res directory rather than hardcoding
         Patient patient = currentPatientList.get(position);
+        holder.bind(patient, onItemClickListener);
         holder.patientName.setText(patient.getName());
         holder.patientStatus.setText(patient.getStatus());
         holder.patientLogDescription.setText(patient.getRecentLog());
@@ -105,13 +116,25 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         TextView patientLogDescription;
         View patientcolorStatus;
 
+        View view;
+
         public DashboardViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            view = itemView;
             patientName = itemView.findViewById(R.id.patient_list_item_name_textView);
             patientStatus = itemView.findViewById(R.id.patient_list_item_statusText_textView);
             patientLogDescription = itemView.findViewById(R.id.patient_list_item_logDescription_textView);
             patientcolorStatus = itemView.findViewById(R.id.patient_list_item_statusCircle_view);
+        }
+
+        void bind(final Patient currentPatient, final OnItemClickListener listener){
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClicked(currentPatient);
+                }
+            });
+
         }
     }
 

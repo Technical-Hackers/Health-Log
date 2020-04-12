@@ -27,6 +27,8 @@ import com.example.healthlog.HealthLog;
 import com.example.healthlog.R;
 import com.example.healthlog.adapter.DashboardAdapter;
 import com.example.healthlog.handler.NewPatientHandler;
+import com.example.healthlog.handler.PatientViewHandler;
+import com.example.healthlog.interfaces.OnItemClickListener;
 import com.example.healthlog.model.Patient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -37,11 +39,11 @@ import io.grpc.Context;
 
 public class DashboardFragment extends Fragment {
 
-    // TODO(DJ) create layout for detailed view of patient
+    // COMPLETED(DJ) create layout for detailed view of patient
 
     // TODO(DJ) create search feature
 
-    // TODO(DJ) reformat ui file for this fragment
+    // COMPLETED(DJ) reformat ui file for this fragment
 
     private DashboardViewModel dashboardViewModel;
     private DashboardAdapter dashboardAdapter;
@@ -50,7 +52,6 @@ public class DashboardFragment extends Fragment {
     private Spinner spinner;
 
     View root;
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,7 +91,15 @@ public class DashboardFragment extends Fragment {
     }
 
     void setUpRecyclerView() {
-        dashboardAdapter = new DashboardAdapter(new ArrayList<Patient>());
+        final PatientViewHandler patientViewHandler = new PatientViewHandler(getContext(), getActivity());
+        dashboardAdapter = new DashboardAdapter(new ArrayList<Patient>(), new OnItemClickListener() {
+            @Override
+            public void onItemClicked(Patient patient) {
+                patientViewHandler.update(patient);
+                patientViewHandler.init();
+            }
+        });
+
         dashboardRecyclerView = root.findViewById(R.id.dashboard_showList_recycler);
 
         dashboardRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
