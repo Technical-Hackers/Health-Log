@@ -53,6 +53,7 @@
         android:ems="10"
         android:hint="@string/patient_id"
         android:inputType="textPersonName"
+        android:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
@@ -76,13 +77,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dashboard_showList_recycler"
-        android:layout_width="393dp"
-        android:layout_height="445dp"
+        android:layout_width="395dp"
+        android:layout_height="426dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0.882" />
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
 
     <TextView
         android:id="@+id/textView"
@@ -110,4 +110,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button"
         app:layout_constraintVertical_bias="0.817" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="407dp"
+        android:layout_height="3dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button">
+
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

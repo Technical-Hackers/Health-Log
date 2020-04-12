@@ -31,8 +31,6 @@ public class HospitalFragment extends Fragment {
                 textView.setText(s);
             }
         });
-        NewPatientHandler  handler = new NewPatientHandler(getContext(), getActivity());
-        handler.init();
         return root;
     }
 }
