@@ -46,8 +46,6 @@ public class DashboardViewModel extends ViewModel {
 
     public MutableLiveData<ArrayList<Patient>> getPatients() {
         fetchPatients();
-        patient.setValue(patientArrayList);
-
         return patient;
     }
     public DashboardViewModel() {
@@ -64,14 +62,17 @@ public class DashboardViewModel extends ViewModel {
         mRef.collection("Hospital")
                 .document("H1_Sir_Sunderlal_Hospital")
                 .collection("Patient")
+                .whereEqualTo("type", 0)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     for(DocumentSnapshot document: task.getResult()){
-                        patientArrayList.add(document.toObject(Patient.class));
+                        Patient p = document.toObject(Patient.class);
+                        patientArrayList.add(p);
                     }
+                    patient.setValue(patientArrayList);
                 }
             }
         });

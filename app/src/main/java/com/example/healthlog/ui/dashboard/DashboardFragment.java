@@ -53,24 +53,25 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
+
+        root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        // COMPLETED(Shashank) attach observer and update the array
+
         setUpRecyclerView();
         setUpSpinner();
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        // COMPLETED(Shashank) attach observer and update the array
 
         dashboardRecyclerView = (RecyclerView) root.findViewById(R.id.dashboard_showList_recycler);
         dashboardRecyclerView.setHasFixedSize(true);
         dashboardRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         //dashboardRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
 
-        dashboardViewModel = ViewModelProviders.of(requireActivity()).get(DashboardViewModel.class);
-        dashboardViewModel.init(getActivity());
+
         //Spinner
         spinner = root.findViewById(R.id.dashboard_list_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.statusArray, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_expandable_list_item_1);
         spinner.setAdapter(adapter);
-        updateRecycleView();
+        //updateRecycleView();
 
         // FAB
         FloatingActionButton addPatient = (FloatingActionButton) root.findViewById(R.id.dashboard_add_fab);
@@ -90,7 +91,7 @@ public class DashboardFragment extends Fragment {
 
     void setUpRecyclerView() {
         dashboardAdapter = new DashboardAdapter(new ArrayList<Patient>());
-        dashboardRecyclerView = (RecyclerView) root.findViewById(R.id.dashboard_showList_recycler);
+        dashboardRecyclerView = root.findViewById(R.id.dashboard_showList_recycler);
 
         dashboardRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         dashboardRecyclerView.setHasFixedSize(false);
@@ -98,7 +99,7 @@ public class DashboardFragment extends Fragment {
         dashboardRecyclerView.setAdapter(dashboardAdapter);
 
 
-        dashboardAdapter.add(new Patient("Ram", "Active", "Three checkup completed"));
+        /*dashboardAdapter.add(new Patient("Ram", "Active", "Three checkup completed"));
         dashboardAdapter.add(new Patient("Shyam", "Cured", "One checkup"));
         dashboardAdapter.add(new Patient("Kumar", "Deceased", "Four checkup late arrival"));
 
@@ -108,11 +109,10 @@ public class DashboardFragment extends Fragment {
 
         dashboardAdapter.add(new Patient("Mohini", "Active", "Three checkup completed"));
         dashboardAdapter.add(new Patient("Tinku", "Cured", "One checkup"));
-        dashboardAdapter.add(new Patient("Rinkiya", "Deceased", "Four checkup late arrival"));
-    }
+        dashboardAdapter.add(new Patient("Rinkiya", "Deceased", "Four checkup late arrival"));*/
 
-
-    private void updateRecycleView() {
+        dashboardViewModel = ViewModelProviders.of(requireActivity()).get(DashboardViewModel.class);
+        dashboardViewModel.init(getActivity());
         dashboardViewModel
                 .getPatientsList()
                 .observe(
@@ -120,14 +120,14 @@ public class DashboardFragment extends Fragment {
                         new Observer<ArrayList<Patient>>() {
                             @Override
                             public void onChanged(ArrayList<Patient> patientModels) {
-                                dashboardAdapter.notifyDataSetChanged();
+                                for(Patient p: patientModels){
+                                    dashboardAdapter.add(p);
+                                }
+
                             }
                         });
-
-        dashboardAdapter =
-                new DashboardAdapter(dashboardViewModel.getPatientsList().getValue());
-        dashboardRecyclerView.setAdapter(dashboardAdapter);
     }
+    
 
     // COMPLETED(Danish) apply filter based on spinner selection
     void setUpSpinner(){

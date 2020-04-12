@@ -42,7 +42,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     @Override
     public void onBindViewHolder(@NonNull DashboardViewHolder holder, int position) {
         // COMPLETED(Shashank) add colors to res directory rather than hardcoding
-        Patient patient = allPatientList.get(position);
+        Patient patient = currentPatientList.get(position);
         holder.patientName.setText(patient.getName());
         holder.patientStatus.setText(patient.getStatus());
         holder.patientLogDescription.setText(patient.getRecentLog());
