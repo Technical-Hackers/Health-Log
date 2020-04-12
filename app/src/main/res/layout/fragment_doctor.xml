@@ -14,7 +14,7 @@
 
         <EditText
             android:id="@+id/doctor_searchBox_editText"
-            android:layout_width="331dp"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/patient_id"
@@ -43,7 +43,7 @@
         android:background="@color/colorPrimary"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/dashboard_showList_recycler"
+        android:id="@+id/doctor_showList_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/doctor_frameLayout"

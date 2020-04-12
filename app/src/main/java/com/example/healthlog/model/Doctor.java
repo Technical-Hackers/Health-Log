@@ -6,17 +6,20 @@ public class Doctor {
 
     String name;
     String department;
-    String NoOfPatient;
-
+    String noOfPatient;
+    String status;
+    String logDescription;
+    Integer type = 0;
     List<String> location;
 
     public Doctor() {
     }
 
-    public Doctor(String name, String department, String NoOfPatient) {
+    public Doctor(String name, String department, String NoOfPatient, String status) {
         this.name = name;
         this.department = department;
-        this.NoOfPatient = NoOfPatient;
+        this.noOfPatient = NoOfPatient;
+        this.status = status;
     }
 
     public void setName(String name) {
@@ -36,11 +39,11 @@ public class Doctor {
     }
 
     public void setNoOfPatient(String noOfPatient) {
-        this.NoOfPatient = noOfPatient;
+        this.noOfPatient = noOfPatient;
     }
 
     public String getNoOfPatient() {
-        return this.NoOfPatient;
+        return this.noOfPatient;
     }
 
     public void setLocation(List<String> location) {
@@ -48,5 +51,29 @@ public class Doctor {
     }
     public List<String> getLocation() {
         return this.location;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public void setLogDescription(String logDescription) {
+        this.logDescription = logDescription;
+    }
+
+    public String getLogDescription() {
+        return this.logDescription;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }
