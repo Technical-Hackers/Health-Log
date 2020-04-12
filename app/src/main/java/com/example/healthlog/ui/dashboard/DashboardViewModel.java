@@ -12,7 +12,6 @@ import com.example.healthlog.HealthLog;
 import com.example.healthlog.model.Patient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -40,7 +39,7 @@ public class DashboardViewModel extends ViewModel {
 
         liveData = getPatients();
     }
-    // COMPLETED(Shashank) fetch data from server and return the arrayList
+
     public LiveData<ArrayList<Patient>> getPatientsList() {
         return liveData;
     }

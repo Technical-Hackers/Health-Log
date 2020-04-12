@@ -57,23 +57,15 @@ public class DashboardFragment extends Fragment {
 
         Toast.makeText(getActivity(), HealthLog.ID, Toast.LENGTH_SHORT).show();
         root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        // COMPLETED(Shashank) attach observer and update the array
 
         setUpRecyclerView();
         setUpSpinner();
-
-        dashboardRecyclerView = (RecyclerView) root.findViewById(R.id.dashboard_showList_recycler);
-        dashboardRecyclerView.setHasFixedSize(true);
-        dashboardRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        //dashboardRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-
 
         //Spinner
         spinner = root.findViewById(R.id.dashboard_list_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.statusArray, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_expandable_list_item_1);
         spinner.setAdapter(adapter);
-        //updateRecycleView();
 
         // FAB
         FloatingActionButton addPatient = (FloatingActionButton) root.findViewById(R.id.dashboard_add_fab);
@@ -101,17 +93,6 @@ public class DashboardFragment extends Fragment {
         dashboardRecyclerView.setAdapter(dashboardAdapter);
 
 
-        /*dashboardAdapter.add(new Patient("Ram", "Active", "Three checkup completed"));
-        dashboardAdapter.add(new Patient("Shyam", "Cured", "One checkup"));
-        dashboardAdapter.add(new Patient("Kumar", "Deceased", "Four checkup late arrival"));
-
-        dashboardAdapter.add(new Patient("Arun", "Active", "Three checkup completed"));
-        dashboardAdapter.add(new Patient("Dev", "Cured", "One checkup"));
-        dashboardAdapter.add(new Patient("Rishu", "Deceased", "Four checkup late arrival"));
-
-        dashboardAdapter.add(new Patient("Mohini", "Active", "Three checkup completed"));
-        dashboardAdapter.add(new Patient("Tinku", "Cured", "One checkup"));
-        dashboardAdapter.add(new Patient("Rinkiya", "Deceased", "Four checkup late arrival"));*/
 
         dashboardViewModel = ViewModelProviders.of(requireActivity()).get(DashboardViewModel.class);
         dashboardViewModel.init(getActivity());
@@ -130,8 +111,6 @@ public class DashboardFragment extends Fragment {
                         });
     }
 
-
-    // COMPLETED(Danish) apply filter based on spinner selection
     void setUpSpinner(){
         spinner = root.findViewById(R.id.dashboard_list_spinner);
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.statusArray, android.R.layout.simple_spinner_item);
