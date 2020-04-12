@@ -38,6 +38,8 @@ public class DashboardFragment extends Fragment {
     private DashboardAdapter dashboardAdapter;
     private RecyclerView dashboardRecyclerView;
 
+    private Spinner spinner;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class DashboardFragment extends Fragment {
         dashboardRecyclerView.setItemAnimator(new DefaultItemAnimator());
         dashboardRecyclerView.setAdapter(dashboardAdapter);
 
+
         dashboardRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
 
         FloatingActionButton addPatient = (FloatingActionButton) root.findViewById(R.id.dashboard_add_fab);
@@ -67,6 +70,12 @@ public class DashboardFragment extends Fragment {
                 addNewPatient();
             }
         });
+
+        spinner = root.findViewById(R.id.dashboard_list_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.statusArray, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_expandable_list_item_1);
+        spinner.setAdapter(adapter);
+
         preparePatientData();
         return root;
     }

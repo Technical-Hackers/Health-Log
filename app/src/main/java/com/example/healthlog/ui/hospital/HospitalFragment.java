@@ -31,6 +31,7 @@ public class HospitalFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
         return root;
     }
 }
