@@ -39,18 +39,31 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // COMPLETED(Danish) check if user is already login
+        if(HealthLog.ID != null){
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
 
     public void signIn() {
+        final String hId = hospitalId.getText().toString().trim();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("Hospital").document(hospitalId.getText().toString());
+        DocumentReference docRef = db.collection("Hospital").document(hId);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
+                        HealthLog.addHospitalIdToSharedPreference(hId);
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
+                        finish();
                     } else {
                         Toast.makeText(getApplicationContext(),"Wrong Login credentials", Toast.LENGTH_SHORT).show();
                     }

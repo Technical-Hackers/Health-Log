@@ -40,6 +40,8 @@ public class DashboardFragment extends Fragment {
 
     private Spinner spinner;
 
+    View root;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,18 +53,11 @@ public class DashboardFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         dashboardViewModel =
                 ViewModelProviders.of(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        root = inflater.inflate(R.layout.fragment_dashboard, container, false);
         // TODO(Shashank) attach observer and update the array
-        dashboardAdapter = new DashboardAdapter(patientList);
-        dashboardRecyclerView = (RecyclerView) root.findViewById(R.id.dashboard_showList_recycler);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        dashboardRecyclerView.setLayoutManager(mLayoutManager);
-        dashboardRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        dashboardRecyclerView.setAdapter(dashboardAdapter);
 
-
-        dashboardRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-
+        setUpRecyclerView();
+        setUpSpinner();
         FloatingActionButton addPatient = (FloatingActionButton) root.findViewById(R.id.dashboard_add_fab);
         addPatient.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,30 +66,61 @@ public class DashboardFragment extends Fragment {
             }
         });
 
-        spinner = root.findViewById(R.id.dashboard_list_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.statusArray, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_expandable_list_item_1);
-        spinner.setAdapter(adapter);
-        // TODO(Danish) apply filter based on spinner selection
-        preparePatientData();
+
+
         return root;
-    }
-
-    private void preparePatientData() {
-        Patient patient = new Patient("Ram", "Active", "Three checkup completed");
-        patientList.add(patient);
-
-        patient = new Patient("Shyam", "Cured", "One checkup");
-        patientList.add(patient);
-
-        patient = new Patient("Kumar", "Deceased", "Four checkup late arrival");
-        patientList.add(patient);
-
-        dashboardAdapter.notifyDataSetChanged();
     }
 
     public void addNewPatient() {
         NewPatientHandler handler = new NewPatientHandler(getContext(), getActivity());
         handler.init();
+    }
+
+    void setUpRecyclerView(){
+        dashboardAdapter = new DashboardAdapter(new ArrayList<Patient>());
+        dashboardRecyclerView = (RecyclerView) root.findViewById(R.id.dashboard_showList_recycler);
+
+        dashboardRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+        dashboardRecyclerView.setHasFixedSize(false);
+        dashboardRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        dashboardRecyclerView.setAdapter(dashboardAdapter);
+
+
+        dashboardAdapter.add(new Patient("Ram", "Active", "Three checkup completed"));
+        dashboardAdapter.add(new Patient("Shyam", "Cured", "One checkup"));
+        dashboardAdapter.add(new Patient("Kumar", "Deceased", "Four checkup late arrival"));
+
+        dashboardAdapter.add(new Patient("Arun", "Active", "Three checkup completed"));
+        dashboardAdapter.add(new Patient("Dev", "Cured", "One checkup"));
+        dashboardAdapter.add(new Patient("Rishu", "Deceased", "Four checkup late arrival"));
+
+        dashboardAdapter.add(new Patient("Mohini", "Active", "Three checkup completed"));
+        dashboardAdapter.add(new Patient("Tinku", "Cured", "One checkup"));
+        dashboardAdapter.add(new Patient("Rinkiya", "Deceased", "Four checkup late arrival"));
+
+    }
+
+    // COMPLETED(Danish) apply filter based on spinner selection
+    void setUpSpinner(){
+        spinner = root.findViewById(R.id.dashboard_list_spinner);
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.statusArray, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            String[] sts = {"All", "Active", "Cured", "Deceased"};
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                spinner.setSelection(i);
+                dashboardAdapter.applyFilter(sts[i]);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 }

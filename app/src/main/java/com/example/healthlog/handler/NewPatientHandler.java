@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
+import com.example.healthlog.HealthLog;
 import com.example.healthlog.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -123,7 +124,7 @@ public class NewPatientHandler {
     }
 
     void fetchPatientMetaData(){
-        mRef.collection("Hospital").document("H1_Sir_Sunderlal_Hospital")
+        mRef.collection("Hospital").document(HealthLog.ID)
                 .collection("Patient").document("meta-data").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
