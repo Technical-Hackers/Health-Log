@@ -37,6 +37,12 @@ import io.grpc.Context;
 
 public class DashboardFragment extends Fragment {
 
+    // TODO(DJ) create layout for detailed view of patient
+
+    // TODO(DJ) create search feature
+
+    // TODO(DJ) reformat ui file for this fragment
+
     private DashboardViewModel dashboardViewModel;
     private DashboardAdapter dashboardAdapter;
     private RecyclerView dashboardRecyclerView;

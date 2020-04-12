@@ -75,14 +75,20 @@
         app:layout_constraintTop_toBottomOf="@+id/dashboard_searchBox_editText"
         app:layout_constraintVertical_bias="0.053" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/dashboard_showList_recycler"
-        android:layout_width="395dp"
-        android:layout_height="426dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/dashboard_showList_recycler"
+            android:layout_width="395dp"
+            android:layout_height="426dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+    </androidx.core.widget.NestedScrollView>
+
+
 
 
 

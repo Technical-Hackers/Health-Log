@@ -141,7 +141,6 @@ public class NewPatientHandler {
         });
     }
 
-
     @RequiresApi(api = Build.VERSION_CODES.N)
     void pickDate(){
         DatePickerDialog datePickerDialog = new DatePickerDialog(context);
@@ -157,7 +156,7 @@ public class NewPatientHandler {
         datePickerDialog.show();
     }
 
-    // TODO(Danish) implement method
+    // COMPLETED(Danish) implement method
     void createNewPatient(){
         /*
         * 1. Create new patient object
@@ -196,18 +195,12 @@ public class NewPatientHandler {
                                         destroy();
                                     }
                                 });
-
                             }
                         }
                     });
                 }
-
-
             }
         });
-
-
-
     }
 
     String calculateAge(){
@@ -232,7 +225,6 @@ public class NewPatientHandler {
     String getCompleteId(){
         return patientId+(name.getText().toString().trim()).split(" ")[0];
     }
-
 
     void fetchPatientMetaData(){
         mRef.collection("Hospital").document(HealthLog.ID)

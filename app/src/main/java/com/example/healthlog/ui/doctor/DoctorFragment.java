@@ -16,6 +16,11 @@ import com.example.healthlog.R;
 
 public class DoctorFragment extends Fragment {
 
+    // TODO(DJ) implement layout file
+
+    // TODO(SHANK) implement recycler view and adapter
+
+
     private DoctorViewModel homeViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -32,4 +37,9 @@ public class DoctorFragment extends Fragment {
         });
         return root;
     }
+
+    // TODO(SHANK) implement following method
+    void setUpRecyclerView(){
+    }
+
 }

@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel;
 
 public class DoctorViewModel extends ViewModel {
 
+    // TODO(SHANK) fetch from server
+
     private MutableLiveData<String> mText;
 
     public DoctorViewModel() {
@@ -15,5 +17,10 @@ public class DoctorViewModel extends ViewModel {
 
     public LiveData<String> getText() {
         return mText;
+    }
+
+    // TODO(SHANK) implement method
+    public void fetchDoctor(){
+
     }
 }
