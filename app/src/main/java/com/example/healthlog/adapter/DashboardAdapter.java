@@ -28,7 +28,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     @Override
     public DashboardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View itemView = LayoutInflater.from(mcontext).inflate(R.layout.patient_list_item, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.patient_list_item, parent, false);
         return new DashboardViewHolder(itemView);
     }
 
