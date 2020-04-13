@@ -1,9 +1,12 @@
 package com.example.healthlog.ui.doctor;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,6 +27,8 @@ import java.util.ArrayList;
 
 public class DoctorFragment extends Fragment {
 
+    // COMPLETED(DJ) apply search filter
+
     // COMPLETED(DJ) implement layout file
 
     // COMPLETED(SHANK) implement recycler view and adapter
@@ -31,6 +36,8 @@ public class DoctorFragment extends Fragment {
     private DoctorAdapter doctorAdapter;
     private RecyclerView doctorRecyclerView;
     private DoctorViewModel doctorViewModel;
+
+    private EditText searchEditText;
 
     View root;
 
@@ -40,6 +47,25 @@ public class DoctorFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_doctor, container, false);
 
         setUpRecyclerView();
+
+        searchEditText = root.findViewById(R.id.doctor_searchBox_editText);
+
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                doctorAdapter.filter(editable.toString().trim());
+            }
+        });
 
         return root;
     }

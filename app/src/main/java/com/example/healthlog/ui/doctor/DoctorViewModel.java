@@ -63,7 +63,6 @@ public class DoctorViewModel extends ViewModel {
         mRef.collection("Hospital")
                 .document(HealthLog.ID)
                 .collection("Doctor")
-                .whereEqualTo("type", 1)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

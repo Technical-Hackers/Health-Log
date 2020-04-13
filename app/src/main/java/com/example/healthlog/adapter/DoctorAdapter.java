@@ -13,17 +13,18 @@ import com.example.healthlog.R;
 import com.example.healthlog.model.Doctor;
 import com.example.healthlog.model.Patient;
 
-import org.w3c.dom.Text;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorViewHolder> {
 
-    private List<Doctor> doctorList;
+    private List<Doctor> allDoctorList;
+    private List<Doctor> mainDoctorList;
     private Context mContext;
 
     public DoctorAdapter(List<Doctor> doctorList) {
-        this.doctorList = doctorList;
+        this.mainDoctorList = doctorList;
+        allDoctorList = new ArrayList<>();
     }
 
     @NonNull
@@ -35,10 +36,10 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
 
     @Override
     public void onBindViewHolder(@NonNull DoctorViewHolder holder, int position) {
-        Doctor doctor = doctorList.get(position);
+        Doctor doctor = mainDoctorList.get(position);
         holder.doctorName.setText(doctor.getName());
         holder.doctorStatus.setText(doctor.getStatus());
-        holder.doctorLogDescription.setText(doctor.getLogDescription());
+        //holder.doctorLogDescription.setText(doctor.getLogDescription());
         holder.doctorRoom.setText(doctor.getLocation().toString());
         holder.doctorType.setText(doctor.getDepartment());
         if (doctor.getStatus().equals("Available")) {
@@ -50,11 +51,27 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
 
     @Override
     public int getItemCount() {
-        return doctorList.size();
+        return mainDoctorList.size();
     }
 
     public void add(Doctor d){
-        doctorList.add(d);
+        allDoctorList.add(d);
+        mainDoctorList.add(d);
+        notifyDataSetChanged();
+    }
+
+    // COMPLETED(DJ) implement filter
+    public void filter(String name){
+        mainDoctorList.clear();
+        if(name.equals("")){
+            mainDoctorList.addAll(allDoctorList);
+            return;
+        }
+        for(Doctor d: allDoctorList){
+            if(d.getId().toLowerCase().contains(name.toLowerCase()) || d.getName().toLowerCase().contains(name.toLowerCase())){
+                mainDoctorList.add(d);
+            }
+        }
         notifyDataSetChanged();
     }
 
