@@ -11,6 +11,9 @@
     <string name="search">Search</string>
     <string name="enter_patient_id">Enter patient ID or patient name</string>
     <string name="patient_id">Patient ID</string>
+    <string name="add_log">Add Log</string>
+    <string name="write_current_log">Write current log</string>
+    <string name="save">Save</string>
 
     <string-array name="statusArray">
         <item>All</item>

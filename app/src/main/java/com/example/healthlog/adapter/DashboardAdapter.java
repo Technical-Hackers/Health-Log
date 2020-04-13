@@ -26,6 +26,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     private Context mcontext;
     private String currentFilter = "Deceased";
+    public String logRecent;
 
     public DashboardAdapter(List<Patient> patientList) {
         this.allPatientList = patientList;
@@ -56,7 +57,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         holder.bind(patient, onItemClickListener);
         holder.patientName.setText(patient.getName());
         holder.patientStatus.setText(patient.getStatus());
-        holder.patientLogDescription.setText(patient.getRecentLog());
+        holder.patientLogDescription.setText(this.logRecent);
         if (patient.getStatus().equals("Active")) {
             holder.patientcolorStatus.setBackgroundColor(0xFFFF0000);
         } else if (patient.getStatus().equals("Cured")) {
@@ -69,6 +70,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     @Override
     public int getItemCount() {
         return currentPatientList.size();
+    }
+
+    public void getLog(String log) {
+        this.logRecent = log;
     }
 
     public void add(Patient p){
