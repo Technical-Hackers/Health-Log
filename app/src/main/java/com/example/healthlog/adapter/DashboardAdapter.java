@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.healthlog.R;
 import com.example.healthlog.interfaces.OnItemClickListener;
+import com.example.healthlog.model.Doctor;
 import com.example.healthlog.model.Patient;
 
 import java.util.ArrayList;
@@ -55,7 +56,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         // COMPLETED(Shashank) add colors to res directory rather than hardcoding
         Patient patient = currentPatientList.get(position);
         holder.bind(patient, onItemClickListener);
-        holder.patientName.setText(patient.getName());
+        holder.patientName.setText(patient.getId());
         holder.patientStatus.setText(patient.getStatus());
         holder.patientLogDescription.setText(this.logRecent);
         if (patient.getStatus().equals("Active")) {
@@ -77,6 +78,11 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     }
 
     public void add(Patient p){
+        for(Patient patient: allPatientList){
+            if(p.getId().equals(patient.getId())){
+                return;
+            }
+        }
         allPatientList.add(p);
         if(currentFilter.equals("All")){
             currentPatientList.clear();

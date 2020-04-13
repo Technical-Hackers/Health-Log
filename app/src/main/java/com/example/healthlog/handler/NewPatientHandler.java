@@ -7,6 +7,7 @@ import android.content.Context;
 import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -20,15 +21,19 @@ import androidx.annotation.RequiresApi;
 
 import com.example.healthlog.HealthLog;
 import com.example.healthlog.R;
+import com.example.healthlog.model.Doctor;
 import com.example.healthlog.model.Patient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firestore.v1.DocumentTransform;
 
 import java.time.LocalDate;
@@ -40,7 +45,7 @@ import java.util.List;
 
 public class NewPatientHandler {
 
-    // TODO(DJ) allot patient to doctor using desired logic
+    // COMPLETED(DJ) allot patient to doctor using desired logic
 
     //activity
     Context context;
@@ -194,7 +199,7 @@ public class NewPatientHandler {
                                 patientRef.document("meta-data").update("size", FieldValue.increment(1)).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        destroy();
+                                        fetchDoctor();
                                     }
                                 });
                             }
@@ -203,6 +208,74 @@ public class NewPatientHandler {
                 }
             }
         });
+    }
+
+    void fetchDoctor(){
+        mRef.collection("Hospital").document(HealthLog.ID)
+                .collection("Doctor")
+                .orderBy("noOfPatients", Query.Direction.DESCENDING)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    List<Doctor> doctors = new ArrayList<>();
+                    for(DocumentSnapshot d: task.getResult()){
+                        doctors.add(d.toObject(Doctor.class));
+                    }
+                    setRoutine(doctors);
+                }
+            }
+        });
+    }
+
+    void setRoutine(List<Doctor> doctors){
+        Doctor currentDoctor=null;
+        for(int i=0; i<doctors.size()-1; i++){
+            if((doctors.get(i).getNoOfPatients()-1) == doctors.get(i+1).getNoOfPatients() && doctors.get(i+1).getStatus().equals("Available")){
+                currentDoctor = doctors.get(i+1);
+                break;
+            }
+        }
+        if(currentDoctor == null){
+            currentDoctor = doctors.get(0);
+        }
+        toast("server initialising");
+        initiateRoutineServer(currentDoctor);
+
+    }
+
+    void initiateRoutineServer(final Doctor doctor) {
+
+        final CollectionReference doctorRef = mRef.collection("Hospital").document(HealthLog.ID)
+                .collection("Doctor");
+        DocumentReference patientRef = mRef.collection("Hospital").document(HealthLog.ID)
+                .collection("Patient").document(getCompleteId());
+
+        doctorRef.document(doctor.getId()).collection("Routine")
+                .document("Routine").update("patientList", FieldValue.arrayUnion(patientRef))
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            toast("REf added ");
+                            doctorRef.document(doctor.getId()).update("noOfPatients", FieldValue.increment(1)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    toast("done");
+                                    destroy();
+                                }
+                            });
+                        }else {
+
+                            Log.i("NEWPATIENTHANDLER:>>", task.getException().getLocalizedMessage());
+                            toast(task.getException().getLocalizedMessage());
+                        }
+                    }
+                });
+    }
+
+    void toast(String msg){
+        Toast.makeText(context,msg, Toast.LENGTH_SHORT).show();
     }
 
     String calculateAge(){

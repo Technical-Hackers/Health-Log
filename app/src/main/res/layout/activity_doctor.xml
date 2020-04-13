@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".DoctorActivity">
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/doctor_patient_list_recyclerView"
         android:layout_width="409dp"
@@ -15,4 +16,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/patient_list_item"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

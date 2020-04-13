@@ -6,7 +6,9 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+
 import android.view.View;
 import android.widget.Button;
 
@@ -22,6 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+
 
 public class DoctorActivity extends AppCompatActivity {
 
@@ -47,12 +50,13 @@ public class DoctorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor);
 
+
         setUpRecyclerView();
     }
 
     void setUpRecyclerView() {
         final PatientLogHandler patientLogHandler = new PatientLogHandler(getApplicationContext(), this);
-        patientAdapter = new DashboardAdapter(patientArrayList, new OnItemClickListener() {
+        patientAdapter = new DashboardAdapter(patientArrayList, new OnItemClickListener<Patient>() {
             @Override
             public void onItemClicked(Patient patient) {
                 patientLogHandler.init();
@@ -94,5 +98,7 @@ public class DoctorActivity extends AppCompatActivity {
                         }
                     }
                 });
+
     }
+
 }

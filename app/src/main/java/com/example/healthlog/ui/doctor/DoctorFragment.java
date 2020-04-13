@@ -1,5 +1,6 @@
 package com.example.healthlog.ui.doctor;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.healthlog.DoctorActivity;
 import com.example.healthlog.R;
 import com.example.healthlog.adapter.DoctorAdapter;
 import com.example.healthlog.model.Doctor;
@@ -24,7 +26,7 @@ import java.util.ArrayList;
 
 public class DoctorFragment extends Fragment {
 
-    // TODO(DJ) setOnItemClickListener to doctor_list_item
+    // COMPLETED(DJ) setOnItemClickListener to doctor_list_item
 
     // COMPLETED(Danish) create Application class and handle the shared preferences
 
@@ -73,7 +75,15 @@ public class DoctorFragment extends Fragment {
 
     // COMPLETED(SHANK) implement following method
     void setUpRecyclerView(){
-        doctorAdapter = new DoctorAdapter(new ArrayList<Doctor>());
+        doctorAdapter = new DoctorAdapter(new ArrayList<Doctor>(), new OnItemClickListener<Doctor>() {
+            @Override
+            public void onItemClicked(Doctor d) {
+                Intent intent = new Intent(getActivity(), DoctorActivity.class);
+                intent.putExtra("doctor", d);
+
+                startActivity(intent);
+            }
+        });
         doctorRecyclerView = root.findViewById(R.id.doctor_showList_recycler);
         doctorRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         doctorRecyclerView.setHasFixedSize(false);

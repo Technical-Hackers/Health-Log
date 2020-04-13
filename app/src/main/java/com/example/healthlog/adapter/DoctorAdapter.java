@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.healthlog.R;
+import com.example.healthlog.interfaces.OnItemClickListener;
 import com.example.healthlog.model.Doctor;
 import com.example.healthlog.model.Patient;
 
@@ -20,11 +21,13 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
 
     private List<Doctor> allDoctorList;
     private List<Doctor> mainDoctorList;
-    private Context mContext;
 
-    public DoctorAdapter(List<Doctor> doctorList) {
+    private OnItemClickListener onItemClickListener;
+
+    public DoctorAdapter(List<Doctor> doctorList, OnItemClickListener listener) {
         this.mainDoctorList = doctorList;
         allDoctorList = new ArrayList<>();
+        onItemClickListener = listener;
     }
 
     @NonNull
@@ -47,6 +50,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
         } else {
             holder.doctorColorStatus.setBackgroundColor(0xFFFF0000);
         }
+        holder.bind(doctor, onItemClickListener);
     }
 
     @Override
@@ -96,6 +100,15 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
             doctorRoom = itemView.findViewById(R.id.doctor_list_item_dateAdded_textView);
             doctorColorStatus = itemView.findViewById(R.id.doctor_list_item_statusCircle_view);
             doctorType = itemView.findViewById(R.id.doctor_list_item_type_textView);
+        }
+
+        public void bind(final Doctor d, final OnItemClickListener listener){
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClicked(d);
+                }
+            });
         }
     }
 }

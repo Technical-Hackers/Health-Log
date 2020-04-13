@@ -42,7 +42,7 @@ import io.grpc.Context;
 
 public class DashboardFragment extends Fragment {
 
-    // TODO(DJ) add ID in patient_list_item
+    // COMPLETED(DJ) add ID in patient_list_item
 
     // COMPLETED(DJ) create layout for detailed view of patient
 
@@ -119,7 +119,7 @@ public class DashboardFragment extends Fragment {
 
     void setUpRecyclerView() {
         final PatientViewHandler patientViewHandler = new PatientViewHandler(getContext(), getActivity());
-        dashboardAdapter = new DashboardAdapter(new ArrayList<Patient>(), new OnItemClickListener() {
+        dashboardAdapter = new DashboardAdapter(new ArrayList<Patient>(), new OnItemClickListener<Patient>() {
             @Override
             public void onItemClicked(Patient patient) {
                 patientViewHandler.update(patient);

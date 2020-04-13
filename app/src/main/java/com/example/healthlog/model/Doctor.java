@@ -1,14 +1,16 @@
 package com.example.healthlog.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Doctor {
+public class Doctor implements Serializable {
 
     String id;
     String name;
     String department;
     String status;
     List<String> location;
+    Integer noOfPatients;
 
     public Doctor() {
     }
@@ -51,5 +53,13 @@ public class Doctor {
 
     public void setLocation(List<String> location) {
         this.location = location;
+    }
+
+    public Integer getNoOfPatients() {
+        return noOfPatients;
+    }
+
+    public void setNoOfPatients(Integer noOfPatients) {
+        this.noOfPatients = noOfPatients;
     }
 }

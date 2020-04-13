@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -12,10 +13,15 @@ import com.example.healthlog.HealthLog;
 import com.example.healthlog.model.Patient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.lang.ref.Reference;
 import java.util.ArrayList;
 
 public class DashboardViewModel extends ViewModel {
@@ -58,25 +64,32 @@ public class DashboardViewModel extends ViewModel {
         return mText;
     }
 
-    // TODO(DJ) update data realtime
+    // COMPLETED(DJ) update data realtime
     public void fetchPatients(){
+        final CollectionReference patientReference = mRef.collection("Hospital").document(HealthLog.ID).collection("Patient");
 
-        mRef.collection("Hospital")
-                .document(HealthLog.ID)
-                .collection("Patient")
-                .whereEqualTo("type", 0)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        patientReference.document("meta-data").addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for(DocumentSnapshot document: task.getResult()){
-                        Patient p = document.toObject(Patient.class);
-                        patientArrayList.add(p);
-                    }
-                    patient.setValue(patientArrayList);
-                }
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+
+                patientReference
+                        .whereEqualTo("type", 0)
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()){
+                                    for(DocumentSnapshot document: task.getResult()){
+                                        Patient p = document.toObject(Patient.class);
+                                        patientArrayList.add(p);
+                                    }
+                                    patient.setValue(patientArrayList);
+                                }
+                            }
+                        });
             }
         });
+
+
     }
 }
