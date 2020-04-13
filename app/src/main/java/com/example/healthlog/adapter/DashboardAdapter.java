@@ -107,6 +107,20 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         notifyDataSetChanged();
     }
 
+    public void filter(String name){
+        currentPatientList.clear();
+        if(name.equals("")){
+            applyFilter(currentFilter);
+            return;
+        }
+        for(Patient p: allPatientList){
+            if(p.getId().toLowerCase().contains(name.toLowerCase()) || p.getName().toLowerCase().contains(name.toLowerCase())){
+                currentPatientList.add(p);
+            }
+        }
+        notifyDataSetChanged();
+    }
+
     // COMPLETED(Shashank) create Add and AddAll method to add new patients in array
 
     public class DashboardViewHolder extends RecyclerView.ViewHolder {

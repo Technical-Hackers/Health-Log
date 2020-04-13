@@ -1,6 +1,8 @@
 package com.example.healthlog.ui.dashboard;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +44,7 @@ public class DashboardFragment extends Fragment {
 
     // COMPLETED(DJ) create layout for detailed view of patient
 
-    // TODO(DJ) create search feature
+    // COMPLETED(DJ) create search feature
 
     // COMPLETED(DJ) reformat ui file for this fragment
 
@@ -50,6 +53,8 @@ public class DashboardFragment extends Fragment {
     private RecyclerView dashboardRecyclerView;
 
     private Spinner spinner;
+
+    private EditText searchEditText;
 
     View root;
 
@@ -67,6 +72,26 @@ public class DashboardFragment extends Fragment {
 
         setUpRecyclerView();
         setUpSpinner();
+
+        //search edit text
+        searchEditText = root.findViewById(R.id.dashboard_searchBox_editText);
+
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                dashboardAdapter.filter(editable.toString().trim());
+            }
+        });
 
         //Spinner
         spinner = root.findViewById(R.id.dashboard_list_spinner);
