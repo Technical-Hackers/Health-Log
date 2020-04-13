@@ -58,7 +58,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         holder.bind(patient, onItemClickListener);
         holder.patientName.setText(patient.getId());
         holder.patientStatus.setText(patient.getStatus());
-        holder.patientLogDescription.setText(this.logRecent);
+        holder.patientLogDescription.setText(patient.getRecentLog());
         if (patient.getStatus().equals("Active")) {
             holder.patientcolorStatus.setBackgroundColor(0xFFFF0000);
         } else if (patient.getStatus().equals("Cured")) {
@@ -71,10 +71,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     @Override
     public int getItemCount() {
         return currentPatientList.size();
-    }
-
-    public void getLog(String log) {
-        this.logRecent = log;
     }
 
     public void add(Patient p){
@@ -132,6 +128,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         notifyDataSetChanged();
     }
 
+    public void setCurrentFilter(String currentFilter) {
+        this.currentFilter = currentFilter;
+    }
+
     // COMPLETED(Shashank) create Add and AddAll method to add new patients in array
 
     public class DashboardViewHolder extends RecyclerView.ViewHolder {
@@ -156,7 +156,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    listener.onItemClicked(currentPatient);
+                    listener.onItemClicked(currentPatient, itemView);
                 }
             });
 

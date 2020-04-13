@@ -45,4 +45,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.109" />
+
+    <RadioGroup
+        android:id="@+id/doctor_Activity_dialog_patientStatus_radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="64dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/doctor_activity_addlog_editText">
+
+        <RadioButton
+            android:id="@+id/doctor_activity_dialog_active_rB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Active" />
+        <RadioButton
+            android:id="@+id/doctor_activity_dialog_cured_rB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cured"/>
+        <RadioButton
+            android:id="@+id/doctor_activity_dialog_deceased_rB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deceased"/>
+
+    </RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>

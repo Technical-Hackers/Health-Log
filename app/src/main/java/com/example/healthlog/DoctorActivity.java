@@ -11,19 +11,28 @@ import android.os.Bundle;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.healthlog.adapter.DashboardAdapter;
 import com.example.healthlog.handler.PatientLogHandler;
 import com.example.healthlog.handler.PatientViewHandler;
+import com.example.healthlog.interfaces.DialogClickListener;
 import com.example.healthlog.interfaces.OnItemClickListener;
+import com.example.healthlog.model.Doctor;
 import com.example.healthlog.model.Patient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class DoctorActivity extends AppCompatActivity {
@@ -36,41 +45,46 @@ public class DoctorActivity extends AppCompatActivity {
 
     // COMPLETED(SHANK) add feature for doctor to enter log for patient
 
-    private RecyclerView.Adapter patientAdapter;
+    DashboardAdapter patientAdapter;
     private RecyclerView patientRecyclerView;
-    DashboardAdapter dashboardAdapter;
     FirebaseFirestore mRef;
-    private ArrayList<Patient> patientArrayList = new ArrayList<>();
-    MutableLiveData<ArrayList<Patient>> patient = new MutableLiveData<>();
-    String doctorName;
-    String logMessage;
+
+    PatientLogHandler patientLogHandler;
+
+    Doctor doctor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor);
 
+        mRef = FirebaseFirestore.getInstance();
+
+
+        Intent intent = getIntent();
+        doctor = (Doctor)intent.getSerializableExtra("doctor") ;
 
         setUpRecyclerView();
     }
 
     void setUpRecyclerView() {
-        final PatientLogHandler patientLogHandler = new PatientLogHandler(getApplicationContext(), this);
-        patientAdapter = new DashboardAdapter(patientArrayList, new OnItemClickListener<Patient>() {
+        patientLogHandler = new PatientLogHandler(DoctorActivity.this, this);
+
+        patientAdapter = new DashboardAdapter(new ArrayList<Patient>(), new OnItemClickListener<Patient>() {
             @Override
-            public void onItemClicked(Patient patient) {
+            public void onItemClicked(final Patient patient, final View v) {
                 patientLogHandler.init();
-                Button save = findViewById(R.id.doctor_activity_addlog_btn);
-                save.setOnClickListener(new View.OnClickListener() {
+                patientLogHandler.setDialogClickListener(new DialogClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        logMessage = patientLogHandler.getLog();
-                        patientLogHandler.destroyDialog();
+                    public void onSaveClicked(String log, String status) {
+                        ((TextView)v.findViewById(R.id.patient_list_item_logDescription_textView)).setText(log);
+                        updatePatient(patient, log, status);
                     }
                 });
             }
         });
-        dashboardAdapter.getLog(logMessage);
+        patientAdapter.setCurrentFilter("All");
+
         patientRecyclerView = (RecyclerView) findViewById(R.id.doctor_patient_list_recyclerView);
         patientRecyclerView.setHasFixedSize(false);
         patientRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -78,27 +92,63 @@ public class DoctorActivity extends AppCompatActivity {
         fetchPatient();
     }
 
+    // fetch patient details
     public void fetchPatient() {
         mRef.collection("Hospital")
                 .document(HealthLog.ID)
                 .collection("Doctor")
-                .document(doctorName)
+                .document(doctor.getId())
                 .collection("Routine")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .document("Routine").get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if(task.isSuccessful()){
-                            for(DocumentSnapshot document: task.getResult()){
-                                Patient p = document.toObject(Patient.class);
-                                patientArrayList.add(p);
+                            DocumentSnapshot document = task.getResult();
+                            List<DocumentReference> patientsRef = (List<DocumentReference>) document.get("patientList");
+
+                            for(DocumentReference ref: patientsRef){
+                                ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if(task.isSuccessful()){
+                                            Patient p = task.getResult().toObject(Patient.class);
+
+                                            patientAdapter.add(p);
+                                        }
+                                    }
+                                });
                             }
-                            patient.setValue(patientArrayList);
-                            patientAdapter.notifyDataSetChanged();
                         }
                     }
                 });
+    }
 
+    // update status and log of patient
+    void updatePatient(Patient p, final String log, final String status){
+        Map<String, Object> update;
+
+        if(status==null){
+            update = new HashMap<String, Object>(){{
+                put("recentLog", log);
+            }};
+        }else{
+            update = new HashMap<String, Object>(){{
+                put("recentLog", log);
+                put("status", status);
+            }};
+        }
+
+        mRef.collection("Hospital").document(HealthLog.ID)
+                .collection("Patient").document(p.getId())
+                .update(update).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    patientLogHandler.destroyDialog();
+                }
+            }
+        });
     }
 
 }

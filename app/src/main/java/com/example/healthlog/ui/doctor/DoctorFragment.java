@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.healthlog.DoctorActivity;
 import com.example.healthlog.R;
 import com.example.healthlog.adapter.DoctorAdapter;
+import com.example.healthlog.interfaces.OnItemClickListener;
 import com.example.healthlog.model.Doctor;
 
 import java.util.ArrayList;
@@ -77,7 +78,7 @@ public class DoctorFragment extends Fragment {
     void setUpRecyclerView(){
         doctorAdapter = new DoctorAdapter(new ArrayList<Doctor>(), new OnItemClickListener<Doctor>() {
             @Override
-            public void onItemClicked(Doctor d) {
+            public void onItemClicked(Doctor d, View v) {
                 Intent intent = new Intent(getActivity(), DoctorActivity.class);
                 intent.putExtra("doctor", d);
 

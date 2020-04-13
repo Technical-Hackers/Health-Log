@@ -121,7 +121,7 @@ public class DashboardFragment extends Fragment {
         final PatientViewHandler patientViewHandler = new PatientViewHandler(getContext(), getActivity());
         dashboardAdapter = new DashboardAdapter(new ArrayList<Patient>(), new OnItemClickListener<Patient>() {
             @Override
-            public void onItemClicked(Patient patient) {
+            public void onItemClicked(Patient patient, View v) {
                 patientViewHandler.update(patient);
                 patientViewHandler.init();
             }
