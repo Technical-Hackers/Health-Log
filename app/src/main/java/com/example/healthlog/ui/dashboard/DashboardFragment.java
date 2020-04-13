@@ -42,6 +42,8 @@ import io.grpc.Context;
 
 public class DashboardFragment extends Fragment {
 
+    // TODO(DJ) add ID in patient_list_item
+
     // COMPLETED(DJ) create layout for detailed view of patient
 
     // COMPLETED(DJ) create search feature

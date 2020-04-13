@@ -58,6 +58,7 @@ public class DashboardViewModel extends ViewModel {
         return mText;
     }
 
+    // TODO(DJ) update data realtime
     public void fetchPatients(){
 
         mRef.collection("Hospital")

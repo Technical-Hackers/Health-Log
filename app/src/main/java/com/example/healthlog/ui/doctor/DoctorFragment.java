@@ -27,6 +27,10 @@ import java.util.ArrayList;
 
 public class DoctorFragment extends Fragment {
 
+    // TODO(DJ) setOnItemClickListener to doctor_list_item
+
+    // COMPLETED(Danish) create Application class and handle the shared preferences
+
     // COMPLETED(DJ) apply search filter
 
     // COMPLETED(DJ) implement layout file

@@ -40,6 +40,8 @@ import java.util.List;
 
 public class NewPatientHandler {
 
+    // TODO(DJ) allot patient to doctor using desired logic
+
     //activity
     Context context;
     Activity activity;
