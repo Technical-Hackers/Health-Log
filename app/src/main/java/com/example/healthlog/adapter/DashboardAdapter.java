@@ -8,12 +8,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.healthlog.HealthLog;
 import com.example.healthlog.R;
 import com.example.healthlog.interfaces.OnItemClickListener;
 import com.example.healthlog.model.Doctor;
 import com.example.healthlog.model.Patient;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,12 +66,13 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         holder.patientStatus.setText(patient.getStatus());
         holder.patientLogDescription.setText(patient.getRecentLog());
         if (patient.getStatus().equals("Active")) {
-            holder.patientcolorStatus.setBackgroundColor(0xFFFF0000);
+            holder.patientColorStatus.setBackgroundColor(0xFFFF0000);
         } else if (patient.getStatus().equals("Cured")) {
-            holder.patientcolorStatus.setBackgroundColor(0xFF00FF00);
+            holder.patientColorStatus.setBackgroundColor(0xFF00FF00);
         } else {
-            holder.patientcolorStatus.setBackgroundColor(0xFFC0C0C0);
+            holder.patientColorStatus.setBackgroundColor(0xFFC0C0C0);
         }
+        holder.listenForStatusAndLogChanges(patient);
     }
 
     @Override
@@ -139,7 +146,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         TextView patientName;
         TextView patientStatus;
         TextView patientLogDescription;
-        View patientcolorStatus;
+        View patientColorStatus;
 
         View view;
 
@@ -149,7 +156,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             patientName = itemView.findViewById(R.id.patient_list_item_name_textView);
             patientStatus = itemView.findViewById(R.id.patient_list_item_statusText_textView);
             patientLogDescription = itemView.findViewById(R.id.patient_list_item_logDescription_textView);
-            patientcolorStatus = itemView.findViewById(R.id.patient_list_item_statusCircle_view);
+            patientColorStatus = itemView.findViewById(R.id.patient_list_item_statusCircle_view);
         }
 
         void bind(final Patient currentPatient, final OnItemClickListener listener){
@@ -159,7 +166,21 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                     listener.onItemClicked(currentPatient, itemView);
                 }
             });
+        }
 
+        void listenForStatusAndLogChanges(final Patient p){
+            FirebaseFirestore mRef = FirebaseFirestore.getInstance();
+            mRef.collection("Hospital").document(HealthLog.ID)
+                    .collection("Patient").document(p.getId()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                    String status = documentSnapshot.getString("status");
+                    String log = documentSnapshot.getString("recentLog");
+                    p.setStatus(status);
+                    p.setRecentLog(log);
+                    notifyDataSetChanged();
+                }
+            });
         }
     }
 
