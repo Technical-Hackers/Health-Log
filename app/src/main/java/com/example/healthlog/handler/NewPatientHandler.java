@@ -196,6 +196,7 @@ public class NewPatientHandler {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
+                                // TODO(DJ) call @updatePatientMetaData() and move below logic in that function
                                 patientRef.document("meta-data").update("size", FieldValue.increment(1)).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
@@ -208,6 +209,11 @@ public class NewPatientHandler {
                 }
             }
         });
+    }
+
+    // TODO(DJ) update meta-data
+    void updatePatientMetaData(DocumentReference patientRef){
+
     }
 
     void fetchDoctor(){

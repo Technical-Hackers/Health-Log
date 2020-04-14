@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.doctor.DoctorFragment">
 
+    <!-- TODO(SHANK) remove search button -->
+
     <LinearLayout
         android:id="@+id/doctor_searchContainer_linearLayout"
         android:layout_width="match_parent"

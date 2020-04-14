@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.DashboardFragment">
 
+    <!-- TODO(SHANK) remove search button -->
+
     <RelativeLayout
         android:id="@+id/dashboard_searchConatiner_relativeLayout"
         android:layout_width="wrap_content"

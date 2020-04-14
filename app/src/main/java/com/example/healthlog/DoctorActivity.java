@@ -145,10 +145,16 @@ public class DoctorActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
+                    // TODO(DJ) call @updatePatientMetaData() function & destroy dialog after that task is completed
                     patientLogHandler.destroyDialog();
                 }
             }
         });
+    }
+
+    // TODO(DJ) update meta-data
+    void updatePatientMetaData(Patient p, String status){
+
     }
 
 }

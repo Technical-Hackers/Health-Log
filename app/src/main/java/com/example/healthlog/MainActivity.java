@@ -1,5 +1,7 @@
 package com.example.healthlog;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -11,6 +13,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
+
+    // TODO(SHANK) add logout button in appBar
 
 
     @Override
@@ -27,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+    }
+
+    // TODO(DJ) implement the method
+    // TODO(SHANK) call this method when logout button is clicked
+    void logOut(){
+
     }
 
 }
