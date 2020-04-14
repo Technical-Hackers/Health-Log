@@ -19,7 +19,10 @@ import com.example.healthlog.ui.doctor.DoctorViewModel;
 
 import org.w3c.dom.Text;
 
+import org.w3c.dom.Text;
+
 public class HospitalFragment extends Fragment {
+
 
     // COMPLETED(SHANK) implement ui
 
@@ -44,7 +47,7 @@ public class HospitalFragment extends Fragment {
     }
 
     // COMPLETED(SHANK) find all views, create object of viewModel and call attachModel
-    void setup(){
+    void setup() {
         totalPatientsTv = root.findViewById(R.id.hospital_confirmed_textView);
         activePatientsTv = root.findViewById(R.id.hospital_active_textView);
         curedPatientsTv = root.findViewById(R.id.hospital_cured_textView);
@@ -88,6 +91,7 @@ public class HospitalFragment extends Fragment {
                                 deceasedPatientsTv.setText(integer);
                             }
                         });
+
     }
 
 }

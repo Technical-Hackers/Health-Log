@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.example.healthlog.HealthLog;
@@ -32,8 +33,10 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.Transaction;
 import com.google.firestore.v1.DocumentTransform;
 
 import java.time.LocalDate;
@@ -41,7 +44,9 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class NewPatientHandler {
 
@@ -196,13 +201,8 @@ public class NewPatientHandler {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
-                                // TODO(DJ) call @updatePatientMetaData() and move below logic in that function
-                                patientRef.document("meta-data").update("size", FieldValue.increment(1)).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        fetchDoctor();
-                                    }
-                                });
+                                // COMPLETED(DJ) call @updatePatientMetaData() and move below logic in that function
+                                updatePatientMetaData(patientRef);
                             }
                         }
                     });
@@ -211,8 +211,24 @@ public class NewPatientHandler {
         });
     }
 
-    // TODO(DJ) update meta-data
-    void updatePatientMetaData(DocumentReference patientRef){
+    // COMPLETED(DJ) update meta-data
+    void updatePatientMetaData(CollectionReference patientRef){
+        final DocumentReference metaDataRef = patientRef.document("meta-data");
+        
+        mRef.runTransaction(new Transaction.Function<Void>() {
+            @Nullable
+            @Override
+            public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
+                transaction.update(metaDataRef, "size", FieldValue.increment(1));
+                transaction.update(metaDataRef, "active", FieldValue.increment(1));
+                return null;
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                fetchDoctor();
+            }
+        });
 
     }
 
