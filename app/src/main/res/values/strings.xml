@@ -10,10 +10,22 @@
     <string name="hospital">Hospital</string>
     <string name="search">Search</string>
     <string name="enter_patient_id">Enter patient ID or patient name</string>
-    <string name="patient_id">Patient ID</string>
+    <string name="patient_id">Patient ID or Patient name</string>
     <string name="add_log">Add Log</string>
     <string name="write_current_log">Write current log</string>
     <string name="save">Save</string>
+    <string name="ask_logout">Do you want to logout</string>
+    <string name="alert">Alert!</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="logout">Logout</string>
+    <string name="_678">678</string>
+    <string name="confirmed">Confirmed</string>
+    <string name="_56">56</string>
+    <string name="deceased">Deceased</string>
+    <string name="cured">Cured</string>
+    <string name="_556">556</string>
+    <string name="active">Active</string>
 
     <string-array name="statusArray">
         <item>All</item>

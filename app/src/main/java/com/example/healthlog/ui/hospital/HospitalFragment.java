@@ -10,16 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.healthlog.R;
 import com.example.healthlog.handler.NewPatientHandler;
+import com.example.healthlog.ui.doctor.DoctorViewModel;
 
 import org.w3c.dom.Text;
 
 public class HospitalFragment extends Fragment {
 
-    // TODO(SHANK) implement ui
+    // COMPLETED(SHANK) implement ui
 
     private HospitalViewModel notificationsViewModel;
 
@@ -41,14 +43,51 @@ public class HospitalFragment extends Fragment {
         return root;
     }
 
-    // TODO(SHANK) find all views, create object of viewModel and call attachModel
+    // COMPLETED(SHANK) find all views, create object of viewModel and call attachModel
     void setup(){
+        totalPatientsTv = root.findViewById(R.id.hospital_confirmed_textView);
+        activePatientsTv = root.findViewById(R.id.hospital_active_textView);
+        curedPatientsTv = root.findViewById(R.id.hospital_cured_textView);
+        deceasedPatientsTv = root.findViewById(R.id.hospital_deceased_textView);
 
-    }
+        notificationsViewModel =
+                ViewModelProviders.of(this).get(HospitalViewModel.class);
+        notificationsViewModel.init(getContext());
+        notificationsViewModel.getNoOfActivePatient()
+                .observe(getViewLifecycleOwner(),
+                        new Observer<Integer>() {
+                            @Override
+                            public void onChanged(Integer integer) {
+                                activePatientsTv.setText(integer);
+                            }
+                        });
 
-    // TODO(SHANK) attach observer to 4 textViews
-    void attachModel(){
+        notificationsViewModel.getTotalNoOfPatient()
+                .observe(getViewLifecycleOwner(),
+                        new Observer<Integer>() {
+                            @Override
+                            public void onChanged(Integer integer) {
+                                totalPatientsTv.setText(integer);
+                            }
+                        });
 
+        notificationsViewModel.getNoOfCuredPatient()
+                .observe(getViewLifecycleOwner(),
+                        new Observer<Integer>() {
+                            @Override
+                            public void onChanged(Integer integer) {
+                                curedPatientsTv.setText(integer);
+                            }
+                        });
+
+        notificationsViewModel.getNoOfDeceasedPatient()
+                .observe(getViewLifecycleOwner(),
+                        new Observer<Integer>() {
+                            @Override
+                            public void onChanged(Integer integer) {
+                                deceasedPatientsTv.setText(integer);
+                            }
+                        });
     }
 
 }

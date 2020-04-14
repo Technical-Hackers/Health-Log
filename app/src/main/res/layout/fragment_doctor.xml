@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.doctor.DoctorFragment">
 
-    <!-- TODO(SHANK) remove search button -->
+    <!-- COMPLETED(SHANK) remove search button -->
 
     <LinearLayout
         android:id="@+id/doctor_searchContainer_linearLayout"
@@ -16,24 +16,12 @@
 
         <EditText
             android:id="@+id/doctor_searchBox_editText"
-            android:layout_width="280dp"
+            android:layout_width="390dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
             android:ems="10"
             android:hint="@string/patient_id"
-            android:inputType="textPersonName"
-            android:backgroundTint="@color/colorPrimary"
-            />
-
-        <Button
-            android:id="@+id/doctor_search_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:text="@string/search"
-            android:textSize="12sp"
-            android:layout_toRightOf="@id/doctor_searchBox_editText"
-            android:textColor="#fff" />
-
+            android:inputType="textPersonName" />
     </LinearLayout>
 
     <FrameLayout

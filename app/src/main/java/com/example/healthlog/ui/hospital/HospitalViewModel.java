@@ -1,5 +1,8 @@
 package com.example.healthlog.ui.hospital;
 
+import android.content.Context;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -13,10 +16,12 @@ public class HospitalViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    private int totalNoOfPatient;
-    private int totalNoOfActivePatient;
-    private int totalNoOfCuredPatient;
-    private int totalNoOfDeceasedPatient;
+    private MutableLiveData<Integer>  totalNoOfPatient;
+    private MutableLiveData<Integer>  totalNoOfActivePatient;
+    private MutableLiveData<Integer>  totalNoOfCuredPatient;
+    private MutableLiveData<Integer>  totalNoOfDeceasedPatient;
+
+    private Context mContext;
 
     public HospitalViewModel() {
         mText = new MutableLiveData<>();
@@ -27,24 +32,28 @@ public class HospitalViewModel extends ViewModel {
         return mText;
     }
 
-    // TODO(SHANK) implement_1
+        public void init(Context context) {
+            this.mContext = context;
+        }
+
+    // COMPLETED(SHANK) implement_1
     public MutableLiveData<Integer> getTotalNoOfPatient(){
-        return null;
+        return totalNoOfPatient;
     }
 
-    // TODO(SHANK) implement_2
+    // COMPLETED(SHANK) implement_2
     public MutableLiveData<Integer> getNoOfActivePatient(){
-        return null;
+        return totalNoOfActivePatient;
     }
 
-    // TODO(SHANK) implement_3
+    // COMPLETED(SHANK) implement_3
     public MutableLiveData<Integer> getNoOfCuredPatient(){
-        return null;
+        return totalNoOfCuredPatient;
     }
 
-    // TODO(SHANK) implement_4
+    // COMPLETED (SHANK) implement_4
     public MutableLiveData<Integer> getNoOfDeceasedPatient(){
-        return null;
+        return totalNoOfDeceasedPatient;
     }
 
 

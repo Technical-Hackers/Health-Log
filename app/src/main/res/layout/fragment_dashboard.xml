@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.DashboardFragment">
 
-    <!-- TODO(SHANK) remove search button -->
+    <!-- COMPLETED(SHANK) remove search button -->
 
     <RelativeLayout
         android:id="@+id/dashboard_searchConatiner_relativeLayout"
@@ -16,41 +16,24 @@
 
         <EditText
             android:id="@+id/dashboard_searchBox_editText"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_width="237dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="@color/colorPrimary"
             android:ems="10"
             android:hint="@string/patient_id"
-            android:inputType="textPersonName"
-            android:backgroundTint="@color/colorPrimary"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"/>
+            android:inputType="textPersonName" />
 
-        <LinearLayout
+        <Spinner
+            android:id="@+id/dashboard_list_spinner"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/dashboard_searchBox_editText"
-            android:layout_centerHorizontal="true"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:text="@string/search"
-                android:textColor="#fff"
-                android:layout_margin="8dp"/>
-            <Spinner
-                android:id="@+id/dashboard_list_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="18dp"
-                android:layout_marginEnd="68dp"
-                android:contextClickable="true"
-                android:layout_gravity="center_vertical"/>
-
-        </LinearLayout>
-
-
-
+            android:layout_height="18dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="1dp"
+            android:layout_marginEnd="68dp"
+            android:layout_toEndOf="@+id/dashboard_searchBox_editText"
+            android:contextClickable="true" />
     </RelativeLayout>
 
 
