@@ -80,9 +80,12 @@ public class MainActivity extends AppCompatActivity {
     // COMPLETED(SHANK) call this method when logout button is clicked
     // COMPLETED(DJ) implement the method
     void logOut(){
-        SharedPreferences preferences = getSharedPreferences("data", MODE_PRIVATE);
+        HealthLog.addHospitalIdToSharedPreference(null);
+        /*SharedPreferences preferences = getSharedPreferences("data", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("ID", null);
+        editor.putString("ID", "");
+        editor.commit();
+        HealthLog.ID = null;*/
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
         finish();
     }

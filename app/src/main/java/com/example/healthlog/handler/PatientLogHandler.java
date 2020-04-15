@@ -20,7 +20,6 @@ public class PatientLogHandler {
     DialogClickListener dialogClickListener;
 
     Context context;
-    Activity activity;
 
     String log;
     EditText logEdit;
@@ -30,8 +29,7 @@ public class PatientLogHandler {
 
     Patient patient;
 
-    public PatientLogHandler(Context context, Activity activity) {
-        this.activity = activity;
+    public PatientLogHandler(Context context) {
         this.context = context;
 
         if(dialog == null) {
@@ -39,10 +37,9 @@ public class PatientLogHandler {
         }
     }
 
-    public PatientLogHandler(DialogClickListener dialogClickListener, Context context, Activity activity) {
+    public PatientLogHandler(DialogClickListener dialogClickListener, Context context) {
         this.dialogClickListener = dialogClickListener;
         this.context = context;
-        this.activity = activity;
     }
 
     Dialog dialog;

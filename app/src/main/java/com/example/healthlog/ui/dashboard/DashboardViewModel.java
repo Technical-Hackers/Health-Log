@@ -33,8 +33,6 @@ public class DashboardViewModel extends ViewModel {
     private MutableLiveData<ArrayList<Patient>> liveData;
     private Context mContext;
 
-    ArrayList<Patient> patientList;
-
     private MutableLiveData<String> mText;
 
     public void init(Context context) {

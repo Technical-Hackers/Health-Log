@@ -61,7 +61,7 @@ public class HospitalFragment extends Fragment {
                         new Observer<Integer>() {
                             @Override
                             public void onChanged(Integer integer) {
-                                activePatientsTv.setText(integer);
+                                activePatientsTv.setText(integer.toString());
                             }
                         });
 
@@ -70,7 +70,7 @@ public class HospitalFragment extends Fragment {
                         new Observer<Integer>() {
                             @Override
                             public void onChanged(Integer integer) {
-                                totalPatientsTv.setText(integer);
+                                totalPatientsTv.setText(integer.toString());
                             }
                         });
 
@@ -79,7 +79,7 @@ public class HospitalFragment extends Fragment {
                         new Observer<Integer>() {
                             @Override
                             public void onChanged(Integer integer) {
-                                curedPatientsTv.setText(integer);
+                                curedPatientsTv.setText(integer.toString());
                             }
                         });
 
@@ -88,7 +88,7 @@ public class HospitalFragment extends Fragment {
                         new Observer<Integer>() {
                             @Override
                             public void onChanged(Integer integer) {
-                                deceasedPatientsTv.setText(integer);
+                                deceasedPatientsTv.setText(integer.toString());
                             }
                         });
 

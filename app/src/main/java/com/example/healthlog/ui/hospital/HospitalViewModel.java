@@ -28,10 +28,10 @@ public class HospitalViewModel extends ViewModel {
 
     private DocumentReference patientMetaDataRef;
 
-    private MutableLiveData<Integer> totalNoOfPatient;
-    private MutableLiveData<Integer> totalNoOfActivePatient;
-    private MutableLiveData<Integer> totalNoOfCuredPatient;
-    private MutableLiveData<Integer> totalNoOfDeceasedPatient;
+    private MutableLiveData<Integer> totalNoOfPatient=new MutableLiveData<>();
+    private MutableLiveData<Integer> totalNoOfActivePatient=new MutableLiveData<>();
+    private MutableLiveData<Integer> totalNoOfCuredPatient=new MutableLiveData<>();
+    private MutableLiveData<Integer> totalNoOfDeceasedPatient=new MutableLiveData<>();
 
 
     public HospitalViewModel() {
@@ -44,29 +44,32 @@ public class HospitalViewModel extends ViewModel {
     }
 
 
-        public void init(Context context) {
-            this.mContext = context;
-        }
+    public void init(Context context) {
+        this.mContext = context;
+        fetchPatientMetaData();
+    }
 
     // COMPLETED(SHANK) implement_1
-    public MutableLiveData<Integer> getTotalNoOfPatient(){
+    public LiveData<Integer> getTotalNoOfPatient(){
         return totalNoOfPatient;
     }
 
     // COMPLETED(SHANK) implement_2
-    public MutableLiveData<Integer> getNoOfActivePatient(){
+    public LiveData<Integer> getNoOfActivePatient(){
         return totalNoOfActivePatient;
     }
 
     // COMPLETED(SHANK) implement_3
-    public MutableLiveData<Integer> getNoOfCuredPatient(){
+    public LiveData<Integer> getNoOfCuredPatient(){
+
         return totalNoOfCuredPatient;
     }
 
     // COMPLETED (SHANK) implement_4
-    public MutableLiveData<Integer> getNoOfDeceasedPatient(){
+    public LiveData<Integer> getNoOfDeceasedPatient(){
         return totalNoOfDeceasedPatient;
     }
+
 
     // COMPLETED(DJ) implement_1
     private void fetchPatientMetaData(){

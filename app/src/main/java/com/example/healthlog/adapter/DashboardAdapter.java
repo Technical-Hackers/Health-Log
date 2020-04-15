@@ -35,12 +35,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private String currentFilter = "Deceased";
     public String logRecent;
 
-    public DashboardAdapter(List<Patient> patientList) {
-        this.allPatientList = patientList;
-        currentPatientList = new ArrayList<>();
-
-    }
-
     public DashboardAdapter(List<Patient> patientList , OnItemClickListener listener) {
         this.allPatientList = patientList;
         currentPatientList = new ArrayList<>();
@@ -61,7 +55,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     public void onBindViewHolder(@NonNull DashboardViewHolder holder, int position) {
         // COMPLETED(Shashank) add colors to res directory rather than hardcoding
         Patient patient = currentPatientList.get(position);
-        holder.bind(patient, onItemClickListener);
         holder.patientName.setText(patient.getId());
         holder.patientStatus.setText(patient.getStatus());
         holder.patientLogDescription.setText(patient.getRecentLog());
@@ -72,6 +65,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         } else {
             holder.patientColorStatus.setBackgroundColor(0xFFC0C0C0);
         }
+        holder.bind(patient, onItemClickListener);
         holder.listenForStatusAndLogChanges(patient);
     }
 
@@ -159,8 +153,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             patientColorStatus = itemView.findViewById(R.id.patient_list_item_statusCircle_view);
         }
 
-        void bind(final Patient currentPatient, final OnItemClickListener listener){
-            itemView.setOnClickListener(new View.OnClickListener() {
+        void bind(final Patient currentPatient, OnItemClickListener listener){
+            view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     listener.onItemClicked(currentPatient, itemView);
