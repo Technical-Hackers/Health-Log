@@ -12,6 +12,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import java.util.ArrayList;
 
 public class HospitalViewModel extends ViewModel {
 
@@ -21,6 +22,10 @@ public class HospitalViewModel extends ViewModel {
 
     private DocumentReference patientMetaDataRef;
 
+    private ArrayList<SuspectedPatient> suspectedPatientArrayList = new ArrayList<SuspectedPatient>();
+    MutableLiveData<ArrayList<SuspectedPatient>> suspect = new MutableLiveData<>();
+
+    private MutableLiveData<ArrayList<SuspectedPatient>> liveData;
     private MutableLiveData<Integer> totalNoOfPatient = new MutableLiveData<>();
     private MutableLiveData<Integer> totalNoOfActivePatient = new MutableLiveData<>();
     private MutableLiveData<Integer> totalNoOfCuredPatient = new MutableLiveData<>();
@@ -40,6 +45,23 @@ public class HospitalViewModel extends ViewModel {
         fetchPatientMetaData();
     }
 
+    public void initSuspectList(Context context) {
+        mContext = context;
+        if (liveData != null) {
+            return;
+        }
+        liveData = getSuspectPatients();
+    }
+
+    public LiveData<ArrayList<SuspectedPatient>> getSuspectPatientsList() {
+        return liveData;
+    }
+
+    public MutableLiveData<ArrayList<SuspectedPatient>> getSuspectPatients() {
+        fetchSuspectPatients();
+        return suspect;
+    }
+
     // COMPLETED(SHANK) implement_1
     public LiveData<Integer> getTotalNoOfPatient() {
         return totalNoOfPatient;
@@ -51,7 +73,9 @@ public class HospitalViewModel extends ViewModel {
     }
 
     // COMPLETED(SHANK) implement_3
-    public LiveData<Integer> getNoOfCuredPatient() { return totalNoOfCuredPatient; }
+    public LiveData<Integer> getNoOfCuredPatient() {
+        return totalNoOfCuredPatient;
+    }
 
     // COMPLETED (SHANK) implement_4
     public LiveData<Integer> getNoOfDeceasedPatient() {
@@ -80,13 +104,11 @@ public class HospitalViewModel extends ViewModel {
                 });
     }
 
-    // TODO(DJ) implement_1
-    public void addPatientToHospital(SuspectedPatient patient){
+    private void fetchSuspectPatients() {}
 
-    }
+    // TODO(DJ) implement_1
+    public void addPatientToHospital(SuspectedPatient patient) {}
 
     // TODO(DJ) implement_2
-    public void sendRequestToHospital(SuspectedPatient patient){
-
-    }
+    public void sendRequestToHospital(SuspectedPatient patient) {}
 }

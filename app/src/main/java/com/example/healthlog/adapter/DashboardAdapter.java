@@ -1,7 +1,6 @@
 package com.example.healthlog.adapter;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,17 +64,23 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     void listenForStatusAndLogChanges(final Patient p) {
         FirebaseFirestore mRef = FirebaseFirestore.getInstance();
-        mRef.collection("Hospital").document(HealthLog.ID)
-                .collection("Patient").document(p.getId()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                String status = documentSnapshot.getString("status");
-                String log = documentSnapshot.getString("recentLog");
-                p.setStatus(status);
-                p.setRecentLog(log);
-                notifyDataSetChanged();
-            }
-        });
+        mRef.collection("Hospital")
+                .document(HealthLog.ID)
+                .collection("Patient")
+                .document(p.getId())
+                .addSnapshotListener(
+                        new EventListener<DocumentSnapshot>() {
+                            @Override
+                            public void onEvent(
+                                    @Nullable DocumentSnapshot documentSnapshot,
+                                    @Nullable FirebaseFirestoreException e) {
+                                String status = documentSnapshot.getString("status");
+                                String log = documentSnapshot.getString("recentLog");
+                                p.setStatus(status);
+                                p.setRecentLog(log);
+                                notifyDataSetChanged();
+                            }
+                        });
     }
 
     @Override
@@ -164,14 +169,14 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             patientColorStatus = itemView.findViewById(R.id.patient_list_item_statusCircle_view);
         }
 
-
         void bind(final Patient currentPatient, final OnItemClickListener listener) {
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    listener.onItemClicked(currentPatient, itemView);
-                }
-            });
+            view.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            listener.onItemClicked(currentPatient, itemView);
+                        }
+                    });
         }
     }
 }

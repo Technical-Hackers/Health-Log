@@ -26,6 +26,8 @@
     <string name="cured">Cured</string>
     <string name="_556">556</string>
     <string name="active">Active</string>
+    <string name="add_patient">Do you want to add this patient</string>
+    <string name="send">Send to other hospital</string>
 
     <string-array name="statusArray">
         <item>All</item>

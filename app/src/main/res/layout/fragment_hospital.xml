@@ -95,6 +95,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="308dp"
         android:layout_height="57dp"
         android:background="#c4c4ff"
@@ -105,21 +106,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.025">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/confirmed"
-                android:gravity="center_horizontal"
-                android:textSize="20sp">
-            </TextView>
 
-            <TextView
-                android:id="@+id/hospital_confirmed_textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/_678"
-                android:textSize="15sp"
-                android:gravity="center">
-            </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/confirmed"
+            android:textSize="20sp"></TextView>
+
+        <TextView
+            android:id="@+id/hospital_confirmed_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/_678"
+            android:textSize="15sp"></TextView>
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/hospital_suspect_list_recyclerView"
+        android:layout_width="409dp"
+        android:layout_height="547dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        tools:listitem="@layout/patient_list_item"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

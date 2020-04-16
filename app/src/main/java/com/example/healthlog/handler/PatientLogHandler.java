@@ -93,7 +93,5 @@ public class PatientLogHandler {
 
     // TODO(DJ) verify code and update the ui
 
-    public void verifyCode(Doctor doctor, String code){
-
-    }
+    public void verifyCode(Doctor doctor, String code) {}
 }
