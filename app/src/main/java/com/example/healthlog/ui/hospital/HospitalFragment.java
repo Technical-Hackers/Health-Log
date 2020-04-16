@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import com.example.healthlog.R;
 
+// run this for spotless check  "./gradlew spotlessApply"
 public class HospitalFragment extends Fragment {
 
     // COMPLETED(SHANK) implement ui
