@@ -9,14 +9,12 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.healthlog.HealthLog;
 import com.example.healthlog.model.Doctor;
-import com.example.healthlog.model.Patient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class DoctorViewModel extends ViewModel {

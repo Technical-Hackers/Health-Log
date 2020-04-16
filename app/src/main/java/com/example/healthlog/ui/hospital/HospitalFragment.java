@@ -7,19 +7,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.healthlog.R;
-import com.example.healthlog.handler.NewPatientHandler;
-import com.example.healthlog.ui.doctor.DoctorViewModel;
-
-import org.w3c.dom.Text;
-
-import org.w3c.dom.Text;
 
 public class HospitalFragment extends Fragment {
 

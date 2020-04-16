@@ -6,7 +6,6 @@ import android.content.Context;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.healthlog.HealthLog;
 import com.example.healthlog.R;
 import com.example.healthlog.model.Patient;
 

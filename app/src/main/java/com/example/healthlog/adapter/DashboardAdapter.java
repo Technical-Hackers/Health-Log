@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.healthlog.HealthLog;
 import com.example.healthlog.R;
 import com.example.healthlog.interfaces.OnItemClickListener;
-import com.example.healthlog.model.Doctor;
 import com.example.healthlog.model.Patient;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;

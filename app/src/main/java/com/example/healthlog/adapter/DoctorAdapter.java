@@ -1,6 +1,5 @@
 package com.example.healthlog.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.healthlog.R;
 import com.example.healthlog.interfaces.OnItemClickListener;
 import com.example.healthlog.model.Doctor;
-import com.example.healthlog.model.Patient;
 
 import java.util.ArrayList;
 import java.util.List;
