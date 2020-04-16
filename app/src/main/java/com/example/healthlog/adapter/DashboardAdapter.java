@@ -63,20 +63,20 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         holder.bind(patient, onItemClickListener);
     }
 
-    void listenForStatusAndLogChanges(final Patient p){
-            FirebaseFirestore mRef = FirebaseFirestore.getInstance();
-            mRef.collection("Hospital").document(HealthLog.ID)
-                    .collection("Patient").document(p.getId()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                @Override
-                public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                    String status = documentSnapshot.getString("status");
-                    String log = documentSnapshot.getString("recentLog");
-                    p.setStatus(status);
-                    p.setRecentLog(log);
-                    notifyDataSetChanged();
-                }
-            });
-        }
+    void listenForStatusAndLogChanges(final Patient p) {
+        FirebaseFirestore mRef = FirebaseFirestore.getInstance();
+        mRef.collection("Hospital").document(HealthLog.ID)
+                .collection("Patient").document(p.getId()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                String status = documentSnapshot.getString("status");
+                String log = documentSnapshot.getString("recentLog");
+                p.setStatus(status);
+                p.setRecentLog(log);
+                notifyDataSetChanged();
+            }
+        });
+    }
 
     @Override
     public int getItemCount() {
@@ -165,14 +165,13 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         }
 
 
-        void bind(final Patient currentPatient, OnItemClickListener listener) {
-            view.setOnClickListener(
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            listener.onItemClicked(currentPatient, itemView);
-                        }
-                    });
+        void bind(final Patient currentPatient, final OnItemClickListener listener) {
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClicked(currentPatient, itemView);
+                }
+            });
         }
     }
 }
