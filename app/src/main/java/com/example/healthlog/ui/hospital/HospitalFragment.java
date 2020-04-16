@@ -5,16 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-
 import com.example.healthlog.R;
 
 public class HospitalFragment extends Fragment {
-
 
     // COMPLETED(SHANK) implement ui
 
@@ -27,10 +24,9 @@ public class HospitalFragment extends Fragment {
     TextView curedPatientsTv;
     TextView deceasedPatientsTv;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
-                ViewModelProviders.of(this).get(HospitalViewModel.class);
+    public View onCreateView(
+            @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        notificationsViewModel = ViewModelProviders.of(this).get(HospitalViewModel.class);
         root = inflater.inflate(R.layout.fragment_hospital, container, false);
 
         setup();
@@ -45,11 +41,12 @@ public class HospitalFragment extends Fragment {
         curedPatientsTv = root.findViewById(R.id.hospital_cured_textView);
         deceasedPatientsTv = root.findViewById(R.id.hospital_deceased_textView);
 
-        notificationsViewModel =
-                ViewModelProviders.of(this).get(HospitalViewModel.class);
+        notificationsViewModel = ViewModelProviders.of(this).get(HospitalViewModel.class);
         notificationsViewModel.init(getContext());
-        notificationsViewModel.getNoOfActivePatient()
-                .observe(getViewLifecycleOwner(),
+        notificationsViewModel
+                .getNoOfActivePatient()
+                .observe(
+                        getViewLifecycleOwner(),
                         new Observer<Integer>() {
                             @Override
                             public void onChanged(Integer integer) {
@@ -57,8 +54,10 @@ public class HospitalFragment extends Fragment {
                             }
                         });
 
-        notificationsViewModel.getTotalNoOfPatient()
-                .observe(getViewLifecycleOwner(),
+        notificationsViewModel
+                .getTotalNoOfPatient()
+                .observe(
+                        getViewLifecycleOwner(),
                         new Observer<Integer>() {
                             @Override
                             public void onChanged(Integer integer) {
@@ -66,8 +65,10 @@ public class HospitalFragment extends Fragment {
                             }
                         });
 
-        notificationsViewModel.getNoOfCuredPatient()
-                .observe(getViewLifecycleOwner(),
+        notificationsViewModel
+                .getNoOfCuredPatient()
+                .observe(
+                        getViewLifecycleOwner(),
                         new Observer<Integer>() {
                             @Override
                             public void onChanged(Integer integer) {
@@ -75,15 +76,15 @@ public class HospitalFragment extends Fragment {
                             }
                         });
 
-        notificationsViewModel.getNoOfDeceasedPatient()
-                .observe(getViewLifecycleOwner(),
+        notificationsViewModel
+                .getNoOfDeceasedPatient()
+                .observe(
+                        getViewLifecycleOwner(),
                         new Observer<Integer>() {
                             @Override
                             public void onChanged(Integer integer) {
                                 deceasedPatientsTv.setText(integer.toString());
                             }
                         });
-
     }
-
 }

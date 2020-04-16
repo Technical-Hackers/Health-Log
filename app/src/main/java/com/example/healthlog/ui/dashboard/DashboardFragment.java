@@ -11,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -20,7 +19,6 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.healthlog.HealthLog;
 import com.example.healthlog.R;
 import com.example.healthlog.adapter.DashboardAdapter;
@@ -29,7 +27,6 @@ import com.example.healthlog.handler.PatientViewHandler;
 import com.example.healthlog.interfaces.OnItemClickListener;
 import com.example.healthlog.model.Patient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.ArrayList;
 
 public class DashboardFragment extends Fragment {
@@ -55,11 +52,10 @@ public class DashboardFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(
+            @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         Toast.makeText(getActivity(), HealthLog.ID, Toast.LENGTH_SHORT).show();
         root = inflater.inflate(R.layout.fragment_dashboard, container, false);
@@ -67,40 +63,41 @@ public class DashboardFragment extends Fragment {
         setUpRecyclerView();
         setUpSpinner();
 
-        //search edit text
+        // search edit text
         searchEditText = root.findViewById(R.id.dashboard_searchBox_editText);
 
-        searchEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        searchEditText.addTextChangedListener(
+                new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
-            }
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+                        dashboardAdapter.filter(editable.toString().trim());
+                    }
+                });
 
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                dashboardAdapter.filter(editable.toString().trim());
-            }
-        });
-
-        //Spinner
+        // Spinner
         spinner = root.findViewById(R.id.dashboard_list_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.statusArray, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter =
+                ArrayAdapter.createFromResource(
+                        getActivity(), R.array.statusArray, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_expandable_list_item_1);
         spinner.setAdapter(adapter);
 
         // FAB
-        FloatingActionButton addPatient = (FloatingActionButton) root.findViewById(R.id.dashboard_add_fab);
-        addPatient.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addNewPatient();
-            }
-        });
+        FloatingActionButton addPatient =
+                (FloatingActionButton) root.findViewById(R.id.dashboard_add_fab);
+        addPatient.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        addNewPatient();
+                    }
+                });
         return root;
     }
 
@@ -110,23 +107,26 @@ public class DashboardFragment extends Fragment {
     }
 
     void setUpRecyclerView() {
-        final PatientViewHandler patientViewHandler = new PatientViewHandler(getContext(), getActivity());
-        dashboardAdapter = new DashboardAdapter(new ArrayList<Patient>(), new OnItemClickListener<Patient>() {
-            @Override
-            public void onItemClicked(Patient patient, View v) {
-                patientViewHandler.update(patient);
-                patientViewHandler.init();
-            }
-        });
+        final PatientViewHandler patientViewHandler =
+                new PatientViewHandler(getContext(), getActivity());
+        dashboardAdapter =
+                new DashboardAdapter(
+                        new ArrayList<Patient>(),
+                        new OnItemClickListener<Patient>() {
+                            @Override
+                            public void onItemClicked(Patient patient, View v) {
+                                patientViewHandler.update(patient);
+                                patientViewHandler.init();
+                            }
+                        });
 
         dashboardRecyclerView = root.findViewById(R.id.dashboard_showList_recycler);
 
-        dashboardRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+        dashboardRecyclerView.addItemDecoration(
+                new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         dashboardRecyclerView.setHasFixedSize(false);
         dashboardRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         dashboardRecyclerView.setAdapter(dashboardAdapter);
-
-
 
         dashboardViewModel = ViewModelProviders.of(requireActivity()).get(DashboardViewModel.class);
         dashboardViewModel.init(getActivity());
@@ -137,34 +137,33 @@ public class DashboardFragment extends Fragment {
                         new Observer<ArrayList<Patient>>() {
                             @Override
                             public void onChanged(ArrayList<Patient> patientModels) {
-                                for(Patient p: patientModels){
+                                for (Patient p : patientModels) {
                                     dashboardAdapter.add(p);
                                 }
-
                             }
                         });
     }
 
-    void setUpSpinner(){
+    void setUpSpinner() {
         spinner = root.findViewById(R.id.dashboard_list_spinner);
-        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.statusArray, android.R.layout.simple_spinner_item);
+        final ArrayAdapter<CharSequence> adapter =
+                ArrayAdapter.createFromResource(
+                        getActivity(), R.array.statusArray, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
+        spinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    String[] sts = {"All", "Active", "Cured", "Deceased"};
 
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        spinner.setSelection(i);
+                        dashboardAdapter.applyFilter(sts[i]);
+                    }
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            String[] sts = {"All", "Active", "Cured", "Deceased"};
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                spinner.setSelection(i);
-                dashboardAdapter.applyFilter(sts[i]);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {}
+                });
     }
 }

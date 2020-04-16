@@ -12,8 +12,7 @@ public class Doctor implements Serializable {
     List<String> location;
     Integer noOfPatients;
 
-    public Doctor() {
-    }
+    public Doctor() {}
 
     public String getId() {
         return id;

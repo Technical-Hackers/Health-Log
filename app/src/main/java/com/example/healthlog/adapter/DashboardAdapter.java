@@ -6,11 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.healthlog.HealthLog;
 import com.example.healthlog.R;
 import com.example.healthlog.interfaces.OnItemClickListener;
@@ -19,7 +17,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +29,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     private String currentFilter = "Deceased";
 
-    public DashboardAdapter(List<Patient> patientList , OnItemClickListener listener) {
+    public DashboardAdapter(List<Patient> patientList, OnItemClickListener listener) {
         this.allPatientList = patientList;
         currentPatientList = new ArrayList<>();
 
@@ -43,7 +40,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     @Override
     public DashboardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.patient_list_item, parent, false);
+        View itemView =
+                LayoutInflater.from(parent.getContext()).inflate(R.layout.patient_list_item, parent, false);
         return new DashboardViewHolder(itemView);
     }
 
@@ -85,32 +83,32 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         return currentPatientList.size();
     }
 
-    public void add(Patient p){
-        for(Patient patient: allPatientList){
-            if(p.getId().equals(patient.getId())){
+    public void add(Patient p) {
+        for (Patient patient : allPatientList) {
+            if (p.getId().equals(patient.getId())) {
                 return;
             }
         }
         listenForStatusAndLogChanges(p);
         allPatientList.add(p);
-        if(currentFilter.equals("All")){
+        if (currentFilter.equals("All")) {
             currentPatientList.clear();
             currentPatientList.addAll(allPatientList);
             notifyDataSetChanged();
             return;
         }
-        if(p.getStatus().equals(currentFilter)){
+        if (p.getStatus().equals(currentFilter)) {
             currentPatientList.add(p);
             notifyDataSetChanged();
         }
     }
 
     // COMPLETED(Danish) handle filter  here
-    public void applyFilter(String filter){
+    public void applyFilter(String filter) {
         currentFilter = filter;
-        if(filter.equals("All")){
-            for(Patient p: allPatientList){
-                if(!currentPatientList.contains(p)){
+        if (filter.equals("All")) {
+            for (Patient p : allPatientList) {
+                if (!currentPatientList.contains(p)) {
                     currentPatientList.add(p);
                 }
             }
@@ -119,22 +117,23 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             return;
         }
         currentPatientList.clear();
-        for(Patient p: allPatientList){
-            if(p.getStatus().equals(filter)){
+        for (Patient p : allPatientList) {
+            if (p.getStatus().equals(filter)) {
                 currentPatientList.add(p);
             }
         }
         notifyDataSetChanged();
     }
 
-    public void filter(String name){
+    public void filter(String name) {
         currentPatientList.clear();
-        if(name.equals("")){
+        if (name.equals("")) {
             applyFilter(currentFilter);
             return;
         }
-        for(Patient p: allPatientList){
-            if(p.getId().toLowerCase().contains(name.toLowerCase()) || p.getName().toLowerCase().contains(name.toLowerCase())){
+        for (Patient p : allPatientList) {
+            if (p.getId().toLowerCase().contains(name.toLowerCase())
+                    || p.getName().toLowerCase().contains(name.toLowerCase())) {
                 currentPatientList.add(p);
             }
         }
@@ -165,13 +164,15 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             patientColorStatus = itemView.findViewById(R.id.patient_list_item_statusCircle_view);
         }
 
-        void bind(final Patient currentPatient, final OnItemClickListener listener){
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    listener.onItemClicked(currentPatient, itemView);
-                }
-            });
+
+        void bind(final Patient currentPatient, OnItemClickListener listener) {
+            view.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            listener.onItemClicked(currentPatient, itemView);
+                        }
+                    });
         }
     }
 }

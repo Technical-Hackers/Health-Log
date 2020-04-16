@@ -1,13 +1,11 @@
 package com.example.healthlog.ui.dashboard;
 
 import android.content.Context;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
 import com.example.healthlog.HealthLog;
 import com.example.healthlog.model.Patient;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,7 +16,6 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
 
 public class DashboardViewModel extends ViewModel {
@@ -49,6 +46,7 @@ public class DashboardViewModel extends ViewModel {
         fetchPatients();
         return patient;
     }
+
     public DashboardViewModel() {
         mRef = FirebaseFirestore.getInstance();
         mText = new MutableLiveData<>();
@@ -60,31 +58,36 @@ public class DashboardViewModel extends ViewModel {
     }
 
     // COMPLETED(DJ) update data realtime
-    public void fetchPatients(){
-        final CollectionReference patientReference = mRef.collection("Hospital").document(HealthLog.ID).collection("Patient");
+    public void fetchPatients() {
+        final CollectionReference patientReference =
+                mRef.collection("Hospital").document(HealthLog.ID).collection("Patient");
 
-        patientReference.document("meta-data").addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-
-                patientReference
-                        .whereEqualTo("type", 0)
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        patientReference
+                .document("meta-data")
+                .addSnapshotListener(
+                        new EventListener<DocumentSnapshot>() {
                             @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if(task.isSuccessful()){
-                                    for(DocumentSnapshot document: task.getResult()){
-                                        Patient p = document.toObject(Patient.class);
-                                        patientArrayList.add(p);
-                                    }
-                                    patient.setValue(patientArrayList);
-                                }
+                            public void onEvent(
+                                    @Nullable DocumentSnapshot documentSnapshot,
+                                    @Nullable FirebaseFirestoreException e) {
+
+                                patientReference
+                                        .whereEqualTo("type", 0)
+                                        .get()
+                                        .addOnCompleteListener(
+                                                new OnCompleteListener<QuerySnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            for (DocumentSnapshot document : task.getResult()) {
+                                                                Patient p = document.toObject(Patient.class);
+                                                                patientArrayList.add(p);
+                                                            }
+                                                            patient.setValue(patientArrayList);
+                                                        }
+                                                    }
+                                                });
                             }
                         });
-            }
-        });
-
-
     }
 }

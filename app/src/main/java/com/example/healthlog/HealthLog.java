@@ -13,10 +13,10 @@ public class HealthLog extends Application {
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
-       getHospitalId();
+        getHospitalId();
     }
 
-    public static void addHospitalIdToSharedPreference(String s){
+    public static void addHospitalIdToSharedPreference(String s) {
         SharedPreferences preferences = context.getSharedPreferences("data", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("ID", s);
@@ -24,9 +24,8 @@ public class HealthLog extends Application {
         getHospitalId();
     }
 
-    private static void getHospitalId(){
+    private static void getHospitalId() {
         SharedPreferences preferences = context.getSharedPreferences("data", MODE_PRIVATE);
         ID = preferences.getString("ID", null);
     }
-
 }

@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -16,13 +15,11 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.healthlog.DoctorActivity;
 import com.example.healthlog.R;
 import com.example.healthlog.adapter.DoctorAdapter;
 import com.example.healthlog.interfaces.OnItemClickListener;
 import com.example.healthlog.model.Doctor;
-
 import java.util.ArrayList;
 
 public class DoctorFragment extends Fragment {
@@ -37,7 +34,6 @@ public class DoctorFragment extends Fragment {
 
     // COMPLETED(SHANK) implement recycler view and adapter
 
-
     private DoctorAdapter doctorAdapter;
     private RecyclerView doctorRecyclerView;
     private DoctorViewModel doctorViewModel;
@@ -46,8 +42,8 @@ public class DoctorFragment extends Fragment {
 
     View root;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(
+            @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.fragment_doctor, container, false);
 
@@ -55,46 +51,46 @@ public class DoctorFragment extends Fragment {
 
         searchEditText = root.findViewById(R.id.doctor_searchBox_editText);
 
-        searchEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        searchEditText.addTextChangedListener(
+                new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
-            }
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                doctorAdapter.filter(editable.toString().trim());
-            }
-        });
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+                        doctorAdapter.filter(editable.toString().trim());
+                    }
+                });
 
         return root;
     }
 
     // COMPLETED(SHANK) implement following method
-    void setUpRecyclerView(){
-        doctorAdapter = new DoctorAdapter(new ArrayList<Doctor>(), new OnItemClickListener<Doctor>() {
-            @Override
-            public void onItemClicked(Doctor d, View v) {
-                Intent intent = new Intent(getActivity(), DoctorActivity.class);
-                intent.putExtra("doctor", d);
+    void setUpRecyclerView() {
+        doctorAdapter =
+                new DoctorAdapter(
+                        new ArrayList<Doctor>(),
+                        new OnItemClickListener<Doctor>() {
+                            @Override
+                            public void onItemClicked(Doctor d, View v) {
+                                Intent intent = new Intent(getActivity(), DoctorActivity.class);
+                                intent.putExtra("doctor", d);
 
-                startActivity(intent);
-            }
-        });
+                                startActivity(intent);
+                            }
+                        });
 
         doctorRecyclerView = root.findViewById(R.id.doctor_showList_recycler);
-        doctorRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+        doctorRecyclerView.addItemDecoration(
+                new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         doctorRecyclerView.setHasFixedSize(false);
         doctorRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         doctorRecyclerView.setAdapter(doctorAdapter);
 
-        doctorViewModel =
-                ViewModelProviders.of(this).get(DoctorViewModel.class);
+        doctorViewModel = ViewModelProviders.of(this).get(DoctorViewModel.class);
         doctorViewModel.init(getActivity());
         doctorViewModel
                 .getDoctorsList()
@@ -107,8 +103,6 @@ public class DoctorFragment extends Fragment {
                                     doctorAdapter.add(d);
                                 }
                             }
-                        }
-                );
+                        });
     }
-
 }

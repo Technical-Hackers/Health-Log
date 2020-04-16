@@ -15,11 +15,9 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-
 import com.example.healthlog.HealthLog;
 import com.example.healthlog.R;
 import com.example.healthlog.model.Doctor;
@@ -35,32 +33,26 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
-import com.google.firestore.v1.DocumentTransform;
-
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class NewPatientHandler {
 
     // COMPLETED(DJ) allot patient to doctor using desired logic
 
-    //activity
+    // activity
     Context context;
     Activity activity;
 
-    //Date object for dob
+    // Date object for dob
     Date date;
 
-    //dialog
+    // dialog
     Dialog dialog;
 
-    //editText
+    // editText
     EditText name;
     EditText address;
     EditText dob;
@@ -68,21 +60,20 @@ public class NewPatientHandler {
     EditText roomNo;
     EditText bedNo;
 
-    //button
+    // button
     Button submit;
     Button cancel;
 
-    //textView
+    // textView
     TextView id;
 
-    //String
+    // String
     String patientId;
 
-    //firebase reference
+    // firebase reference
     FirebaseFirestore mRef;
 
     int size;
-
 
     public NewPatientHandler(Context context, Activity activity) {
         this.context = context;
@@ -90,12 +81,15 @@ public class NewPatientHandler {
         setUp();
     }
 
-    void setUp(){
+    void setUp() {
         mRef = FirebaseFirestore.getInstance();
         fetchPatientMetaData();
         dialog = new Dialog(context);
         dialog.setContentView(R.layout.new_patient_layout);
-        dialog.getWindow().setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+        dialog
+                .getWindow()
+                .setLayout(
+                        RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
 
         id = dialog.findViewById(R.id.new_patient_layout_id_tV);
 
@@ -109,65 +103,67 @@ public class NewPatientHandler {
         cancel = dialog.findViewById(R.id.new_patient_layout_cancel_btn);
         submit = dialog.findViewById(R.id.new_patient_layout_submit_btn);
 
-        (dob).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context, "clicked", Toast.LENGTH_SHORT).show();
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    pickDate();
-                }
-            }
-        });
+        (dob)
+                .setOnClickListener(
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Toast.makeText(context, "clicked", Toast.LENGTH_SHORT).show();
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                    pickDate();
+                                }
+                            }
+                        });
 
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                destroy();
-            }
-        });
+        cancel.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        destroy();
+                    }
+                });
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createNewPatient();
-            }
-        });
+        submit.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        createNewPatient();
+                    }
+                });
 
-        name.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        name.addTextChangedListener(
+                new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
-            }
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                id.setText("Patient id: "+getCompleteId());
-            }
-        });
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+                        id.setText("Patient id: " + getCompleteId());
+                    }
+                });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    void pickDate(){
+    void pickDate() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(context);
 
-        datePickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                dob.setText(day+"/"+month+"/"+year);
-                date = new Date(year, month, day);
-            }
-        });
+        datePickerDialog.setOnDateSetListener(
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        dob.setText(day + "/" + month + "/" + year);
+                        date = new Date(year, month, day);
+                    }
+                });
 
         datePickerDialog.show();
     }
 
     // COMPLETED(Danish) implement method
-    void createNewPatient(){
+    void createNewPatient() {
         /*
         * 1. Create new patient object
         * 2. Initiate server
@@ -189,116 +185,143 @@ public class NewPatientHandler {
         patient.setStatus("Active");
         patient.setAge(calculateAge());
 
-        final CollectionReference patientRef = mRef.collection("Hospital").document(HealthLog.ID).collection("Patient");
+        final CollectionReference patientRef =
+                mRef.collection("Hospital").document(HealthLog.ID).collection("Patient");
 
-        patientRef.document(patient.getId()).set(patient).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    patientRef.document(patient.getId()).update("dateAdded", FieldValue.serverTimestamp()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                // COMPLETED(DJ) call @updatePatientMetaData() and move below logic in that function
-                                updatePatientMetaData(patientRef);
+        patientRef
+                .document(patient.getId())
+                .set(patient)
+                .addOnCompleteListener(
+                        new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    patientRef
+                                            .document(patient.getId())
+                                            .update("dateAdded", FieldValue.serverTimestamp())
+                                            .addOnCompleteListener(
+                                                    new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if (task.isSuccessful()) {
+                                                                // COMPLETED(DJ) call @updatePatientMetaData() and move below logic
+                                                                // in that function
+                                                                updatePatientMetaData(patientRef);
+                                                            }
+                                                        }
+                                                    });
+                                }
                             }
-                        }
-                    });
-                }
-            }
-        });
+                        });
     }
 
     // COMPLETED(DJ) update meta-data
-    void updatePatientMetaData(CollectionReference patientRef){
+    void updatePatientMetaData(CollectionReference patientRef) {
         final DocumentReference metaDataRef = patientRef.document("meta-data");
-        
-        mRef.runTransaction(new Transaction.Function<Void>() {
-            @Nullable
-            @Override
-            public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
-                transaction.update(metaDataRef, "size", FieldValue.increment(1));
-                transaction.update(metaDataRef, "active", FieldValue.increment(1));
-                return null;
-            }
-        }).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                fetchDoctor();
-            }
-        });
 
+        mRef.runTransaction(
+                        new Transaction.Function<Void>() {
+                            @Nullable
+                            @Override
+                            public Void apply(@NonNull Transaction transaction)
+                                    throws FirebaseFirestoreException {
+                                transaction.update(metaDataRef, "size", FieldValue.increment(1));
+                                transaction.update(metaDataRef, "active", FieldValue.increment(1));
+                                return null;
+                            }
+                        })
+                .addOnCompleteListener(
+                        new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                fetchDoctor();
+                            }
+                        });
     }
 
-    void fetchDoctor(){
-        mRef.collection("Hospital").document(HealthLog.ID)
+    void fetchDoctor() {
+        mRef.collection("Hospital")
+                .document(HealthLog.ID)
                 .collection("Doctor")
                 .orderBy("noOfPatients", Query.Direction.DESCENDING)
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    List<Doctor> doctors = new ArrayList<>();
-                    for(DocumentSnapshot d: task.getResult()){
-                        doctors.add(d.toObject(Doctor.class));
-                    }
-                    setRoutine(doctors);
-                }
-            }
-        });
+                .get()
+                .addOnCompleteListener(
+                        new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    List<Doctor> doctors = new ArrayList<>();
+                                    for (DocumentSnapshot d : task.getResult()) {
+                                        doctors.add(d.toObject(Doctor.class));
+                                    }
+                                    setRoutine(doctors);
+                                }
+                            }
+                        });
     }
 
-    void setRoutine(List<Doctor> doctors){
-        Doctor currentDoctor=null;
-        for(int i=0; i<doctors.size()-1; i++){
-            if((doctors.get(i).getNoOfPatients()-1) == doctors.get(i+1).getNoOfPatients() && doctors.get(i+1).getStatus().equals("Available")){
-                currentDoctor = doctors.get(i+1);
+    void setRoutine(List<Doctor> doctors) {
+        Doctor currentDoctor = null;
+        for (int i = 0; i < doctors.size() - 1; i++) {
+            if ((doctors.get(i).getNoOfPatients() - 1) == doctors.get(i + 1).getNoOfPatients()
+                    && doctors.get(i + 1).getStatus().equals("Available")) {
+                currentDoctor = doctors.get(i + 1);
                 break;
             }
         }
-        if(currentDoctor == null){
+        if (currentDoctor == null) {
             currentDoctor = doctors.get(0);
         }
         toast("server initialising");
         initiateRoutineServer(currentDoctor);
-
     }
 
     void initiateRoutineServer(final Doctor doctor) {
 
-        final CollectionReference doctorRef = mRef.collection("Hospital").document(HealthLog.ID)
-                .collection("Doctor");
-        DocumentReference patientRef = mRef.collection("Hospital").document(HealthLog.ID)
-                .collection("Patient").document(getCompleteId());
+        final CollectionReference doctorRef =
+                mRef.collection("Hospital").document(HealthLog.ID).collection("Doctor");
+        DocumentReference patientRef =
+                mRef.collection("Hospital")
+                        .document(HealthLog.ID)
+                        .collection("Patient")
+                        .document(getCompleteId());
 
-        doctorRef.document(doctor.getId()).collection("Routine")
-                .document("Routine").update("patientList", FieldValue.arrayUnion(patientRef))
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            toast("REf added ");
-                            doctorRef.document(doctor.getId()).update("noOfPatients", FieldValue.increment(1)).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    toast("done");
-                                    destroy();
+        doctorRef
+                .document(doctor.getId())
+                .collection("Routine")
+                .document("Routine")
+                .update("patientList", FieldValue.arrayUnion(patientRef))
+                .addOnCompleteListener(
+                        new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    toast("REf added ");
+                                    doctorRef
+                                            .document(doctor.getId())
+                                            .update("noOfPatients", FieldValue.increment(1))
+                                            .addOnCompleteListener(
+                                                    new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            toast("done");
+                                                            destroy();
+                                                        }
+                                                    });
+                                } else {
+
+                                    Log.i("NEWPATIENTHANDLER:>>", task.getException().getLocalizedMessage());
+                                    toast(task.getException().getLocalizedMessage());
                                 }
-                            });
-                        }else {
-
-                            Log.i("NEWPATIENTHANDLER:>>", task.getException().getLocalizedMessage());
-                            toast(task.getException().getLocalizedMessage());
-                        }
-                    }
-                });
+                            }
+                        });
     }
 
-    void toast(String msg){
-        Toast.makeText(context,msg, Toast.LENGTH_SHORT).show();
+    void toast(String msg) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
 
-    String calculateAge(){
+    String calculateAge() {
         String result = "";
 
         Calendar dob = Calendar.getInstance();
@@ -308,7 +331,7 @@ public class NewPatientHandler {
 
         int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
 
-        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)){
+        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)) {
             age--;
         }
 
@@ -317,30 +340,34 @@ public class NewPatientHandler {
         return result;
     }
 
-    String getCompleteId(){
-        return patientId+(name.getText().toString().trim()).split(" ")[0];
+    String getCompleteId() {
+        return patientId + (name.getText().toString().trim()).split(" ")[0];
     }
 
-    void fetchPatientMetaData(){
-        mRef.collection("Hospital").document(HealthLog.ID)
-                .collection("Patient").document("meta-data").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful() && task.getResult()!=null){
-                    size = task.getResult().getDouble("size").intValue();
-                    patientId = "P"+size+"_";
-                    id.setText("Patient id: "+patientId);
-                }
-            }
-        });
+    void fetchPatientMetaData() {
+        mRef.collection("Hospital")
+                .document(HealthLog.ID)
+                .collection("Patient")
+                .document("meta-data")
+                .get()
+                .addOnCompleteListener(
+                        new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful() && task.getResult() != null) {
+                                    size = task.getResult().getDouble("size").intValue();
+                                    patientId = "P" + size + "_";
+                                    id.setText("Patient id: " + patientId);
+                                }
+                            }
+                        });
     }
 
-    public void init(){
+    public void init() {
         dialog.show();
     }
 
-    public void destroy(){
+    public void destroy() {
         dialog.dismiss();
     }
-
 }

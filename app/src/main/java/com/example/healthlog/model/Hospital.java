@@ -11,8 +11,7 @@ public class Hospital {
     private String district;
     private GeoPoint location;
 
-    public Hospital() {
-    }
+    public Hospital() {}
 
     public String getName() {
         return name;

@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Patient {
 
-
     String id;
     String name;
     String address;
@@ -20,9 +19,7 @@ public class Patient {
 
     Integer type = 0;
 
-
-    public Patient() {
-    }
+    public Patient() {}
 
     public Patient(String name, String status, String recentLog) {
         this.name = name;

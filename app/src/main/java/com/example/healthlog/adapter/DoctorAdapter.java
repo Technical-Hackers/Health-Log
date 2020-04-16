@@ -4,14 +4,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.healthlog.R;
 import com.example.healthlog.interfaces.OnItemClickListener;
 import com.example.healthlog.model.Doctor;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +28,8 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
     @NonNull
     @Override
     public DoctorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.doctor_list_item, parent, false);
+        View itemView =
+                LayoutInflater.from(parent.getContext()).inflate(R.layout.doctor_list_item, parent, false);
         return new DoctorViewHolder(itemView);
     }
 
@@ -40,7 +38,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
         Doctor doctor = mainDoctorList.get(position);
         holder.doctorName.setText(doctor.getName());
         holder.doctorStatus.setText(doctor.getStatus());
-        //holder.doctorLogDescription.setText(doctor.getLogDescription());
+        // holder.doctorLogDescription.setText(doctor.getLogDescription());
         holder.doctorRoom.setText(doctor.getLocation().toString());
         holder.doctorType.setText(doctor.getDepartment());
         if (doctor.getStatus().equals("Available")) {
@@ -56,29 +54,29 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
         return mainDoctorList.size();
     }
 
-    public void add(Doctor d){
+    public void add(Doctor d) {
         allDoctorList.add(d);
         mainDoctorList.add(d);
         notifyDataSetChanged();
     }
 
     // COMPLETED(DJ) implement filter
-    public void filter(String name){
+    public void filter(String name) {
         mainDoctorList.clear();
-        if(name.equals("")){
+        if (name.equals("")) {
             mainDoctorList.addAll(allDoctorList);
             return;
         }
-        for(Doctor d: allDoctorList){
-            if(d.getId().toLowerCase().contains(name.toLowerCase()) || d.getName().toLowerCase().contains(name.toLowerCase())){
+        for (Doctor d : allDoctorList) {
+            if (d.getId().toLowerCase().contains(name.toLowerCase())
+                    || d.getName().toLowerCase().contains(name.toLowerCase())) {
                 mainDoctorList.add(d);
             }
         }
         notifyDataSetChanged();
     }
 
-
-    public class DoctorViewHolder extends RecyclerView.ViewHolder{
+    public class DoctorViewHolder extends RecyclerView.ViewHolder {
 
         TextView doctorName;
         TextView doctorStatus;
@@ -100,13 +98,14 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
             doctorType = itemView.findViewById(R.id.doctor_list_item_type_textView);
         }
 
-        public void bind(final Doctor d, final OnItemClickListener listener){
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    listener.onItemClicked(d, view);
-                }
-            });
+        public void bind(final Doctor d, final OnItemClickListener listener) {
+            view.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            listener.onItemClicked(d, view);
+                        }
+                    });
         }
     }
 }
