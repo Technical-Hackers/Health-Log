@@ -81,6 +81,7 @@ public class DashboardFragment extends Fragment {
                 });
 
         // Spinner
+        ArrayList<String> dt = new ArrayList<>();
         spinner = root.findViewById(R.id.dashboard_list_spinner);
         ArrayAdapter<CharSequence> adapter =
                 ArrayAdapter.createFromResource(
@@ -102,7 +103,7 @@ public class DashboardFragment extends Fragment {
     }
 
     public void addNewPatient() {
-        NewPatientHandler handler = new NewPatientHandler(getContext(), getActivity());
+        NewPatientHandler handler = new NewPatientHandler(getContext());
         handler.init();
     }
 

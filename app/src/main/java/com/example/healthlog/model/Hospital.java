@@ -4,6 +4,7 @@ import com.google.firebase.firestore.GeoPoint;
 
 public class Hospital {
 
+    String id;
     private String name;
     private String address;
     private String city;
@@ -59,5 +60,13 @@ public class Hospital {
 
     public void setLocation(GeoPoint location) {
         this.location = location;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

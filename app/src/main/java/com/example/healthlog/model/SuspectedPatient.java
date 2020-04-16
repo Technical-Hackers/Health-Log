@@ -1,8 +1,6 @@
 package com.example.healthlog.model;
 
-
 // COMPLETED(SHANK) implement the class
-
 
 public class SuspectedPatient {
 
@@ -14,6 +12,7 @@ public class SuspectedPatient {
     String email;
     String contact;
 
+    public SuspectedPatient() {}
 
     public SuspectedPatient(String name, String age, String email, String contact) {
         this.name = name;

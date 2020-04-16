@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -12,7 +11,6 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import com.example.healthlog.R;
 import com.example.healthlog.interfaces.DialogClickListener;
-import com.example.healthlog.model.Doctor;
 import com.example.healthlog.model.Patient;
 
 public class PatientLogHandler {
@@ -71,7 +69,6 @@ public class PatientLogHandler {
                     }
                 });
 
-
         save.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -85,20 +82,21 @@ public class PatientLogHandler {
                     }
                 });
 
-        verifyCodeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                verifyCode(verifyCodeEt.getText().toString().trim());
-            }
-        });
+        verifyCodeBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        verifyCode(verifyCodeEt.getText().toString().trim());
+                    }
+                });
 
-        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialogInterface) {
-                resetCode();
-            }
-        });
-
+        dialog.setOnCancelListener(
+                new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialogInterface) {
+                        resetCode();
+                    }
+                });
     }
 
     public void init() {
@@ -119,33 +117,27 @@ public class PatientLogHandler {
 
     // COMPLETED(DJ) verify code and update the ui
 
-    public void verifyCode(String code){
-        if (code.equals(verifyCode)){
+    public void verifyCode(String code) {
+        if (code.equals(verifyCode)) {
             verifyCodeEt.setVisibility(View.GONE);
             verifyCodeBtn.setVisibility(View.GONE);
             logEdit.setVisibility(View.VISIBLE);
             radioGroup.setVisibility(View.VISIBLE);
             save.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             verifyCodeEt.setError("Invalid code");
         }
     }
-
 
     public void setVerifyCode(String verifyCode) {
         this.verifyCode = verifyCode;
     }
 
-    public void resetCode(){
+    public void resetCode() {
         verifyCodeEt.setVisibility(View.VISIBLE);
         verifyCodeBtn.setVisibility(View.VISIBLE);
         logEdit.setVisibility(View.GONE);
         radioGroup.setVisibility(View.GONE);
         save.setVisibility(View.GONE);
     }
-
-
-
-
-
 }

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.healthlog.R;
 import com.example.healthlog.adapter.SuspectedPatientAdapter;
+import com.example.healthlog.interfaces.OnItemClickListener;
 import com.example.healthlog.model.SuspectedPatient;
 import java.util.ArrayList;
 
@@ -112,6 +113,13 @@ public class HospitalFragment extends Fragment {
 
     public void showSuspectList() {
         suspectedAdapter = new SuspectedPatientAdapter(new ArrayList<SuspectedPatient>());
+        suspectedAdapter.setListener(
+                new OnItemClickListener<SuspectedPatient>() {
+                    @Override
+                    public void onItemClicked(SuspectedPatient suspectedPatient, View v) {
+                        showDialog(suspectedPatient);
+                    }
+                });
 
         suspectedRecyclerView = root.findViewById(R.id.hospital_suspect_list_recyclerView);
         suspectedRecyclerView.addItemDecoration(
@@ -136,7 +144,7 @@ public class HospitalFragment extends Fragment {
                         });
     }
 
-    public void dialog() {
+    public void showDialog(final SuspectedPatient currentSuspectedPatient) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         // Set the message show for the Alert time
         builder.setMessage(R.string.add_patient);
@@ -147,7 +155,7 @@ public class HospitalFragment extends Fragment {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        // notificationsViewModel.addPatientToHospital();
+                        notificationsViewModel.addPatientToHospital(currentSuspectedPatient);
                     }
                 });
         builder.setNegativeButton(
@@ -155,7 +163,7 @@ public class HospitalFragment extends Fragment {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        // notificationsViewModel.sendRequestToHospital();
+                        notificationsViewModel.sendRequestToHospital(currentSuspectedPatient);
                     }
                 });
         // Create the Alert dialog

@@ -1,21 +1,24 @@
 package com.example.healthlog.ui.hospital;
 
 import android.content.Context;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.example.healthlog.HealthLog;
+import com.example.healthlog.handler.HospitalHandler;
 import com.example.healthlog.handler.NewPatientHandler;
-import com.example.healthlog.handler.PatientLogHandler;
-import com.example.healthlog.model.Doctor;
 import com.example.healthlog.model.SuspectedPatient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 public class HospitalViewModel extends ViewModel {
@@ -108,19 +111,41 @@ public class HospitalViewModel extends ViewModel {
                 });
     }
 
+    private void fetchSuspectPatients() {
+        CollectionReference patientRef =
+                FirebaseFirestore.getInstance()
+                        .collection("Hospital")
+                        .document(HealthLog.ID)
+                        .collection("suspect");
 
-    private void fetchSuspectPatients() {}
+        patientRef
+                .get()
+                .addOnCompleteListener(
+                        new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (DocumentSnapshot snapshot : task.getResult()) {
+                                        SuspectedPatient suspectedPatient = snapshot.toObject(SuspectedPatient.class);
+                                        suspectedPatientArrayList.add(suspectedPatient);
+                                    }
+                                    suspect.setValue(suspectedPatientArrayList);
+                                }
+                            }
+                        });
+    }
 
-
-    // TODO(DJ) implement_1
-    public void addPatientToHospital(SuspectedPatient patient){
+    // COMPLETED(DJ) implement_1
+    public void addPatientToHospital(SuspectedPatient patient) {
         NewPatientHandler patientHandler = new NewPatientHandler(mContext);
         patientHandler.setName(patient.getName());
         patientHandler.setAddress(patient.getAddress());
         patientHandler.init();
     }
 
-
-    // TODO(DJ) implement_2
-    public void sendRequestToHospital(SuspectedPatient patient) {}
+    // COMPLETED(DJ) implement_2
+    public void sendRequestToHospital(SuspectedPatient patient) {
+        HospitalHandler hospitalHandler = new HospitalHandler(mContext, patient);
+        hospitalHandler.init();
+    }
 }

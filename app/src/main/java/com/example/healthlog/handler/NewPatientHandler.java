@@ -1,6 +1,5 @@
 package com.example.healthlog.handler;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -75,7 +74,7 @@ public class NewPatientHandler {
 
     public NewPatientHandler(Context context) {
         this.context = context;
-        //this.activity = activity;
+        // this.activity = activity;
         setUp();
     }
 

@@ -7,8 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.healthlog.R;
+import com.example.healthlog.interfaces.OnItemClickListener;
 import com.example.healthlog.model.SuspectedPatient;
 import java.util.List;
 
@@ -16,6 +18,8 @@ public class SuspectedPatientAdapter
         extends RecyclerView.Adapter<SuspectedPatientAdapter.SuspectedPatientViewHolder> {
 
     private List<SuspectedPatient> suspectedPatientList;
+
+    OnItemClickListener listener;
 
     public SuspectedPatientAdapter(List<SuspectedPatient> suspectedPatientList) {
         this.suspectedPatientList = suspectedPatientList;
@@ -36,11 +40,16 @@ public class SuspectedPatientAdapter
         holder.suspectName.setText(suspectedPatient.getName());
         holder.suspectAge.setText(suspectedPatient.getAge());
         holder.suspectMobile.setText(suspectedPatient.getContact());
+        holder.bind(suspectedPatient, listener);
     }
 
     public void add(SuspectedPatient suspectedPatient) {
         suspectedPatientList.add(suspectedPatient);
         notifyDataSetChanged();
+    }
+
+    public void setListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -59,6 +68,17 @@ public class SuspectedPatientAdapter
             suspectName = itemView.findViewById(R.id.suspect_list_item_name_textView);
             suspectAge = itemView.findViewById(R.id.suspect_list_item_age_textView);
             suspectMobile = itemView.findViewById(R.id.suspect_list_item_mobile_textView);
+        }
+
+        void bind(
+                final SuspectedPatient suspectedPatient, @Nullable final OnItemClickListener listener) {
+            view.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            listener.onItemClicked(suspectedPatient, view);
+                        }
+                    });
         }
     }
 }

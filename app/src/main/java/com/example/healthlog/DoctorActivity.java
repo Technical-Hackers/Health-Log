@@ -206,5 +206,4 @@ public class DoctorActivity extends AppCompatActivity {
     public void setChangeStatus(Pair<String, String> changeStatus) {
         this.changeStatus = changeStatus;
     }
-
 }
