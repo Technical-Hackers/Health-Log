@@ -79,9 +79,9 @@ public class DoctorActivity extends AppCompatActivity {
         patientLogHandler = new PatientLogHandler(DoctorActivity.this);
 
 
-        patientAdapter = new DashboardAdapter(new ArrayList<>(), new OnItemClickListener<Patient>() {
+        patientAdapter = new DashboardAdapter(new ArrayList<Patient>(), new OnItemClickListener<Patient>() {
             @Override
-            public void onItemClicked(Patient patient, View v) {
+            public void onItemClicked(final Patient patient, View v) {
                 patientLogHandler.init();
                 patientLogHandler.setDialogClickListener(new DialogClickListener() {
                     @Override

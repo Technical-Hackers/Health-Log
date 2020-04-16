@@ -31,9 +31,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private List<Patient> allPatientList;
     private List<Patient> currentPatientList;
 
-    private Context mcontext;
     private String currentFilter = "Deceased";
-    public String logRecent;
 
     public DashboardAdapter(List<Patient> patientList , OnItemClickListener listener) {
         this.allPatientList = patientList;
@@ -66,8 +64,22 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             holder.patientColorStatus.setBackgroundColor(0xFFC0C0C0);
         }
         holder.bind(patient, onItemClickListener);
-        holder.listenForStatusAndLogChanges(patient);
     }
+
+    void listenForStatusAndLogChanges(final Patient p){
+            FirebaseFirestore mRef = FirebaseFirestore.getInstance();
+            mRef.collection("Hospital").document(HealthLog.ID)
+                    .collection("Patient").document(p.getId()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                    String status = documentSnapshot.getString("status");
+                    String log = documentSnapshot.getString("recentLog");
+                    p.setStatus(status);
+                    p.setRecentLog(log);
+                    notifyDataSetChanged();
+                }
+            });
+        }
 
     @Override
     public int getItemCount() {
@@ -80,6 +92,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 return;
             }
         }
+        listenForStatusAndLogChanges(p);
         allPatientList.add(p);
         if(currentFilter.equals("All")){
             currentPatientList.clear();
@@ -153,7 +166,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             patientColorStatus = itemView.findViewById(R.id.patient_list_item_statusCircle_view);
         }
 
-        void bind(final Patient currentPatient, OnItemClickListener listener){
+        void bind(final Patient currentPatient, final OnItemClickListener listener){
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -161,22 +174,5 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 }
             });
         }
-
-        void listenForStatusAndLogChanges(final Patient p){
-            FirebaseFirestore mRef = FirebaseFirestore.getInstance();
-            mRef.collection("Hospital").document(HealthLog.ID)
-                    .collection("Patient").document(p.getId()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                @Override
-                public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                    String status = documentSnapshot.getString("status");
-                    String log = documentSnapshot.getString("recentLog");
-                    p.setStatus(status);
-                    p.setRecentLog(log);
-                    notifyDataSetChanged();
-                }
-            });
-        }
     }
-
-
 }
