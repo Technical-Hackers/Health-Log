@@ -14,6 +14,17 @@ import com.example.healthlog.R;
 // run this for spotless check  "./gradlew spotlessApply"
 public class HospitalFragment extends Fragment {
 
+    // TODO(SHANK) create recyclerView
+    // TODO(SHANK) display list of requested patients
+
+    /* TODO(INSTRUCTION)
+    * 1. When user tap on listItem an alert dialog will popUp
+    * 2. Alert dialog will have 2 options
+    *   2.1. Positive -> add to ur hospital
+    *   2.2. Negative -> send request to diff hospital
+    * 3. And call form viewModel @addPatientToHospital for +ve and @sendRequestToHospital for -ve.
+    * */
+
     // COMPLETED(SHANK) implement ui
 
     private HospitalViewModel notificationsViewModel;

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.example.healthlog.HealthLog;
+import com.example.healthlog.model.SuspectedPatient;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -50,10 +51,7 @@ public class HospitalViewModel extends ViewModel {
     }
 
     // COMPLETED(SHANK) implement_3
-    public LiveData<Integer> getNoOfCuredPatient() {
-
-        return totalNoOfCuredPatient;
-    }
+    public LiveData<Integer> getNoOfCuredPatient() { return totalNoOfCuredPatient; }
 
     // COMPLETED (SHANK) implement_4
     public LiveData<Integer> getNoOfDeceasedPatient() {
@@ -80,5 +78,15 @@ public class HospitalViewModel extends ViewModel {
                         totalNoOfDeceasedPatient.setValue(doc.getLong("deceased").intValue());
                     }
                 });
+    }
+
+    // TODO(DJ) implement_1
+    public void addPatientToHospital(SuspectedPatient patient){
+
+    }
+
+    // TODO(DJ) implement_2
+    public void sendRequestToHospital(SuspectedPatient patient){
+
     }
 }

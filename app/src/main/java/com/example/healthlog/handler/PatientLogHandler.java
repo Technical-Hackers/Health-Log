@@ -10,6 +10,7 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import com.example.healthlog.R;
 import com.example.healthlog.interfaces.DialogClickListener;
+import com.example.healthlog.model.Doctor;
 import com.example.healthlog.model.Patient;
 
 public class PatientLogHandler {
@@ -88,5 +89,11 @@ public class PatientLogHandler {
 
     public void setDialogClickListener(DialogClickListener dialogClickListener) {
         this.dialogClickListener = dialogClickListener;
+    }
+
+    // TODO(DJ) verify code and update the ui
+
+    public void verifyCode(Doctor doctor, String code){
+
     }
 }

@@ -39,6 +39,8 @@ public class DoctorActivity extends AppCompatActivity {
 
     // COMPLETED(SHANK) add feature for doctor to enter log for patient
 
+    // TODO(DJ) verify code before allowing doctor to add log
+
     DashboardAdapter patientAdapter;
     private RecyclerView patientRecyclerView;
     FirebaseFirestore mRef;
