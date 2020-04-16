@@ -39,7 +39,7 @@ public class DoctorActivity extends AppCompatActivity {
 
     // COMPLETED(SHANK) add feature for doctor to enter log for patient
 
-    // TODO(DJ) verify code before allowing doctor to add log
+    // COMPLETED(DJ) verify code before allowing doctor to add log
 
     DashboardAdapter patientAdapter;
     private RecyclerView patientRecyclerView;
@@ -66,6 +66,7 @@ public class DoctorActivity extends AppCompatActivity {
 
     void setUpRecyclerView() {
         patientLogHandler = new PatientLogHandler(DoctorActivity.this);
+        patientLogHandler.setVerifyCode(doctor.getVerifyKey());
         patientAdapter =
                 new DashboardAdapter(
                         new ArrayList<Patient>(),
@@ -205,4 +206,5 @@ public class DoctorActivity extends AppCompatActivity {
     public void setChangeStatus(Pair<String, String> changeStatus) {
         this.changeStatus = changeStatus;
     }
+
 }

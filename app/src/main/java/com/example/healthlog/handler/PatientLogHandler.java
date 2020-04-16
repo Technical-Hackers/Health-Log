@@ -2,7 +2,9 @@ package com.example.healthlog.handler;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -21,9 +23,15 @@ public class PatientLogHandler {
 
     String log;
     EditText logEdit;
+    Button save;
+
+    EditText verifyCodeEt;
+    Button verifyCodeBtn;
 
     RadioGroup radioGroup;
     RadioButton checkedRadioButton;
+
+    String verifyCode;
 
     Patient patient;
 
@@ -51,6 +59,9 @@ public class PatientLogHandler {
                         RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         logEdit = dialog.findViewById(R.id.doctor_activity_addlog_editText);
         radioGroup = dialog.findViewById(R.id.doctor_Activity_dialog_patientStatus_radioGroup);
+        save = dialog.findViewById(R.id.doctor_activity_addlog_btn);
+        verifyCodeEt = dialog.findViewById(R.id.doctor_activity_verifyCode_eT);
+        verifyCodeBtn = dialog.findViewById(R.id.doctor_activity_verifyCode_btn);
 
         radioGroup.setOnCheckedChangeListener(
                 new RadioGroup.OnCheckedChangeListener() {
@@ -60,7 +71,7 @@ public class PatientLogHandler {
                     }
                 });
 
-        Button save = dialog.findViewById(R.id.doctor_activity_addlog_btn);
+
         save.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -73,6 +84,21 @@ public class PatientLogHandler {
                         }
                     }
                 });
+
+        verifyCodeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                verifyCode(verifyCodeEt.getText().toString().trim());
+            }
+        });
+
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                resetCode();
+            }
+        });
+
     }
 
     public void init() {
@@ -91,7 +117,35 @@ public class PatientLogHandler {
         this.dialogClickListener = dialogClickListener;
     }
 
-    // TODO(DJ) verify code and update the ui
+    // COMPLETED(DJ) verify code and update the ui
 
-    public void verifyCode(Doctor doctor, String code) {}
+    public void verifyCode(String code){
+        if (code.equals(verifyCode)){
+            verifyCodeEt.setVisibility(View.GONE);
+            verifyCodeBtn.setVisibility(View.GONE);
+            logEdit.setVisibility(View.VISIBLE);
+            radioGroup.setVisibility(View.VISIBLE);
+            save.setVisibility(View.VISIBLE);
+        }else{
+            verifyCodeEt.setError("Invalid code");
+        }
+    }
+
+
+    public void setVerifyCode(String verifyCode) {
+        this.verifyCode = verifyCode;
+    }
+
+    public void resetCode(){
+        verifyCodeEt.setVisibility(View.VISIBLE);
+        verifyCodeBtn.setVisibility(View.VISIBLE);
+        logEdit.setVisibility(View.GONE);
+        radioGroup.setVisibility(View.GONE);
+        save.setVisibility(View.GONE);
+    }
+
+
+
+
+
 }

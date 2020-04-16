@@ -44,8 +44,6 @@ public class NewPatientHandler {
 
     // activity
     Context context;
-    Activity activity;
-
     // Date object for dob
     Date date;
 
@@ -75,9 +73,9 @@ public class NewPatientHandler {
 
     int size;
 
-    public NewPatientHandler(Context context, Activity activity) {
+    public NewPatientHandler(Context context) {
         this.context = context;
-        this.activity = activity;
+        //this.activity = activity;
         setUp();
     }
 
@@ -361,6 +359,30 @@ public class NewPatientHandler {
                                 }
                             }
                         });
+    }
+
+    public void setName(String name) {
+        this.name.setText(name);
+    }
+
+    public void setAddress(String address) {
+        this.address.setText(address);
+    }
+
+    public void setDob(String dob) {
+        this.dob.setText(dob);
+    }
+
+    public void setFloor(String floor) {
+        this.floor.setText(floor);
+    }
+
+    public void setRoomNo(String roomNo) {
+        this.roomNo.setText(roomNo);
+    }
+
+    public void setBedNo(String bedNo) {
+        this.bedNo.setText(bedNo);
     }
 
     public void init() {

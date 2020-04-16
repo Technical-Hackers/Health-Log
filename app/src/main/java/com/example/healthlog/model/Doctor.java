@@ -5,12 +5,15 @@ import java.util.List;
 
 public class Doctor implements Serializable {
 
+    // COMPLETED(DJ) add verify field
+
     String id;
     String name;
     String department;
     String status;
     List<String> location;
     Integer noOfPatients;
+    String verifyKey;
 
     public Doctor() {}
 
@@ -60,5 +63,13 @@ public class Doctor implements Serializable {
 
     public void setNoOfPatients(Integer noOfPatients) {
         this.noOfPatients = noOfPatients;
+    }
+
+    public String getVerifyKey() {
+        return verifyKey;
+    }
+
+    public void setVerifyKey(String verifyKey) {
+        this.verifyKey = verifyKey;
     }
 }

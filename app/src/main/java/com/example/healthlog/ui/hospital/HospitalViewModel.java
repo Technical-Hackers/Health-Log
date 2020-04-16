@@ -6,7 +6,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.example.healthlog.HealthLog;
+import com.example.healthlog.handler.NewPatientHandler;
+import com.example.healthlog.handler.PatientLogHandler;
+import com.example.healthlog.model.Doctor;
 import com.example.healthlog.model.SuspectedPatient;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -104,10 +108,18 @@ public class HospitalViewModel extends ViewModel {
                 });
     }
 
+
     private void fetchSuspectPatients() {}
 
+
     // TODO(DJ) implement_1
-    public void addPatientToHospital(SuspectedPatient patient) {}
+    public void addPatientToHospital(SuspectedPatient patient){
+        NewPatientHandler patientHandler = new NewPatientHandler(mContext);
+        patientHandler.setName(patient.getName());
+        patientHandler.setAddress(patient.getAddress());
+        patientHandler.init();
+    }
+
 
     // TODO(DJ) implement_2
     public void sendRequestToHospital(SuspectedPatient patient) {}
