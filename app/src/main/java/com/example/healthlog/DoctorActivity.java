@@ -6,6 +6,7 @@ import android.util.Pair;
 import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -60,7 +61,8 @@ public class DoctorActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         doctor = (Doctor) intent.getSerializableExtra("doctor");
-
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         setUpRecyclerView();
     }
 

@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/colorPrimaryLight"
     android:layout_height="match_parent">
 
     <TextView
@@ -13,6 +14,7 @@
         android:layout_marginTop="240dp"
         android:text="@string/enter_your_hospital_id"
         android:textSize="25dp"
+        android:textColor="@color/colorLight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,6 +25,9 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/hospital_id"
+        android:textColor="@color/colorLight"
+        android:backgroundTint="@color/colorLight"
+        android:textColorHint="@color/colorLight"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/loginActivity_login_btn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,6 +41,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="308dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorLight"
         android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

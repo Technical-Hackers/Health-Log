@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@drawable/recycler_bg"
     android:layout_height="100dp">
 
     <LinearLayout
@@ -15,6 +16,7 @@
         <TextView
             android:id="@+id/suspect_list_item_name_textView"
             android:layout_width="wrap_content"
+            android:textColor="@color/colorPrimary"
             android:layout_height="wrap_content"
             android:text="Full name"
             android:textSize="24sp" />
@@ -27,6 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/suspect_list_item_mobile_textView"
         android:layout_alignParentTop="true"
+        android:textColor="@color/colorPrimary"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="21dp"
         android:layout_marginLeft="16dp"
@@ -44,6 +47,7 @@
         android:id="@+id/suspect_list_item_mobile_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:text="+91 9923496282"
@@ -56,6 +60,7 @@
         android:layout_below="@+id/suspect_list_item_nameStatusContainer_linearLayout"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
+        android:textColor="@color/colorPrimary"
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="218dp"

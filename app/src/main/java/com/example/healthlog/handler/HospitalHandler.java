@@ -2,6 +2,8 @@ package com.example.healthlog.handler;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -51,10 +53,11 @@ public class HospitalHandler {
     void setUp() {
         dialog = new Dialog(context);
         dialog.setContentView(R.layout.dialog_hospital);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog
                 .getWindow()
                 .setLayout(
-                        RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+                        RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
         spinner = dialog.findViewById(R.id.dialog_hospitalList_spinner);
         submit = dialog.findViewById(R.id.dialog_submit_button);

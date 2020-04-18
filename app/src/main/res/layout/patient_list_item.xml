@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@drawable/recycler_bg"
     android:layout_height="100dp">
 
     <LinearLayout
@@ -16,6 +17,7 @@
             android:id="@+id/patient_list_item_name_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
             android:text="Full name"
             android:textSize="24sp"/>
 
@@ -39,6 +41,7 @@
                 android:layout_height="wrap_content"
                 android:text="Active"
                 android:textSize="18sp"
+                android:textColor="@color/colorPrimary"
                 android:layout_marginLeft="8dp"/>
 
         </LinearLayout>
@@ -54,6 +57,7 @@
         android:layout_centerVertical="true"
         android:maxLines="3"
         android:minLines="3"
+        android:textColor="@color/colorPrimary"
         android:ellipsize="end"
         android:text="Last log description,this is demo text displaying "
         android:layout_marginLeft="16dp"
@@ -64,6 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:textColor="@color/colorPrimary"
         android:layout_alignParentEnd="true"
         android:text="Added: 24th Mar, 13:00 hrs"
         android:padding="6dp"/>

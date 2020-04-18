@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLight"
     tools:context=".ui.dashboard.DashboardFragment">
 
     <!-- COMPLETED(SHANK) remove search button -->
@@ -19,8 +20,10 @@
             android:layout_width="237dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:backgroundTint="@color/colorLight"
             android:layout_marginRight="20dp"
-            android:backgroundTint="@color/colorPrimary"
+            android:textColor="@color/colorLight"
+            android:textColorHint="@color/colorLight"
             android:ems="10"
             android:hint="@string/patient_id"
             android:inputType="textPersonName" />
@@ -51,6 +54,7 @@
         android:id="@+id/dashboard_showList_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:listitem="@layout/patient_list_item"
         android:layout_below="@id/frameLayout"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

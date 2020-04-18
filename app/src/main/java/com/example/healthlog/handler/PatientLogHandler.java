@@ -3,6 +3,8 @@ package com.example.healthlog.handler;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,10 +53,11 @@ public class PatientLogHandler {
     void setUp() {
         dialog = new Dialog(context);
         dialog.setContentView(R.layout.dialog_add_log);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog
                 .getWindow()
                 .setLayout(
-                        RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         logEdit = dialog.findViewById(R.id.doctor_activity_addlog_editText);
         radioGroup = dialog.findViewById(R.id.doctor_Activity_dialog_patientStatus_radioGroup);
         save = dialog.findViewById(R.id.doctor_activity_addlog_btn);

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/colorPrimaryLight"
     android:layout_height="match_parent"
     tools:context=".ui.doctor.DoctorFragment">
 
@@ -18,9 +19,11 @@
             android:id="@+id/doctor_searchBox_editText"
             android:layout_width="390dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="@color/colorLight"
             android:ems="10"
-            android:hint="@string/patient_id"
+            android:textColor="@color/colorLight"
+            android:textColorHint="@color/colorLight"
+            android:hint="@string/doctor_id_or_doctor_name"
             android:inputType="textPersonName" />
     </LinearLayout>
 
@@ -30,7 +33,7 @@
         android:layout_height="3dp"
         android:layout_marginTop="8dp"
         android:layout_below="@id/doctor_searchContainer_linearLayout"
-        android:background="@color/colorPrimary"/>
+        android:background="@color/colorAccent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/doctor_showList_recycler"

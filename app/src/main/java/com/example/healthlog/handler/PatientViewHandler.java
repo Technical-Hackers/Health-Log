@@ -3,6 +3,8 @@ package com.example.healthlog.handler;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.example.healthlog.R;
@@ -42,10 +44,11 @@ public class PatientViewHandler {
         // initialising dialog
         dialog = new Dialog(context);
         dialog.setContentView(R.layout.patient_layout);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog
                 .getWindow()
                 .setLayout(
-                        RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
         id = dialog.findViewById(R.id.patient_layout_id_tV);
         name = dialog.findViewById(R.id.patient_layout_name_tV);

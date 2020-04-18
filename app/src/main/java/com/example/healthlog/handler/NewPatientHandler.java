@@ -3,6 +3,8 @@ package com.example.healthlog.handler;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -82,11 +84,12 @@ public class NewPatientHandler {
         mRef = FirebaseFirestore.getInstance();
         fetchPatientMetaData();
         dialog = new Dialog(context);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setContentView(R.layout.new_patient_layout);
         dialog
                 .getWindow()
                 .setLayout(
-                        RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+                        RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
         id = dialog.findViewById(R.id.new_patient_layout_id_tV);
 
