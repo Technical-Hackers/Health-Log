@@ -84,8 +84,6 @@ public class DoctorFragment extends Fragment {
                         });
 
         doctorRecyclerView = root.findViewById(R.id.doctor_showList_recycler);
-        doctorRecyclerView.addItemDecoration(
-                new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         doctorRecyclerView.setHasFixedSize(false);
         doctorRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         doctorRecyclerView.setAdapter(doctorAdapter);

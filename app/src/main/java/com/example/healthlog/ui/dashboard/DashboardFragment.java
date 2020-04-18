@@ -111,7 +111,7 @@ public class DashboardFragment extends Fragment {
         final PatientViewHandler patientViewHandler =
                 new PatientViewHandler(getContext(), getActivity());
         dashboardAdapter =
-                new DashboardAdapter(
+                new DashboardAdapter(getContext(),
                         new ArrayList<Patient>(),
                         new OnItemClickListener<Patient>() {
                             @Override
@@ -122,9 +122,6 @@ public class DashboardFragment extends Fragment {
                         });
 
         dashboardRecyclerView = root.findViewById(R.id.dashboard_showList_recycler);
-
-        dashboardRecyclerView.addItemDecoration(
-                new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         dashboardRecyclerView.setHasFixedSize(false);
         dashboardRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         dashboardRecyclerView.setAdapter(dashboardAdapter);

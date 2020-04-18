@@ -81,6 +81,7 @@ public class DashboardViewModel extends ViewModel {
                                                         if (task.isSuccessful()) {
                                                             for (DocumentSnapshot document : task.getResult()) {
                                                                 Patient p = document.toObject(Patient.class);
+                                                                p.refreshStatus();
                                                                 patientArrayList.add(p);
                                                             }
                                                             patient.setValue(patientArrayList);

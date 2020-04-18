@@ -54,8 +54,9 @@
         android:id="@+id/dashboard_showList_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/frameLayout"
         tools:listitem="@layout/patient_list_item"
-        android:layout_below="@id/frameLayout"/>
+        android:layout_marginTop="8dp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/dashboard_add_fab"

@@ -122,8 +122,6 @@ public class HospitalFragment extends Fragment {
                 });
 
         suspectedRecyclerView = root.findViewById(R.id.hospital_suspect_list_recyclerView);
-        suspectedRecyclerView.addItemDecoration(
-                new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         suspectedRecyclerView.setHasFixedSize(false);
         suspectedRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         suspectedRecyclerView.setAdapter(suspectedAdapter);

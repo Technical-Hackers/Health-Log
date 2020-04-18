@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.healthlog.HealthLog;
 import com.example.healthlog.R;
 import com.example.healthlog.interfaces.OnItemClickListener;
 import com.example.healthlog.model.Doctor;
@@ -39,12 +41,13 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
         holder.doctorName.setText(doctor.getName());
         holder.doctorStatus.setText(doctor.getStatus());
         // holder.doctorLogDescription.setText(doctor.getLogDescription());
-        holder.doctorRoom.setText(doctor.getLocation().toString());
+        holder.doctorRoom.setText(HealthLog.getDoctorLocation(doctor.getLocation()));
         holder.doctorType.setText(doctor.getDepartment());
+
         if (doctor.getStatus().equals("Available")) {
-            holder.doctorColorStatus.setBackgroundColor(0xFF00FF00);
+            holder.doctorColorStatus.setBackgroundResource(R.drawable.cured_status_circle);
         } else {
-            holder.doctorColorStatus.setBackgroundColor(0xFFFF0000);
+            holder.doctorColorStatus.setBackgroundResource(R.drawable.active_status_circle);
         }
         holder.bind(doctor, onItemClickListener);
     }

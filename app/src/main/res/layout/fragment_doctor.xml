@@ -40,6 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/doctor_frameLayout"
-        tools:listitem="@layout/doctor_list_item"/>
+        tools:listitem="@layout/doctor_list_item"
+        android:layout_marginTop="8dp"/>
 
 </RelativeLayout>

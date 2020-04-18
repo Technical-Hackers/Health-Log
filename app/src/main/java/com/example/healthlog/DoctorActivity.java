@@ -70,7 +70,7 @@ public class DoctorActivity extends AppCompatActivity {
         patientLogHandler = new PatientLogHandler(DoctorActivity.this);
         patientLogHandler.setVerifyCode(doctor.getVerifyKey());
         patientAdapter =
-                new DashboardAdapter(
+                new DashboardAdapter(DoctorActivity.this,
                         new ArrayList<Patient>(),
                         new OnItemClickListener<Patient>() {
                             @Override

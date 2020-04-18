@@ -3,11 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:background="@drawable/recycler_bg"
-    android:layout_height="100dp">
+    android:layout_height="100dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp">
+
 
     <LinearLayout
         android:id="@+id/doctor_list_item_nameStatusContainer_linearLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerVertical="true"
@@ -19,33 +23,49 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimary"
             android:text="Full name"
-            android:textSize="24sp"/>
+            android:textSize="24sp"
+            android:fontFamily="@font/baloobhaina2_regular"/>
 
-        <LinearLayout
-            android:id="@+id/doctor_list_item_statusContainer_linearLayout"
+
+        <TextView
+            android:id="@+id/doctor_list_item_type_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginTop="8dp">
+            android:layout_below="@+id/doctor_list_item_logDescription_textView"
+            android:text="General physician"
+            android:textSize="12sp"
+            android:textColor="#000"
+            android:layout_marginTop="-12dp"/>
 
-            <View
-                android:id="@+id/doctor_list_item_statusCircle_view"
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:background="@drawable/status_circle"/>
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/doctor_list_item_statusText_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
-                android:text="Available"
-                android:textSize="18sp"
-                android:layout_marginLeft="8dp" />
 
-        </LinearLayout>
+    <LinearLayout
+        android:id="@+id/doctor_list_item_statusContainer_linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp">
 
+
+        <View
+            android:id="@+id/doctor_list_item_statusCircle_view"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:background="@drawable/cured_status_circle"/>
+
+        <TextView
+            android:id="@+id/doctor_list_item_statusText_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Available"
+            android:textSize="12sp"
+            android:layout_marginLeft="8dp"
+            android:textStyle="bold"
+            android:textColor="@color/recoveredLightText"/>
 
     </LinearLayout>
 
@@ -71,23 +91,8 @@
         android:textColor="@color/colorPrimary"
         android:gravity="center"
         android:text="Cabin: 1st floor C009"
-        android:padding="6dp"/>
-
-    <TextView
-        android:id="@+id/doctor_list_item_type_textView"
-        android:layout_width="143dp"
-        android:layout_height="22dp"
-        android:textColor="@color/colorPrimary"
-        android:layout_above="@+id/doctor_list_item_dateAdded_textView"
-        android:layout_below="@+id/doctor_list_item_logDescription_textView"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="151dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="-3dp"
-        android:layout_marginBottom="-2dp"
-        android:layout_toEndOf="@+id/doctor_list_item_nameStatusContainer_linearLayout"
-        android:gravity="center"
-        android:text="General physician" />
-
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="12dp"
+        android:textSize="8sp" />
 
 </RelativeLayout>

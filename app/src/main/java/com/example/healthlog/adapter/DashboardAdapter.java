@@ -1,22 +1,29 @@
 package com.example.healthlog.adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.healthlog.HealthLog;
 import com.example.healthlog.R;
 import com.example.healthlog.interfaces.OnItemClickListener;
 import com.example.healthlog.model.Patient;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.DashboardViewHolder> {
@@ -28,7 +35,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     private String currentFilter = "Deceased";
 
-    public DashboardAdapter(List<Patient> patientList, OnItemClickListener listener) {
+    Context context;
+
+    public DashboardAdapter(Context context, List<Patient> patientList, OnItemClickListener listener) {
+        this.context = context;
         this.allPatientList = patientList;
         currentPatientList = new ArrayList<>();
 
@@ -51,16 +61,15 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         Patient patient = currentPatientList.get(position);
         holder.patientName.setText(patient.getId());
         holder.patientStatus.setText(patient.getStatus());
+
+        holder.patientStatus.setTextColor(ContextCompat.getColor(context, patient.getStatusColor()));
+        holder.patientColorStatus.setBackgroundResource(patient.getStatusDrawable());
+
         holder.patientLogDescription.setText(patient.getRecentLog());
-        if (patient.getStatus().equals("Active")) {
-            holder.patientColorStatus.setBackgroundColor(0xFFFF0000);
-        } else if (patient.getStatus().equals("Cured")) {
-            holder.patientColorStatus.setBackgroundColor(0xFF00FF00);
-        } else {
-            holder.patientColorStatus.setBackgroundColor(0xFFC0C0C0);
-        }
+        holder.patientDateAdded.setText("Added: "+ HealthLog.getDate(patient.getDateAdded()) + ", " + HealthLog.getTime(patient.getDateAdded()));
         holder.bind(patient, onItemClickListener);
     }
+
 
     void listenForStatusAndLogChanges(final Patient p) {
         FirebaseFirestore mRef = FirebaseFirestore.getInstance();
@@ -156,6 +165,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         TextView patientName;
         TextView patientStatus;
         TextView patientLogDescription;
+        TextView patientDateAdded;
         View patientColorStatus;
 
         View view;
@@ -167,6 +177,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             patientStatus = itemView.findViewById(R.id.patient_list_item_statusText_textView);
             patientLogDescription = itemView.findViewById(R.id.patient_list_item_logDescription_textView);
             patientColorStatus = itemView.findViewById(R.id.patient_list_item_statusCircle_view);
+            patientDateAdded = itemView.findViewById(R.id.patient_list_item_dateAdded_textView);
         }
 
         void bind(final Patient currentPatient, final OnItemClickListener listener) {

@@ -1,5 +1,8 @@
 package com.example.healthlog.model;
 
+import android.graphics.Color;
+
+import com.example.healthlog.R;
 import com.google.firebase.Timestamp;
 import java.util.List;
 
@@ -13,6 +16,9 @@ public class Patient {
     String recentLog;
     String dob;
 
+    int statusColor;
+    int statusDrawable;
+
     Timestamp dateAdded;
 
     List<String> location;
@@ -25,6 +31,8 @@ public class Patient {
         this.name = name;
         this.status = status;
         this.recentLog = recentLog;
+        setStatusColor();
+        setStatusDrawable();
     }
 
     public String getId() {
@@ -89,6 +97,8 @@ public class Patient {
 
     public void setStatus(String status) {
         this.status = status;
+        setStatusColor();
+        setStatusDrawable();
     }
 
     public void setRecentLog(String recentLog) {
@@ -105,5 +115,41 @@ public class Patient {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public int getStatusColor() {
+        return statusColor;
+    }
+
+    private void setStatusColor() {
+        if(status.equals("Active")){
+            statusColor = R.color.activeLightText;
+        }else if(status.equals("Cured")){
+            statusColor = R.color.recoveredLightText;
+        }else if(status.equals("Deceased")){
+            statusColor = R.color.deceasedLightText;
+        }else{
+        }
+    }
+
+    public int getStatusDrawable() {
+        return statusDrawable;
+    }
+
+    private void setStatusDrawable(){
+        if(status.equals("Active")){
+            statusDrawable = R.drawable.active_status_circle;
+        }else if(status.equals("Cured")){
+            statusDrawable = R.drawable.cured_status_circle;
+        }else if(status.equals("Deceased")){
+            statusDrawable = R.drawable.deceased_status_circle;
+        }else{
+
+        }
+    }
+
+    public void refreshStatus(){
+        setStatusColor();
+        setStatusDrawable();
     }
 }

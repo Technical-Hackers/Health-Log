@@ -3,11 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:background="@drawable/recycler_bg"
-    android:layout_height="100dp">
+    android:layout_height="100dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp">
 
     <LinearLayout
         android:id="@+id/patient_list_item_nameStatusContainer_linearLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerVertical="true"
@@ -19,49 +22,49 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimary"
             android:text="Full name"
-            android:textSize="24sp"/>
-
-        <LinearLayout
-            android:id="@+id/patient_list_item_statusContainer_linearLayout"
+            android:textSize="24sp"
+            android:fontFamily="@font/baloobhaina2_regular"/>
+        <TextView
+            android:id="@+id/patient_list_item_logDescription_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginTop="8dp">
-
-            <View
-                android:id="@+id/patient_list_item_statusCircle_view"
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:background="@drawable/status_circle"/>
-
-            <TextView
-                android:id="@+id/patient_list_item_statusText_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Active"
-                android:textSize="18sp"
-                android:textColor="@color/colorPrimary"
-                android:layout_marginLeft="8dp"/>
-
-        </LinearLayout>
-
+            android:layout_centerVertical="true"
+            android:maxLines="1"
+            android:minLines="1"
+            android:ellipsize="end"
+            android:text="Last log description,this is demo text displaying "
+            android:textSize="12sp"
+            android:textColor="#000"
+            android:layout_marginTop="-12dp"/>
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/patient_list_item_logDescription_textView"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/patient_list_item_nameStatusContainer_linearLayout"
-        android:layout_centerVertical="true"
-        android:maxLines="3"
-        android:minLines="3"
-        android:textColor="@color/colorPrimary"
-        android:ellipsize="end"
-        android:text="Last log description,this is demo text displaying "
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp">
+
+        <View
+            android:id="@+id/patient_list_item_statusCircle_view"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:background="@drawable/cured_status_circle" />
+
+        <TextView
+            android:id="@+id/patient_list_item_statusText_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Active"
+            android:textSize="12sp"
+            android:layout_marginLeft="8dp"
+            android:textStyle="bold"
+            android:textColor="@color/recoveredDarkText"/>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/patient_list_item_dateAdded_textView"
@@ -71,7 +74,7 @@
         android:textColor="@color/colorPrimary"
         android:layout_alignParentEnd="true"
         android:text="Added: 24th Mar, 13:00 hrs"
-        android:padding="6dp"/>
+        android:textSize="8sp" />
 
 
 </RelativeLayout>
