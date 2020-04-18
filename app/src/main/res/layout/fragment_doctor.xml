@@ -5,15 +5,27 @@
     android:layout_width="match_parent"
     android:background="@color/colorPrimaryLight"
     android:layout_height="match_parent"
-    tools:context=".ui.doctor.DoctorFragment">
+    tools:context=".ui.doctor.DoctorFragment"
+    android:id="@+id/root">
 
     <!-- COMPLETED(SHANK) remove search button -->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/doctor_showList_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/doctor_list_item"
+        android:layout_marginTop="8dp"/>
+
 
     <LinearLayout
         android:id="@+id/doctor_searchContainer_linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:background="@color/colorPrimaryLight"
+        android:padding="8dp"
+        android:layout_margin="32dp"
+        android:alpha="0.1">
 
         <EditText
             android:id="@+id/doctor_searchBox_editText"
@@ -27,20 +39,8 @@
             android:inputType="textPersonName" />
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/doctor_frameLayout"
-        android:layout_width="407dp"
-        android:layout_height="3dp"
-        android:layout_marginTop="8dp"
-        android:layout_below="@id/doctor_searchContainer_linearLayout"
-        android:background="@color/colorAccent"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/doctor_showList_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/doctor_frameLayout"
-        tools:listitem="@layout/doctor_list_item"
-        android:layout_marginTop="8dp"/>
+
+
 
 </RelativeLayout>

@@ -34,7 +34,7 @@
             android:ellipsize="end"
             android:text="Last log description,this is demo text displaying "
             android:textSize="12sp"
-            android:textColor="#000"
+            android:textColor="@color/colorPrimary"
             android:layout_marginTop="-12dp"/>
 
     </LinearLayout>
@@ -74,7 +74,7 @@
         android:textColor="@color/colorPrimary"
         android:layout_alignParentEnd="true"
         android:text="Added: 24th Mar, 13:00 hrs"
-        android:textSize="8sp" />
+        android:textSize="10sp" />
 
 
 </RelativeLayout>

@@ -37,13 +37,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mobile:"
-                android:fontFamily="monospace"/>
+                android:fontFamily="monospace"
+                android:textSize="12sp"
+                android:textColor="@color/colorPrimary"/>
             <TextView
                 android:id="@+id/suspect_list_item_mobile_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="9923496282"
-                android:fontFamily="monospace"/>
+                android:fontFamily="monospace"
+                android:textSize="12sp"
+                android:textColor="@color/colorPrimary"/>
 
         </LinearLayout>
 
@@ -57,7 +61,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Age:"
-                android:fontFamily="monospace"/>
+                android:fontFamily="monospace"
+                android:textSize="12sp"
+                android:textColor="@color/colorPrimary"/>
             <TextView
                 android:id="@+id/suspect_list_item_age_textView"
                 android:layout_width="wrap_content"
@@ -65,7 +71,9 @@
                 android:text="35"
                 android:gravity="top"
                 android:layout_marginLeft="2dp"
-                android:fontFamily="monospace"/>
+                android:fontFamily="monospace"
+                android:textSize="12sp"
+                android:textColor="@color/colorPrimary"/>
 
         </LinearLayout>
 
@@ -75,20 +83,15 @@
         android:id="@+id/suspect_list_item_reason_textView"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:textColor="@color/colorPrimary"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="21dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="39dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="-6dp"
-        android:layout_toEndOf="@+id/suspect_list_item_nameStatusContainer_linearLayout"
         android:ellipsize="end"
         android:maxLines="3"
         android:minLines="3"
-        android:text="Last log description,this is demo text displaying " />
+        android:text="Last log description,this is demo text displaying "
+        android:layout_alignParentEnd="true"
+        android:textDirection="rtl"
+        android:gravity="center"
+        android:layout_centerVertical="true"/>
 
 
 </RelativeLayout>

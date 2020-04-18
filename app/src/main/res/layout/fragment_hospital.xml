@@ -18,7 +18,7 @@
             android:layout_width="97dp"
             android:layout_height="69dp"
             android:layout_weight="1"
-            android:background="@color/confirmBox"
+            android:background="@drawable/confirmed_stats_bg"
             android:layout_margin="8dp">
 
             <TextView
@@ -44,7 +44,7 @@
             android:layout_width="97dp"
             android:layout_height="69dp"
             android:layout_weight="1"
-            android:background="@color/activeBox"
+            android:background="@drawable/active_stats_bg"
             android:layout_marginTop="8dp"
             android:layout_marginRight="8dp">
 
@@ -71,7 +71,7 @@
             android:layout_width="97dp"
             android:layout_height="69dp"
             android:layout_weight="1"
-            android:background="@color/recoveredBox"
+            android:background="@drawable/cured_stats_bg"
             android:layout_marginTop="8dp"
             android:layout_marginRight="8dp">
 
@@ -98,7 +98,7 @@
             android:layout_width="97dp"
             android:layout_height="69dp"
             android:layout_weight="1"
-            android:background="@color/deceasedBox"
+            android:background="@drawable/deceased_stats_bg"
             android:layout_marginTop="8dp"
             android:layout_marginRight="8dp">
 
@@ -132,6 +132,7 @@
         android:layout_below="@id/hospital_suspect_topContainer_linearLayout"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
+        android:textColor="@color/colorAccent"
         style="@style/hospitalFragmentTextValueStyle"/>
 
     <androidx.recyclerview.widget.RecyclerView

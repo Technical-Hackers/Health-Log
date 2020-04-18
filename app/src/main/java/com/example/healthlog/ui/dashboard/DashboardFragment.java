@@ -3,12 +3,14 @@ package com.example.healthlog.ui.dashboard;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -43,6 +45,8 @@ public class DashboardFragment extends Fragment {
     private DashboardAdapter dashboardAdapter;
     private RecyclerView dashboardRecyclerView;
 
+    RelativeLayout searchContainer;
+
     private Spinner spinner;
 
     private EditText searchEditText;
@@ -66,6 +70,8 @@ public class DashboardFragment extends Fragment {
         // search edit text
         searchEditText = root.findViewById(R.id.dashboard_searchBox_editText);
 
+        searchContainer = root.findViewById(R.id.dashboard_searchContainer_relativeLayout);
+
         searchEditText.addTextChangedListener(
                 new TextWatcher() {
                     @Override
@@ -80,14 +86,6 @@ public class DashboardFragment extends Fragment {
                     }
                 });
 
-        // Spinner
-        ArrayList<String> dt = new ArrayList<>();
-        spinner = root.findViewById(R.id.dashboard_list_spinner);
-        ArrayAdapter<CharSequence> adapter =
-                ArrayAdapter.createFromResource(
-                        getActivity(), R.array.statusArray, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_expandable_list_item_1);
-        spinner.setAdapter(adapter);
 
         // FAB
         FloatingActionButton addPatient =
@@ -126,6 +124,18 @@ public class DashboardFragment extends Fragment {
         dashboardRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         dashboardRecyclerView.setAdapter(dashboardAdapter);
 
+        dashboardRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if(dy > 0){
+                    searchContainer.animate().alpha(0.1f).setDuration(500).start();
+                }else{
+                    searchContainer.animate().alpha(0.8f).setDuration(500).start();
+                }
+            }
+        });
+
         dashboardViewModel = ViewModelProviders.of(requireActivity()).get(DashboardViewModel.class);
         dashboardViewModel.init(getActivity());
         dashboardViewModel
@@ -143,16 +153,18 @@ public class DashboardFragment extends Fragment {
     }
 
     void setUpSpinner() {
+        final String[] sts = { "Active", "Cured", "Deceased","All"};
         spinner = root.findViewById(R.id.dashboard_list_spinner);
-        final ArrayAdapter<CharSequence> adapter =
-                ArrayAdapter.createFromResource(
-                        getActivity(), R.array.statusArray, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<String>(
+                        getActivity(), R.layout.spinner_item, sts);
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         spinner.setAdapter(adapter);
 
         spinner.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
-                    String[] sts = {"All", "Active", "Cured", "Deceased"};
 
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -163,5 +175,6 @@ public class DashboardFragment extends Fragment {
                     @Override
                     public void onNothingSelected(AdapterView<?> adapterView) {}
                 });
+
     }
 }

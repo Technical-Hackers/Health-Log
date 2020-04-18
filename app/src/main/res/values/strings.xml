@@ -31,10 +31,10 @@
     <string name="doctor_id_or_doctor_name">Doctor ID or Doctor Name</string>
 
     <string-array name="statusArray">
-        <item>All</item>
         <item>Active</item>
         <item>Cured</item>
         <item>Deceased</item>
+        <item>All</item>
     </string-array>
 
 </resources>

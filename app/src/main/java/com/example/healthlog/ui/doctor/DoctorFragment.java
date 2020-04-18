@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -38,6 +41,9 @@ public class DoctorFragment extends Fragment {
     private RecyclerView doctorRecyclerView;
     private DoctorViewModel doctorViewModel;
 
+    LinearLayout searchContainer;
+    int currentSate = 0;//0: dim, 1:bright
+
     private EditText searchEditText;
 
     View root;
@@ -50,6 +56,8 @@ public class DoctorFragment extends Fragment {
         setUpRecyclerView();
 
         searchEditText = root.findViewById(R.id.doctor_searchBox_editText);
+
+        searchContainer = root.findViewById(R.id.doctor_searchContainer_linearLayout);
 
         searchEditText.addTextChangedListener(
                 new TextWatcher() {
@@ -64,6 +72,37 @@ public class DoctorFragment extends Fragment {
                         doctorAdapter.filter(editable.toString().trim());
                     }
                 });
+
+        searchEditText.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(currentSate==0){
+                    currentSate = 1;
+                    searchContainer.animate().alpha(0.8f).setDuration(500).start();
+                }
+                return false;
+            }
+        });
+
+        (root.findViewById(R.id.root)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(currentSate==1){
+                    currentSate = 0;
+                    searchContainer.animate().alpha(0.1f).setDuration(500).start();
+                }
+            }
+        });
+
+        searchContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(currentSate==0){
+                    currentSate = 1;
+                    searchContainer.animate().alpha(0.8f).setDuration(500).start();
+                }
+            }
+        });
 
         return root;
     }
@@ -87,6 +126,20 @@ public class DoctorFragment extends Fragment {
         doctorRecyclerView.setHasFixedSize(false);
         doctorRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         doctorRecyclerView.setAdapter(doctorAdapter);
+
+        doctorRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if(dy >= 0){
+                    currentSate = 0;
+                    searchContainer.animate().alpha(0.1f).setDuration(500).start();
+                }else{
+                    currentSate = 1;
+                    searchContainer.animate().alpha(0.8f).setDuration(500).start();
+                }
+            }
+        });
 
         doctorViewModel = ViewModelProviders.of(this).get(DoctorViewModel.class);
         doctorViewModel.init(getActivity());

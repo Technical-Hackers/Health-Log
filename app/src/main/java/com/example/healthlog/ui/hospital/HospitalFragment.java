@@ -143,11 +143,11 @@ public class HospitalFragment extends Fragment {
     }
 
     public void showDialog(final SuspectedPatient currentSuspectedPatient) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.CustomDialogTheme);
         // Set the message show for the Alert time
         builder.setMessage(R.string.add_patient);
         builder.setTitle(R.string.alert);
-        builder.setCancelable(false);
+        builder.setCancelable(true);
         builder.setPositiveButton(
                 android.R.string.yes,
                 new DialogInterface.OnClickListener() {

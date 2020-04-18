@@ -64,8 +64,8 @@ public class HospitalHandler {
 
         adapter =
                 new ArrayAdapter<String>(
-                        context, android.R.layout.simple_spinner_dropdown_item, hospitalNameList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        context, R.layout.spinner_item, hospitalNameList);
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(adapter);
 

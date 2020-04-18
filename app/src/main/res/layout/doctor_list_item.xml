@@ -91,8 +91,6 @@
         android:textColor="@color/colorPrimary"
         android:gravity="center"
         android:text="Cabin: 1st floor C009"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="12dp"
-        android:textSize="8sp" />
+        android:textSize="10sp" />
 
 </RelativeLayout>

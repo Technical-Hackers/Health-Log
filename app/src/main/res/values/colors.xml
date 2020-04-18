@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<<<<<<< HEAD
-    <color name="colorPrimary">#4f3b78</color>
-    <color name="colorPrimaryLight">#927fbf</color>
-    <color name="colorBar">#515585</color>
-    <color name="colorAccent">#c4bbf0</color>
-    <color name="colorLight">#ececec</color>
-=======
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
 
+    <!--<color name="colorPrimary">#4f3b78</color>-->
+    <color name="colorPrimary">#000</color>
+    <color name="colorPrimaryLight">#252525</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorBar">#515585</color>
+    <color name="colorAccent">#fff</color>
+    <color name="colorLight">#ececec</color>
 
 
    <!-- confirmed colors-->
@@ -34,5 +31,4 @@
     <color name="deceasedDarkText">#6E777E</color>
 
 
->>>>>>> Ui fixed and updates
 </resources>

@@ -33,7 +33,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private List<Patient> allPatientList;
     private List<Patient> currentPatientList;
 
-    private String currentFilter = "Deceased";
+    private String currentFilter = "Active";
 
     Context context;
 

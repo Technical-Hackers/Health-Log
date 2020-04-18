@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void dialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomDialogTheme);
         // Set the message show for the Alert time
         builder.setMessage(R.string.ask_logout);
         builder.setTitle(R.string.alert);
