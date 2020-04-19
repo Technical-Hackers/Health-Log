@@ -6,12 +6,16 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryLight</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
     </style>
 
-    <style name="CustomDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:windowBackground">#191616</item>
-        <item name="colorAccent">#fff</item>
+    <style name="CustomDialogTheme" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+        <!--<item name="android:windowBackground">#191616</item>-->
+        <item name="android:background">#000</item>
+        <item name="android:colorPrimary">#000</item>
+        <item name="colorAccent">@color/ColorAccentSec</item>
         <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <!-- new patient layout editText theme. -->
@@ -34,6 +38,9 @@
         <item name="android:textSize">16sp</item>
         <item name="android:layout_margin">8dp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:minLines">1</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
     </style>
 
     <style name="hospitalFragmentTextValueStyle" parent="Widget.AppCompat.TextView">

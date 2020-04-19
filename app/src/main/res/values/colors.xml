@@ -9,6 +9,7 @@
     <color name="colorAccent">#fff</color>
     <color name="colorLight">#ececec</color>
 
+    <color name="ColorAccentSec">#FFBE00</color>
 
    <!-- confirmed colors-->
     <color name="confirmBox">#E2E2F4</color>

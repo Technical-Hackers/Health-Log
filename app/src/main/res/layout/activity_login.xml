@@ -11,41 +11,48 @@
         android:id="@+id/loginActivity_login_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="128dp"
         android:text="@string/enter_your_hospital_id"
-        android:textSize="25dp"
         android:textColor="@color/colorLight"
+        android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
+
 
     <EditText
         android:id="@+id/loginActivity_login_editText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/hospital_id"
-        android:textColor="@color/colorLight"
         android:backgroundTint="@color/colorLight"
-        android:textColorHint="@color/colorLight"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/enter_your_hospital_id"
         android:inputType="textPersonName"
+        android:padding="32dp"
+        android:textColor="@color/ColorAccentSec"
+        android:textColorHint="@color/colorLight"
+        android:background="#00000000"
+        android:ellipsize="end"
         app:layout_constraintBottom_toTopOf="@+id/loginActivity_login_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginActivity_login_textView"
-        app:layout_constraintVertical_bias="0.591" />
+        app:layout_constraintVertical_bias="0.608" />
 
     <Button
         android:id="@+id/loginActivity_login_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="308dp"
-        android:background="@color/colorPrimary"
-        android:textColor="@color/colorLight"
+        android:layout_marginBottom="260dp"
+        android:background="@color/ColorAccentSec"
         android:text="@string/login"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

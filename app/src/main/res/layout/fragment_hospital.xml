@@ -6,6 +6,7 @@
     android:background="@color/colorPrimaryLight"
     tools:context=".ui.hospital.HospitalFragment">
 
+
     <LinearLayout
         android:id="@+id/hospital_suspect_topContainer_linearLayout"
         android:layout_width="match_parent"

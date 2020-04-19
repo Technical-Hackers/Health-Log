@@ -5,7 +5,7 @@
     <string name="title_hospital">Hospital Info</string>
     <string name="hospital_id">Hospital ID</string>
     <string name="login">Login</string>
-    <string name="enter_your_hospital_id">Enter your Hospital ID</string>
+    <string name="enter_your_hospital_id">Enter Hospital ID</string>
     <string name="doctor">Doctor</string>
     <string name="hospital">Hospital</string>
     <string name="search">Search</string>

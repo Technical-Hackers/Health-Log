@@ -13,7 +13,8 @@
         app:menu="@menu/bottom_nav_menu"
         app:itemIconTint="@color/bottom_nav"
         app:itemTextColor="@color/bottom_nav"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        />
 
     <fragment
         android:id="@+id/nav_host_fragment"
