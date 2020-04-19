@@ -35,7 +35,7 @@ Health Log will help the hospitals to store there patient's log. It'd be very us
 ## :question: How it Works
 
 * **Add Patient:** Here, the hospitala authority can add new patient details.
-* **Doctor:** Whenever the new patient is added then it is alotted to a particular doctor. Doctor can enter their verification ID and then check each patients and write the recent log of each patient. The changes would be updated for each patient. For verification you can enter 123, 456, 789 or any assigned to a doctor by authority.
+* **Doctor:** Whenever the new patient is added then it is alotted to a particular doctor. Doctor can enter their verification ID and then check each patients and write the recent log of each patient. The changes would be updated for each patient. For verification ID doctors have to enter their unique id provided by the authority.
 * **Hospital:** It will show the current status of that hospital for example the number of active, cured, confirmed and deceased cases. It will also show the request made by other people for appintment. 
 ## :satellite: Technology Stack
 
