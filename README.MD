@@ -50,3 +50,5 @@ Health Log will help the hospitals to store there patient's log. It'd be very us
 1. Select ```Open an existing Android Studio project``` option in Android Studio
 1. Select the project folder
 1. Select ```Menu```, then ```Run``` -> ```Run 'app'```
+1. It will ask for a hospital ID ```Write``` -> ```H1_Sir_Sunderlal_Hospital``` for testing the app
+
