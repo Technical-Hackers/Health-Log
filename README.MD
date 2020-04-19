@@ -9,19 +9,19 @@ Health Log will help the hospitals to store there patient's log. It'd be very us
 ## :camera: Screenshots
 <table>
      <tr>
-          <td><img height="500" width= "230" src="https://i.imgur.com/ANwRbY4.png" /><br /><center><b>Login Page</b></center></td>
-          <td><img height="500" width= "230" src="https://i.imgur.com/X1uIaoi.png" /><br /><center><b>Dashboard Page</b></center></td>
-          <td><img height="500" width= "230" src="https://i.imgur.com/yWz2QiV.png" /><br /><center><b>Doctor Page</b></center></td>
+          <td><img height="500" src="https://i.imgur.com/ANwRbY4.png" /><br /><center><b>Login Page</b></center></td>
+          <td><img height="500" src="https://i.imgur.com/X1uIaoi.png" /><br /><center><b>Dashboard Page</b></center></td>
+          <td><img height="500" src="https://i.imgur.com/yWz2QiV.png" /><br /><center><b>Doctor Page</b></center></td>
      </tr>
      <tr>
-         <td><img height="500" width= "230" src="https://i.imgur.com/ArQ6RV3.png" /><br /><center><b>Hospital Page</b></center></td>
-         <td><img height="500" width= "230" src="https://i.imgur.com/3VWgtBv.png" /><br /><center><b>Add Patient dialog</b></center></td>
-         <td><img height="500" width= "230" src="https://i.imgur.com/ztKgmMq.png" /><br /><center><b>Patient Information dialog</b></center></td>
+         <td><img height="500" src="https://i.imgur.com/ArQ6RV3.png" /><br /><center><b>Hospital Page</b></center></td>
+         <td><img height="500" src="https://i.imgur.com/3VWgtBv.png" /><br /><center><b>Add Patient dialog</b></center></td>
+         <td><img height="500" src="https://i.imgur.com/ztKgmMq.png" /><br /><center><b>Patient Information dialog</b></center></td>
        </tr>
   <tr>
-         <td><img height="500" width= "230" src="https://i.imgur.com/cDOHL5m.png" /><br /><center><b>Alotted Patients</b></center></td>
-         <td><img height="500" width= "230" src="https://i.imgur.com/NGu3SPZ.png" /><br /><center><b>Change Patient Log</b></center></td>
-         <td><img height="500" width= "230" src="https://i.imgur.com/cWp0wLB.png" /><br /><center><b>Shift Patient</b></center></td>
+         <td><img height="500" src="https://i.imgur.com/cDOHL5m.png" /><br /><center><b>Alotted Patients</b></center></td>
+         <td><img height="500" src="https://i.imgur.com/NGu3SPZ.png" /><br /><center><b>Change Patient Log</b></center></td>
+         <td><img height="500" src="https://i.imgur.com/cWp0wLB.png" /><br /><center><b>Shift Patient</b></center></td>
     </tr>
 </table>
 
