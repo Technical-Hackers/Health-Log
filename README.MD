@@ -9,18 +9,19 @@ Health Log will help the hospitals to store there patient's log. It'd be very us
 ## :camera: Screenshots
 <table>
      <tr>
-          <td><img height="500" width= "230" src="https://i.imgur.com/DtCXhAd.jpg" /><br /><center><b>Login Page</b></center></td>
-          <td><img height="500" width= "230" src="https://i.imgur.com/zY4Scau.jpg" /><br /><center><b>Dashboard Page</b></center></td>
-          <td><img height="500" width= "230" src="https://i.imgur.com/n1O7mZP.jpg" /><br /><center><b>Doctor Page</b></center></td>
+          <td><img height="500" width= "230" src="https://i.imgur.com/ANwRbY4.png" /><br /><center><b>Login Page</b></center></td>
+          <td><img height="500" width= "230" src="https://i.imgur.com/X1uIaoi.png" /><br /><center><b>Dashboard Page</b></center></td>
+          <td><img height="500" width= "230" src="https://i.imgur.com/yWz2QiV.png" /><br /><center><b>Doctor Page</b></center></td>
      </tr>
      <tr>
-         <td><img height="500" width= "230" src="https://i.imgur.com/YZXt4sh.jpg" /><br /><center><b>Hospital Page</b></center></td>
-         <td><img height="500" width= "230" src="https://i.imgur.com/hwnJXZd.jpg" /><br /><center><b>Add Patient dialog</b></center></td>
-         <td><img height="500" width= "230" src="https://i.imgur.com/zWTrS4p.jpg" /><br /><center><b>Patient Information dialog</b></center></td>
+         <td><img height="500" width= "230" src="https://i.imgur.com/ArQ6RV3.png" /><br /><center><b>Hospital Page</b></center></td>
+         <td><img height="500" width= "230" src="https://i.imgur.com/3VWgtBv.png" /><br /><center><b>Add Patient dialog</b></center></td>
+         <td><img height="500" width= "230" src="https://i.imgur.com/ztKgmMq.png" /><br /><center><b>Patient Information dialog</b></center></td>
        </tr>
   <tr>
-         <td><img height="500" width= "230" src="https://i.imgur.com/PbQxcMz.jpg" /><br /><center><b>Alotted Patients</b></center></td>
-         <td><img height="500" width= "230" src="https://i.imgur.com/mfiPbLX.jpg" /><br /><center><b>Shift Patient</b></center></td>
+         <td><img height="500" width= "230" src="https://i.imgur.com/cDOHL5m.png" /><br /><center><b>Alotted Patients</b></center></td>
+         <td><img height="500" width= "230" src="https://i.imgur.com/NGu3SPZ.png" /><br /><center><b>Change Patient Log</b></center></td>
+         <td><img height="500" width= "230" src="https://i.imgur.com/cWp0wLB.png" /><br /><center><b>Shift Patient</b></center></td>
     </tr>
 </table>
 
@@ -34,7 +35,7 @@ Health Log will help the hospitals to store there patient's log. It'd be very us
 ## :question: How it Works
 
 * **Add Patient:** Here, the hospitala authority can add new patient details.
-* **Doctor:** Whenever the new patient is added then it is alotted to a particular doctor. Doctor can enter their verification ID and then check each patients and write the recent log of each patient. The changes would be updated for each patient.
+* **Doctor:** Whenever the new patient is added then it is alotted to a particular doctor. Doctor can enter their verification ID and then check each patients and write the recent log of each patient. The changes would be updated for each patient. For verification you can enter 123, 456, 789 or any assigned to a doctor by authority.
 * **Hospital:** It will show the current status of that hospital for example the number of active, cured, confirmed and deceased cases. It will also show the request made by other people for appintment. 
 ## :satellite: Technology Stack
 
