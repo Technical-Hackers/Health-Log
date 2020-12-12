@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <item
         android:id="@+id/spinner"
-        android:title="@Spinner"
+        android:title="Spinner"
         app:showAsAction="always"
         android:icon="@android:drawable/arrow_down_float"
         app:actionViewClass="android.widget.Spinner"

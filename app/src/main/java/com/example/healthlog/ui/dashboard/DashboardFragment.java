@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -54,6 +55,8 @@ public class DashboardFragment extends Fragment {
     private Spinner spinner;
 
     private EditText searchEditText;
+
+    private Spinner category;
 
     View root;
 
@@ -187,6 +190,7 @@ public class DashboardFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_spinner, menu);
         inflater.inflate(R.menu.menu_logout, menu);
         MenuItem searchItem=menu.findItem(R.id.search);
         SearchView searchView=(SearchView) searchItem.getActionView();
@@ -202,6 +206,30 @@ public class DashboardFragment extends Fragment {
                 return true;
             }
         });
+
+        MenuItem spinnerItem=menu.findItem(R.id.spinner);
+        category=(Spinner)spinnerItem.getActionView();
+
+        final String[] sts = { "Active", "Cured", "Deceased","All"};
+
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, sts);
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        category.setAdapter(adapter);
+        category.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        category.setSelection(i);
+                        dashboardAdapter.applyFilter(sts[i]);
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {}
+                });
+
         super.onCreateOptionsMenu(menu, inflater);
     }
 }
