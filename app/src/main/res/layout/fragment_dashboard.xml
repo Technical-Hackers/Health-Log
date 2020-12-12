@@ -13,8 +13,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dashboard_showList_recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_height="match_parent"
         tools:listitem="@layout/patient_list_item" />
 
     <RelativeLayout
@@ -24,7 +23,8 @@
         android:background="@color/colorPrimaryLight"
         android:padding="8dp"
         android:layout_margin="32dp"
-        android:alpha="0.1">
+        android:alpha="0.1"
+        android:visibility="gone">
 
         <EditText
             android:id="@+id/dashboard_searchBox_editText"

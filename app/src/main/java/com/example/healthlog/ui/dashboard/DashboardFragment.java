@@ -5,6 +5,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -15,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -61,6 +65,8 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        setHasOptionsMenu(true);
+
         Toast.makeText(getActivity(), HealthLog.ID, Toast.LENGTH_SHORT).show();
         root = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
@@ -98,6 +104,7 @@ public class DashboardFragment extends Fragment {
                     }
                 });
         return root;
+
     }
 
     public void addNewPatient() {
@@ -176,5 +183,25 @@ public class DashboardFragment extends Fragment {
                     public void onNothingSelected(AdapterView<?> adapterView) {}
                 });
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_logout, menu);
+        MenuItem searchItem=menu.findItem(R.id.search);
+        SearchView searchView=(SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                dashboardAdapter.filter(newText.trim());
+                return true;
+            }
+        });
+        super.onCreateOptionsMenu(menu, inflater);
     }
 }
