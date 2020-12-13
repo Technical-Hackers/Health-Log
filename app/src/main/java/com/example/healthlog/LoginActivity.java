@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         loadLocale();
+        setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_login);
         ActionBar actionBar= getSupportActionBar();
         actionBar.setTitle(getResources().getString(R.string.app_name));

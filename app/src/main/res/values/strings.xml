@@ -39,4 +39,6 @@
         <item>All</item>
     </string-array>
 
+    <string name="date_not_selected">Date not selected properly</string>
+
 </resources>
