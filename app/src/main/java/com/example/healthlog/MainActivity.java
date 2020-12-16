@@ -1,6 +1,7 @@
 package com.example.healthlog;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,9 +10,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.CompoundButton;
+import android.widget.Switch;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -23,6 +28,11 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     // COMPLETED(SHANK) add logout button in appBar
+
+    private Switch mSwitch;
+    private static final String MyPREFERENCES = "nightModePrefs";
+    private static final String KEY_ISNIGHTMODE = "isNightMode";
+    SharedPreferences mSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +53,45 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        mSharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        mSwitch = findViewById(R.id.theme_toggle);
+        checkNightModeActivated();
+
+        mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    saveNightMode(true);
+                    recreate();
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    saveNightMode(false);
+                    recreate();
+                }
+            }
+        });
     }
+
+    //save night or dark mode
+    private void saveNightMode(boolean nightMode) {
+        SharedPreferences.Editor editor =mSharedPreferences.edit();
+        editor.putBoolean(KEY_ISNIGHTMODE,nightMode);
+        editor.apply();
+    }
+
+    //checking the dark theme switch
+    public void checkNightModeActivated(){
+        if(mSharedPreferences.getBoolean(KEY_ISNIGHTMODE,false)){
+            mSwitch.setChecked(true);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            mSwitch.setChecked(false);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+    }
+
     public void dialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomDialogTheme);
         // Set the message show for the Alert time

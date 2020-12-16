@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Health Log</string>
+    <string name="title_doctor">Doctor</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_hospital">Hospital Info</string>
+    <string name="hospital_id">Hospital ID</string>
+    <string name="login">Login</string>
+    <string name="enter_your_hospital_id">Enter Hospital ID</string>
+    <string name="doctor">Doctor</string>
+    <string name="hospital">Hospital</string>
+    <string name="search">Search</string>
+    <string name="enter_patient_id">Enter patient ID or patient name</string>
+    <string name="patient_id">Patient ID or Patient name</string>
+    <string name="add_log">Add Log</string>
+    <string name="write_current_log">Write current log</string>
+    <string name="save">Save</string>
+    <string name="ask_logout">Do you want to logout</string>
+    <string name="alert">Alert!</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="logout">Logout</string>
+    <string name="_678">678</string>
+    <string name="confirmed">Confirmed</string>
+    <string name="_56">56</string>
+    <string name="deceased">Deceased</string>
+    <string name="cured">Cured</string>
+    <string name="_556">556</string>
+    <string name="active">Active</string>
+    <string name="add_patient">Do you want to add this patient</string>
+    <string name="send">Send to other hospital</string>
+    <string name="doctor_id_or_doctor_name">Doctor ID or Doctor Name</string>
+    <string name="choose_language">Choose Language</string>
+
+
+    <string-array name="statusArray">
+        <item>Active</item>
+        <item>Cured</item>
+        <item>Deceased</item>
+        <item>All</item>
+    </string-array>
+
+    <string name="date_not_selected">Date not selected properly</string>
+
+</resources>
