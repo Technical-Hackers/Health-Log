@@ -24,14 +24,18 @@
     <string name="_56">56</string>
     <string name="deceased">Deceased</string>
     <string name="cured">Cured</string>
+    <string name="notification_channel_info" translatable="false">This is notification channel 1.</string>
+    <string name="notification_channel_name" translatable="false">Channel 1</string>
+    <string name="notification_channel2_info" translatable="false">This is notification channel 2.</string>
+    <string name="notification_channel2_name" translatable="false">Channel 2</string>
+    <string name="newpatient" >New Patient Admitted</string>
+    <string name="notification_click" >Tap for more information.</string>
     <string name="_556">556</string>
     <string name="active">Active</string>
     <string name="add_patient">Do you want to add this patient</string>
     <string name="send">Send to other hospital</string>
     <string name="doctor_id_or_doctor_name">Doctor ID or Doctor Name</string>
     <string name="choose_language">Choose Language</string>
-
-
     <string-array name="statusArray">
         <item>Active</item>
         <item>Cured</item>
