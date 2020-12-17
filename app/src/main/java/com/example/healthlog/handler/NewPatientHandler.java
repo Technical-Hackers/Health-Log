@@ -365,10 +365,12 @@ public class NewPatientHandler<notificationCount> {
 
     String calculateAge() {
         String result = "";
-
         Calendar dob = Calendar.getInstance();
         Calendar today = Calendar.getInstance();
 
+        if(date == null) {
+            return "0";
+        }
         dob.set(date.getYear(), date.getMonth(), date.getDay());
 
         int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
@@ -381,6 +383,7 @@ public class NewPatientHandler<notificationCount> {
 
         return result;
     };
+
 
 
     String getCompleteId() {
