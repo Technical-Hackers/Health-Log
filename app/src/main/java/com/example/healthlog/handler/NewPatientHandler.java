@@ -2,7 +2,10 @@ package com.example.healthlog.handler;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -19,7 +22,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import com.example.healthlog.HealthLog;
+import com.example.healthlog.MainActivity;
 import com.example.healthlog.R;
 import com.example.healthlog.model.Doctor;
 import com.example.healthlog.model.Patient;
@@ -39,9 +45,17 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class NewPatientHandler {
+import static com.example.healthlog.HealthLog.CHANNEL_1_ID;
+
+public class NewPatientHandler<notificationCount> {
 
     // COMPLETED(DJ) allot patient to doctor using desired logic
+
+    //Notification Manager
+    private NotificationManagerCompat notificationManager;
+
+    //every patient entry will require a new notification-id otherwise only one notification can be shown using one channel
+    private static int notificationCount = 1;
 
     // activity
     Context context;
@@ -76,6 +90,7 @@ public class NewPatientHandler {
 
     public NewPatientHandler(Context context) {
         this.context = context;
+        notificationManager =  NotificationManagerCompat.from(context);
         // this.activity = activity;
         setUp();
     }
@@ -210,6 +225,33 @@ public class NewPatientHandler {
                                                             }
                                                         }
                                                     });
+
+                                        Intent activityIntent = new Intent(context, MainActivity.class);
+                                        PendingIntent contentIntent = PendingIntent.getActivity(
+                                                context, 0, activityIntent, 0
+                                        );
+//                                        Incase we want to add some minor functionality to improve usage we can add an intent here
+//                                        Intent broadcastIntent = new Intent(this, NotificationReceiver.class);
+//                                        broadcastIntent.putExtra("toastMessage", message);
+//                                        PendingIntent actionIntent = PendingIntent.getBroadcast(
+//                                                this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT
+//                                        );
+
+//                                        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.family_father);
+
+                                        Notification notification = new NotificationCompat.Builder(context, CHANNEL_1_ID)
+                                                .setSmallIcon(R.mipmap.health_log)
+                                                .setContentTitle("New Patient Admitted")
+                                                .setContentText("Tap for more information.")
+//                                                .setLargeIcon(largeIcon)
+                                                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                                                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                                                .setColor(Color.RED)
+                                                .setContentIntent(contentIntent)
+                                                .setAutoCancel(true)
+//                                                .addAction(R.mipmap.ic_launcher, "Toast", actionIntent)
+                                                .build();
+                                    notificationManager.notify(notificationCount++, notification);
                                 }
                             }
                         });
@@ -327,23 +369,19 @@ public class NewPatientHandler {
         Calendar dob = Calendar.getInstance();
         Calendar today = Calendar.getInstance();
 
-        if(date == null){
-            return context.getResources().getString(R.string.date_not_selected);
-        }else{
-            dob.set(date.getYear(), date.getMonth(), date.getDay());
+        dob.set(date.getYear(), date.getMonth(), date.getDay());
 
-            int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
 
-            if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)) {
-                age--;
-            }
-            result = String.valueOf(age);
-            return result;
+        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)) {
+            age--;
         }
 
+        result = (new Integer(age)).toString();
 
+        return result;
+    };
 
-    }
 
     String getCompleteId() {
         return patientId + (name.getText().toString().trim()).split(" ")[0];
