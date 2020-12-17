@@ -46,4 +46,6 @@ Cerrar sesión</string>
         <item>Fallecida</item>
         <item>Todas</item>
     </string-array>
+    <string name="newpatient">Nuevo paciente ingresado</string>
+    <string name="notification_click">Toque para obtener más información.</string>
 </resources>

@@ -34,18 +34,18 @@ public class HealthLog extends Application {
 //          For high priority Notifications, eg new patient admitted etc.
             NotificationChannel channel1 = new NotificationChannel(
                     CHANNEL_1_ID,
-                    "Channel 1",
+                    "@string/notification_channel_info",
                     NotificationManager.IMPORTANCE_HIGH
             );
-            channel1.setDescription("This is channel 1");
+            channel1.setDescription("@string/notification_channel_name");
 
 //          For relatively less important notifications
             NotificationChannel channel2 = new NotificationChannel(
                     CHANNEL_2_ID,
-                    "Channel 2",
+                    "@string/notification_channel2_info",
                     NotificationManager.IMPORTANCE_LOW
             );
-            channel1.setDescription("This is channel 2");
+            channel1.setDescription("@string/notification_channel2_name");
 
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel1);

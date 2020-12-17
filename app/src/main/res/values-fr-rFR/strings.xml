@@ -42,4 +42,6 @@ Envoyer dans un autre hôpital</string>
 Décédé</item>
         <item>Toute</item>
     </string-array>
+    <string name="newpatient">Nouveau patient admis</string>
+    <string name="notification_click">Appuyez sur pour plus d\'informations.</string>
 </resources>

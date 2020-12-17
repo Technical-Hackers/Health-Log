@@ -39,4 +39,6 @@ Bestätigt</string>
         <item>Verstorbene</item>
         <item>Alles</item>
     </string-array>
+    <string name="newpatient">Neuer Patient aufgenommen</string>
+    <string name="notification_click">Tippen Sie hier, um weitere Informationen zu erhalten.</string>
 </resources>

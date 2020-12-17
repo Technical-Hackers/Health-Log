@@ -241,8 +241,8 @@ public class NewPatientHandler<notificationCount> {
 
                                         Notification notification = new NotificationCompat.Builder(context, CHANNEL_1_ID)
                                                 .setSmallIcon(R.mipmap.health_log)
-                                                .setContentTitle("New Patient Admitted")
-                                                .setContentText("Tap for more information.")
+                                                .setContentTitle("@string/newpatient")
+                                                .setContentText("@string/notification_click")
 //                                                .setLargeIcon(largeIcon)
                                                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                                                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
@@ -365,10 +365,12 @@ public class NewPatientHandler<notificationCount> {
 
     String calculateAge() {
         String result = "";
-
         Calendar dob = Calendar.getInstance();
         Calendar today = Calendar.getInstance();
 
+        if(date == null) {
+            return "0";
+        }
         dob.set(date.getYear(), date.getMonth(), date.getDay());
 
         int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
@@ -381,6 +383,7 @@ public class NewPatientHandler<notificationCount> {
 
         return result;
     };
+
 
 
     String getCompleteId() {
