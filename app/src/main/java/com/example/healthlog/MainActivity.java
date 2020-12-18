@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
                 dialog();break;
             case R.id.language:
                 showChangeLanguageDialogue();break;
+            case R.id.about:
+                showAboutAppPage();break;
             default:
                 super.onOptionsItemSelected(item);
         }
@@ -152,5 +154,9 @@ public class MainActivity extends AppCompatActivity {
         HealthLog.ID = null;*/
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
         finish();
+    }
+    void showAboutAppPage() {
+        Intent intent=new Intent(this, AboutActivity.class);
+        startActivity(intent);
     }
 }

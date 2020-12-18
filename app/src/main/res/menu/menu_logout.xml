@@ -11,9 +11,15 @@
     </item>
 
     <item
+        android:id="@+id/about"
+        android:icon="@android:drawable/ic_menu_info_details"
+        app:showAsAction="never"
+        android:title="@string/about">
+    </item>
+    <item
         android:id="@+id/logout"
         android:icon="@drawable/ic_logout_svgrepo_com"
-        app:showAsAction="always"
+        app:showAsAction="never"
         android:title="@string/logout">
     </item>
 </menu>
