@@ -327,17 +327,22 @@ public class NewPatientHandler {
         Calendar dob = Calendar.getInstance();
         Calendar today = Calendar.getInstance();
 
-        dob.set(date.getYear(), date.getMonth(), date.getDay());
+        if(date == null){
+            return context.getResources().getString(R.string.date_not_selected);
+        }else{
+            dob.set(date.getYear(), date.getMonth(), date.getDay());
 
-        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+            int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
 
-        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)) {
-            age--;
+            if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)) {
+                age--;
+            }
+            result = String.valueOf(age);
+            return result;
         }
 
-        result = (new Integer(age)).toString();
 
-        return result;
+
     }
 
     String getCompleteId() {

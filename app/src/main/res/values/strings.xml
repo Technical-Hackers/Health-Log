@@ -29,6 +29,8 @@
     <string name="add_patient">Do you want to add this patient</string>
     <string name="send">Send to other hospital</string>
     <string name="doctor_id_or_doctor_name">Doctor ID or Doctor Name</string>
+    <string name="choose_language">Choose Language</string>
+
 
     <string-array name="statusArray">
         <item>Active</item>
@@ -36,5 +38,7 @@
         <item>Deceased</item>
         <item>All</item>
     </string-array>
+
+    <string name="date_not_selected">Date not selected properly</string>
 
 </resources>
