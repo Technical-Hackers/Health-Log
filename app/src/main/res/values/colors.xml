@@ -31,5 +31,12 @@
     <color name="deceasedLightText">#A7ACB1</color>
     <color name="deceasedDarkText">#6E777E</color>
 
+    <!-- dark theme colors -->
+    <color name="colorPrimaryNight">#16202c</color>
+    <color name="colorPrimaryDarkNight">#141d26</color>
+    <color name="colorAccentNight">#ffffff</color>
+
+    <color name="primaryTitleColor">#212121</color>
+    <color name="primaryTitleColorNight">#ffffff</color>
 
 </resources>
