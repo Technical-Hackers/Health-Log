@@ -30,6 +30,8 @@
     <string name="send">Send to other hospital</string>
     <string name="doctor_id_or_doctor_name">Doctor ID or Doctor Name</string>
     <string name="choose_language">Choose Language</string>
+    <string name="about">About</string>
+    <string name="aboutText">Health Log is a smart and efficient android app provided to hospitals to maintain the logs of covid19 patients.\n\nThey can store new patients and doctors and it will automatically assign the doctor to each patient.\n\nDoctors can also fill the recent logs of each patient in each visit which will update the family members by the patient’s report.</string>
 
 
     <string-array name="statusArray">

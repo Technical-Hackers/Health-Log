@@ -10,14 +10,14 @@
         android:roundIcon="@mipmap/health_log"
         android:supportsRtl="true"
         android:theme="@style/splashScreenTheme">
-        <activity android:name=".DoctorActivity"
-            android:parentActivityName=".MainActivity">
-        </activity>
+        <activity android:name=".AboutActivity"></activity>
+        <activity
+            android:name=".DoctorActivity"
+            android:parentActivityName=".MainActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
