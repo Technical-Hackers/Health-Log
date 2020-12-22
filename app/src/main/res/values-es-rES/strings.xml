@@ -46,4 +46,8 @@ Cerrar sesión</string>
         <item>Fallecida</item>
         <item>Todas</item>
     </string-array>
+
+    <string name="setting">Ajuste</string>
+    <string name="app_setting">Ajustes de Aplicacion</string>
+
 </resources>
