@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -16,7 +17,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.healthlog.R;
 import com.example.healthlog.adapter.SuspectedPatientAdapter;
+import com.example.healthlog.handler.HospitalProfileHandler;
 import com.example.healthlog.interfaces.OnItemClickListener;
+import com.example.healthlog.model.Hospital;
 import com.example.healthlog.model.SuspectedPatient;
 import java.util.ArrayList;
 
@@ -54,6 +57,7 @@ public class HospitalFragment extends Fragment {
 
         setup();
         showSuspectList();
+        showHospitalProfile();
         return root;
     }
 
@@ -140,6 +144,28 @@ public class HospitalFragment extends Fragment {
                                 }
                             }
                         });
+    }
+
+    public void showHospitalProfile(){
+        final HospitalProfileHandler hospitalProfileHandler = new HospitalProfileHandler(getContext(),getActivity());
+        Button hospitalProfile = root.findViewById(R.id.hospital_profile);
+
+        final Hospital hospital = new Hospital();
+
+        // Set Hospital info HERE
+        hospital.setId("H1");
+        hospital.setName("Sir Sunderlal Hospital");
+        hospital.setAddress("31/3,Andheri,Mumbai");
+        hospital.setBedCount(120);
+        hospital.setDoctorCount(30);
+
+        hospitalProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hospitalProfileHandler.update(hospital);
+                hospitalProfileHandler.init();
+            }
+        });
     }
 
     public void showDialog(final SuspectedPatient currentSuspectedPatient) {

@@ -11,6 +11,23 @@ public class Hospital {
     private String state;
     private String district;
     private GeoPoint location;
+    private int bedCount, doctorCount;
+
+    public int getBedCount() {
+        return bedCount;
+    }
+
+    public void setBedCount(int bedCount) {
+        this.bedCount = bedCount;
+    }
+
+    public int getDoctorCount() {
+        return doctorCount;
+    }
+
+    public void setDoctorCount(int doctorCount) {
+        this.doctorCount = doctorCount;
+    }
 
     public Hospital() {}
 
