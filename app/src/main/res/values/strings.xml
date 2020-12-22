@@ -29,6 +29,13 @@
     <string name="add_patient">Do you want to add this patient</string>
     <string name="send">Send to other hospital</string>
     <string name="doctor_id_or_doctor_name">Doctor ID or Doctor Name</string>
+    <string name="hospital_id_text">Hospital ID : <big>%1$s</big></string>
+    <string name="hospital_name">Name :  %1$s </string>
+    <string name="hospital_address">Address : %1$s</string>
+    <string name="hospital_profile">Hospital Profile</string>
+    <string name="request_list_text">Request List</string>
+    <string name="bed_count">Bed Count : %1$d</string>
+    <string name="doctor_count">Doctor Count : %1$d</string>
 
     <string-array name="statusArray">
         <item>Active</item>

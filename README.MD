@@ -27,16 +27,18 @@ Health Log will help the hospitals to store there patient's log. It'd be very us
 
 ## :star: Features
 
-* Hospital authorities can store patients log.
-* It will auto assign patients to each doctor. And doctor can update the recent log in each visit. 
-* Hospital can decide for the checkups raised by a citizen in website.
-* Hospital can also refer the patients to other hospital avaiabe.
-* Family member can check the recent log of there member admitted in the hospital through the website.
+1. Hospital authorities can store patients' log. It'd be very useful during this pandemic time of covid19
+1. The best use of this app would be we can get the exact number of patients in the particular hospital. If all the hospitals in a particular city are using this app then we can get the total number of patients in the whole city easily and also it can we used over the country to get the total number of patients. 
+1. It will auto-assign patients to each doctor. And the doctor can update the recent log in each visit.
+1. The hospital can decide whether they want to fix the appointments raised by a citizen on the website. Either they can add that patient to their hospital and appoint it to a particular doctor or they can refer it to another hospital.
+1. The hospital can also refer the patients to another hospital available if they don't have a proper place to accommodate patients or if they don't have proper medical facilities.
+1. The family members can check the recent log of there members admitted to the hospital through the website without going to the hospital.
+
 ## :question: How it Works
 
 * **Add Patient:** Here, the hospitala authority can add new patient details.
-* **Doctor:** Whenever the new patient is added then it is alotted to a particular doctor. Doctor can enter their verification ID and then check each patients and write the recent log of each patient. The changes would be updated for each patient. For verification you can enter 123, 456, 789 or any assigned to a doctor by authority.
-* **Hospital:** It will show the current status of that hospital for example the number of active, cured, confirmed and deceased cases. It will also show the request made by other people for appintment. 
+* **Doctor:** Whenever the new patient is added then it is alotted to a particular doctor. Doctor can enter their verification ID and then check each patients and write the recent log of each patient. The changes would be updated for each patient. For verification ID doctors have to enter their unique id provided by the authority.
+* **Hospital:** It will show the current status of that hospital for example the number of active, cured, confirmed and deceased cases. It will also show the request made by other people for appintment throught web app, with an action of adding him/her to our hospital or forward request to another. 
 ## :satellite: Technology Stack
 
 * Android Studio
