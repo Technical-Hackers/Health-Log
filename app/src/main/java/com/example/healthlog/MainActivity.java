@@ -1,11 +1,16 @@
 package com.example.healthlog;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +20,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 
     // COMPLETED(SHANK) add logout button in appBar
@@ -22,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        loadLocale();
+        setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -35,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
     }
-
     public void dialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomDialogTheme);
         // Set the message show for the Alert time
@@ -62,25 +71,81 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_logout, menu);
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-                dialog();
+                dialog();break;
+            case R.id.language:
+                showChangeLanguageDialogue();break;
+            case R.id.about:
+                showAboutAppPage();break;
+            case R.id.setting:
+                showSettingsAppPage();
             default:
                 super.onOptionsItemSelected(item);
         }
         return true;
     }
+    private void showChangeLanguageDialogue() {
+        final String[] listitems= {"French","German","Spanish","English"};
+        AlertDialog.Builder mbuilder = new AlertDialog.Builder(MainActivity.this);
+        mbuilder.setTitle(R.string.choose_language);
+        mbuilder.setSingleChoiceItems(listitems, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if(i==0)
+                {   //French
+                    setLocale("fr");
+                    recreate();
+                }
+                else if(i==1)
+                {   //German
+                    setLocale("de");
+                    recreate();
+                }
+                else if(i==2)
+                {   //Spanish
+                    setLocale("es");
+                    recreate();
+                }
+                else if(i==3)
+                {    //English
+                    setLocale("en");
+                    recreate();
+                }
+                //dismiss alert dialog when language is selected
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog mDialog = mbuilder.create();
+        //show alert dialog
+        mDialog.show();
+    }
+    private void setLocale(String language) {
+        Locale locale= new Locale(language);
+        Locale.setDefault(locale);
+        Configuration configuration= new Configuration();
+        configuration.locale= locale;
+        Object metrices;
+        getBaseContext().getResources().updateConfiguration(configuration,getBaseContext().getResources().getDisplayMetrics());
+        //save data to shared preferences
+        SharedPreferences.Editor editor =getSharedPreferences("Settings",MODE_PRIVATE).edit();
 
+        editor.putString("My_Lang", language);
+        editor.apply();
+    }
+    //load language saved in Shared Preferences
+    public void loadLocale()
+    {
+        SharedPreferences prefs= getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        String language= prefs.getString("My_Lang","");
+        setLocale(language);
+    }
     // COMPLETED(SHANK) call this method when logout button is clicked
     // COMPLETED(DJ) implement the method
     void logOut() {
@@ -92,5 +157,13 @@ public class MainActivity extends AppCompatActivity {
         HealthLog.ID = null;*/
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
         finish();
+    }
+    void showAboutAppPage() {
+        Intent intent=new Intent(this, AboutActivity.class);
+        startActivity(intent);
+    }
+    void showSettingsAppPage() {
+        Intent intent = new Intent(this,SettingsActivity.class);
+        startActivity(intent);
     }
 }
