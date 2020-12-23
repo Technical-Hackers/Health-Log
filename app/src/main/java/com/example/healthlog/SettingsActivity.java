@@ -1,5 +1,6 @@
 package com.example.healthlog;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -7,10 +8,13 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -18,6 +22,11 @@ import androidx.preference.PreferenceFragmentCompat;
 import java.util.Locale;
 
 public class SettingsActivity extends AppCompatActivity {
+
+    private Switch mSwitch;
+    private static final String MyPREFERENCES = "nightModePrefs";
+    private static final String KEY_ISNIGHTMODE = "isNightMode";
+    SharedPreferences mSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +45,42 @@ public class SettingsActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setTitle(R.string.setting);
             actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+        mSharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        mSwitch = findViewById(R.id.theme_toggle);
+        checkNightModeActivated();
+
+        mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    saveNightMode(true);
+                    recreate();
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    saveNightMode(false);
+                    recreate();
+                }
+            }
+        });
+    }
+
+    //save night or dark mode
+    private void saveNightMode(boolean nightMode) {
+        SharedPreferences.Editor editor =mSharedPreferences.edit();
+        editor.putBoolean(KEY_ISNIGHTMODE,nightMode);
+        editor.apply();
+    }
+
+    //checking the dark theme switch
+    public void checkNightModeActivated(){
+        if(mSharedPreferences.getBoolean(KEY_ISNIGHTMODE,false)){
+            mSwitch.setChecked(true);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            mSwitch.setChecked(false);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
     }
 

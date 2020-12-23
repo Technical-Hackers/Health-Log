@@ -7,9 +7,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -26,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     // COMPLETED(SHANK) add logout button in appBar
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration =
                 new AppBarConfiguration.Builder(
-                                R.id.navigation_dashboard, R.id.navigation_doctor, R.id.navigation_hospitals)
+                        R.id.navigation_dashboard, R.id.navigation_doctor, R.id.navigation_hospitals)
                         .build();
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -85,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.about:
                 showAboutAppPage();break;
             case R.id.setting:
-                showSettingsAppPage();
+                showSettingsAppPage(); break;
             default:
                 super.onOptionsItemSelected(item);
         }
