@@ -1,21 +1,31 @@
 package com.example.healthlog.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.healthlog.HealthLog;
+import com.example.healthlog.MainActivity;
 import com.example.healthlog.R;
 import com.example.healthlog.interfaces.OnItemClickListener;
 import com.example.healthlog.model.Patient;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,6 +35,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.DashboardViewHolder> {
 
@@ -83,10 +95,13 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                             public void onEvent(
                                     @Nullable DocumentSnapshot documentSnapshot,
                                     @Nullable FirebaseFirestoreException e) {
-                                String status = documentSnapshot.getString("status");
-                                String log = documentSnapshot.getString("recentLog");
-                                p.setStatus(status);
-                                p.setRecentLog(log);
+                                if(documentSnapshot.exists()) {
+                                    String status = documentSnapshot.getString("status");
+                                    String log = documentSnapshot.getString("recentLog");
+                                    p.setStatus(status);
+                                    p.setRecentLog(log);
+
+                                }
                                 notifyDataSetChanged();
                             }
                         });
@@ -170,6 +185,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
         View view;
 
+        Button patient_delete;
+
         public DashboardViewHolder(@NonNull View itemView) {
             super(itemView);
             view = itemView;
@@ -178,6 +195,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             patientLogDescription = itemView.findViewById(R.id.patient_list_item_logDescription_textView);
             patientColorStatus = itemView.findViewById(R.id.patient_list_item_statusCircle_view);
             patientDateAdded = itemView.findViewById(R.id.patient_list_item_dateAdded_textView);
+            patient_delete=itemView.findViewById(R.id.patient_delete_button);
         }
 
         void bind(final Patient currentPatient, final OnItemClickListener listener) {
@@ -188,6 +206,48 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                             listener.onItemClicked(currentPatient, itemView);
                         }
                     });
+            patient_delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder alert=new AlertDialog.Builder(context, R.style.CustomDialogTheme);
+                    alert.setTitle("Delete Patient");
+                    alert.setMessage("Are you sure you want to delete?");
+                    alert.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            allPatientList.remove(currentPatient);
+                            if(currentPatientList.contains(currentPatient))
+                                currentPatientList.remove(currentPatient);
+                            FirebaseFirestore.getInstance().collection("Hospital").
+                                    document(HealthLog.ID).
+                                    collection("Patient")
+                                    .document(currentPatient.getId())
+                                    .delete()
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d(TAG, "Patient deleted");
+                                            Toast.makeText(context,"Patient "+currentPatient.getId()+" deleted", Toast.LENGTH_SHORT).show();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.e(TAG, "Error", e);
+                                        }
+                                    });
+                        }
+                    });
+                    alert.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    alert.show();
+
+                }
+            });
         }
     }
 }
