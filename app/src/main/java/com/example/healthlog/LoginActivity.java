@@ -46,7 +46,12 @@ public class LoginActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        signIn();
+                        if(hospitalId.getText().toString().isEmpty()) {
+                            hospitalId.setError("Please Enter Hospital ID");
+                            hospitalId.requestFocus();
+                        }
+                        else
+                            signIn();
                     }
                 });
     }

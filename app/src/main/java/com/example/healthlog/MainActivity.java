@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         loadLocale();
-
         setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -81,6 +82,10 @@ public class MainActivity extends AppCompatActivity {
                 dialog();break;
             case R.id.language:
                 showChangeLanguageDialogue();break;
+            case R.id.about:
+                showAboutAppPage();break;
+            case R.id.setting:
+                showSettingsAppPage();
             default:
                 super.onOptionsItemSelected(item);
         }
@@ -152,5 +157,13 @@ public class MainActivity extends AppCompatActivity {
         HealthLog.ID = null;*/
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
         finish();
+    }
+    void showAboutAppPage() {
+        Intent intent=new Intent(this, AboutActivity.class);
+        startActivity(intent);
+    }
+    void showSettingsAppPage() {
+        Intent intent = new Intent(this,SettingsActivity.class);
+        startActivity(intent);
     }
 }

@@ -22,8 +22,7 @@ Instrumententafel</string>
     <string name="no">Nein</string>
     <string name="logout">Ausloggen</string>
     <string name="_678">sechs­hundert­acht­und­siebzig</string>
-    <string name="confirmed">
-Bestätigt</string>
+    <string name="confirmed">Bestätigt</string>
     <string name="_56">sechs­und­fünfzig</string>
     <string name="deceased">Verstorbene</string>
     <string name="cured">Geheilt</string>
@@ -41,4 +40,6 @@ Bestätigt</string>
     </string-array>
     <string name="newpatient">Neuer Patient aufgenommen</string>
     <string name="notification_click">Tippen Sie hier, um weitere Informationen zu erhalten.</string>
+    <string name="setting">Rahmen</string>
+    <string name="app_setting">App Einstellungen</string>
 </resources>

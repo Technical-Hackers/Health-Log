@@ -7,10 +7,32 @@
     tools:context=".ui.hospital.HospitalFragment">
 
 
+    <Button
+        android:id="@+id/hospital_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="78dp"
+        android:layout_marginBottom="4dp"
+        android:background="@color/ColorAccentSec"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:text="@string/hospital_profile"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
     <LinearLayout
         android:id="@+id/hospital_suspect_topContainer_linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/hospital_profile"
         android:orientation="horizontal">
 
 

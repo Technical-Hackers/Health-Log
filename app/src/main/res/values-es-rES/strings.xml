@@ -48,4 +48,6 @@ Cerrar sesión</string>
     </string-array>
     <string name="newpatient">Nuevo paciente ingresado</string>
     <string name="notification_click">Toque para obtener más información.</string>
+    <string name="setting">Ajuste</string>
+    <string name="app_setting">Ajustes de Aplicacion</string>
 </resources>
