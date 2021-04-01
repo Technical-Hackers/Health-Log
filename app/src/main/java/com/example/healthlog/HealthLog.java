@@ -1,8 +1,11 @@
 package com.example.healthlog;
 
 import android.app.Application;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 
 import com.google.firebase.Timestamp;
 
@@ -10,6 +13,9 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class HealthLog extends Application {
+
+    public static final String CHANNEL_1_ID = "channel1";
+    public static final String CHANNEL_2_ID = "channel2";
 
     public static String ID = null;
     public static Context context;
@@ -19,7 +25,35 @@ public class HealthLog extends Application {
         super.onCreate();
         context = getApplicationContext();
         getHospitalId();
+        createNotificationChannels();
     }
+
+    private void createNotificationChannels() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+//          For high priority Notifications, eg new patient admitted etc.
+            NotificationChannel channel1 = new NotificationChannel(
+                    CHANNEL_1_ID,
+                    "@string/notification_channel_info",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+            channel1.setDescription("@string/notification_channel_name");
+
+//          For relatively less important notifications
+            NotificationChannel channel2 = new NotificationChannel(
+                    CHANNEL_2_ID,
+                    "@string/notification_channel2_info",
+                    NotificationManager.IMPORTANCE_LOW
+            );
+            channel1.setDescription("@string/notification_channel2_name");
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel1);
+            manager.createNotificationChannel(channel2);
+
+        }
+    }
+
 
     public static void addHospitalIdToSharedPreference(String s) {
         SharedPreferences preferences = context.getSharedPreferences("data", MODE_PRIVATE);
